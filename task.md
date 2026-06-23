@@ -1,0 +1,35 @@
+# Tasks: Student Admission Management System
+
+- `[x]` 1. Database Setup (`schema.sql`) and configuration (`includes/db_connect.php`)
+- `[x]` 2. Design System and Layouts
+  - `[x]` Create `assets/css/style.css` (Royal blue professional theme)
+  - `[x]` Create `includes/header.php`, `includes/footer.php`, `includes/sidebar.php`
+- `[x]` 3. Authentication & Core Files
+  - `[x]` Create `includes/auth.php` (Session management, role checks)
+  - `[x]` Create `logout.php`
+  - `[x]` Create Home page (`index.php`)
+  - `[x]` Create Student Registration (`student_register.php`)
+  - `[x]` Create Student Login (`student_login.php`)
+  - `[x]` Create Admin Login (`admin_login.php`)
+  - `[x]` Create Staff Login (`staff_login.php`)
+- `[x]` 4. Student Dashboard & Flow
+  - `[x]` Download & extract FPDF library into `libs/`
+  - `[x]` Create `student/dashboard.php`
+  - `[x]` Create `student/apply.php` (Auto-generated Admission ID, duplicate check, 12th eligibility)
+  - `[x]` Create `student/upload.php` (File validation, upload folder creation)
+  - `[x]` Create `student/status.php`
+  - `[x]` Create `student/receipt.php` (PDF receipt via FPDF)
+- `[x]` 5. Staff Dashboard & Verification
+  - `[x]` Create `staff/dashboard.php`
+  - `[x]` Create `staff/verify.php` (Approve/reject with remarks, save status history)
+  - `[x]` Create `staff/reports.php` (Generate student lists, export to CSV)
+- `[x]` 6. Admin Dashboard & Management
+  - `[x]` Create `admin/dashboard.php` (Total, approved, pending, rejected stats, gender/category charts)
+  - `[x]` Create `admin/manage_staff.php` (CRUD staff accounts)
+  - `[x]` Create `admin/manage_courses.php` (CRUD courses)
+  - `[x]` Create `admin/manage_students.php` (Add, Edit, View, Delete students)
+  - `[x]` Create `admin/backup_restore.php` (Database export/import)
+- `[x]` 7. Testing & Verification
+  - `[x]` Verify all pages are free of PHP syntax errors (`php -l`)
+  - `[x]` Verify database interactions, upload system, reports, and PDF receipt downloads
+  - `[x]` Create walkthrough.md summarizing features and how to run

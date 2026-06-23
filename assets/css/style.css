@@ -1,0 +1,341 @@
+/* ====================================================================
+   Student Admission Management System Custom Stylesheet
+   Theme: College Professional Blue & White
+   ==================================================================== */
+
+:root {
+    --primary-color: #0f4c81;     /* Deep Royal Blue */
+    --primary-dark: #0a3356;      /* Dark Blue for headers/hover */
+    --secondary-color: #328cc1;   /* Sky Blue */
+    --accent-color: #d9b310;      /* Gold Accent */
+    --bg-light: #f4f7f6;          /* Off-white background */
+    --text-dark: #1d2731;         /* Charcoal text */
+    --text-muted: #6c757d;        /* Muted gray text */
+    --white: #ffffff;
+    --border-radius: 12px;
+    --box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+    --transition: all 0.3s ease;
+}
+
+body {
+    font-family: 'Poppins', 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: var(--bg-light);
+    color: var(--text-dark);
+    font-size: 15px;
+    overflow-x: hidden;
+}
+
+/* --- Layout Structure --- */
+.wrapper {
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+}
+
+/* Sidebar Styling */
+#sidebar {
+    min-width: 260px;
+    max-width: 260px;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+    color: var(--white);
+    transition: var(--transition);
+    min-height: 100vh;
+    box-shadow: 4px 0 15px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+#sidebar.active {
+    margin-left: -260px;
+}
+
+#sidebar .sidebar-header {
+    padding: 24px;
+    background: rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+#sidebar .sidebar-header h4 {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0;
+    letter-spacing: 0.5px;
+}
+
+#sidebar ul.components {
+    padding: 20px 0;
+}
+
+#sidebar ul li a {
+    padding: 14px 24px;
+    font-size: 15px;
+    display: block;
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+    transition: var(--transition);
+    border-left: 4px solid transparent;
+}
+
+#sidebar ul li a:hover {
+    color: var(--white);
+    background: rgba(255, 255, 255, 0.08);
+    border-left-color: var(--accent-color);
+}
+
+#sidebar ul li.active > a {
+    color: var(--white);
+    background: rgba(255, 255, 255, 0.12);
+    border-left-color: var(--secondary-color);
+    font-weight: 600;
+}
+
+#sidebar ul li a i {
+    margin-right: 10px;
+    width: 20px;
+    text-align: center;
+}
+
+/* Content Area */
+#content {
+    width: 100%;
+    padding: 30px;
+    min-height: 100vh;
+    transition: var(--transition);
+}
+
+/* Navigation Bar */
+.navbar-custom {
+    background-color: var(--white);
+    box-shadow: var(--box-shadow);
+    padding: 15px 30px;
+    border-radius: var(--border-radius);
+    margin-bottom: 30px;
+}
+
+.navbar-custom .navbar-brand {
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+/* --- Cards & UI Elements --- */
+.card-custom {
+    background-color: var(--white);
+    border: none;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    transition: var(--transition);
+    margin-bottom: 25px;
+    overflow: hidden;
+}
+
+.card-custom:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+}
+
+.card-header-custom {
+    background-color: var(--white);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    padding: 20px 25px;
+    font-weight: 700;
+    color: var(--primary-color);
+    font-size: 18px;
+}
+
+.card-body-custom {
+    padding: 25px;
+}
+
+/* Stat Cards */
+.stat-card {
+    border-left: 5px solid var(--primary-color);
+}
+
+.stat-card.approved { border-left-color: #2ec4b6; }
+.stat-card.pending { border-left-color: #ff9f1c; }
+.stat-card.rejected { border-left-color: #e71d36; }
+.stat-card.courses { border-left-color: #0f4c81; }
+
+.stat-card .stat-icon {
+    font-size: 32px;
+    opacity: 0.2;
+    color: var(--text-dark);
+}
+
+/* Form Styles */
+.form-control-custom {
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 10px 16px;
+    font-size: 14px;
+    transition: var(--transition);
+}
+
+.form-control-custom:focus {
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 3px rgba(50, 140, 193, 0.15);
+    outline: none;
+}
+
+.form-label-custom {
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+/* Button Custom Styles */
+.btn-custom-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: var(--white);
+    font-weight: 600;
+    border-radius: 8px;
+    padding: 10px 24px;
+    transition: var(--transition);
+}
+
+.btn-custom-primary:hover {
+    background-color: var(--primary-dark);
+    border-color: var(--primary-dark);
+    color: var(--white);
+}
+
+.btn-custom-secondary {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+    color: var(--white);
+    font-weight: 600;
+    border-radius: 8px;
+    padding: 10px 24px;
+    transition: var(--transition);
+}
+
+.btn-custom-secondary:hover {
+    background-color: #2779a7;
+    border-color: #2779a7;
+    color: var(--white);
+}
+
+/* Badges */
+.badge-custom {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 12px;
+}
+
+.badge-pending {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.badge-approved {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.badge-rejected {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+/* --- Tables --- */
+.table-custom {
+    width: 100%;
+    margin-bottom: 0;
+    color: var(--text-dark);
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.table-custom th {
+    background-color: #f8f9fc;
+    color: var(--primary-color);
+    font-weight: 700;
+    border-bottom: 2px solid #e3e6f0;
+    padding: 15px;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+}
+
+.table-custom td {
+    padding: 15px;
+    vertical-align: middle;
+    border-bottom: 1px solid #e3e6f0;
+    font-size: 14px;
+}
+
+.table-custom tbody tr:hover {
+    background-color: rgba(15, 76, 129, 0.02);
+}
+
+/* --- Home / Portal Page Design --- */
+.hero-section {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+    color: var(--white);
+    padding: 80px 0;
+    border-radius: 0 0 50px 50px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    margin-bottom: 50px;
+}
+
+.hero-title {
+    font-size: 42px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+}
+
+.hero-subtitle {
+    font-size: 18px;
+    opacity: 0.9;
+    font-weight: 300;
+    margin-bottom: 30px;
+}
+
+.role-card {
+    background: var(--white);
+    border-radius: var(--border-radius);
+    padding: 40px 30px;
+    text-align: center;
+    box-shadow: var(--box-shadow);
+    transition: var(--transition);
+    border-top: 5px solid var(--primary-color);
+}
+
+.role-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.1);
+}
+
+.role-card i {
+    font-size: 48px;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+}
+
+.role-card h3 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    #sidebar {
+        margin-left: -260px;
+    }
+    #sidebar.active {
+        margin-left: 0;
+    }
+    .wrapper {
+        position: relative;
+    }
+    #content {
+        padding: 15px;
+    }
+    .navbar-custom {
+        padding: 10px 15px;
+        margin-bottom: 20px;
+    }
+}
