@@ -150,12 +150,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $insert_stmt->execute($params);
             }
             
-            $success_msg = "Documents uploaded successfully!";
-            
             // Refresh documents details
             $doc_stmt = $pdo->prepare("SELECT * FROM documents WHERE student_id = :student_id");
             $doc_stmt->execute(['student_id' => $student_id]);
             $documents = $doc_stmt->fetch();
+
+            // Check if all 5 documents are uploaded
+            if ($documents && !empty($documents['photo']) && !empty($documents['marksheet10']) && !empty($documents['marksheet12']) && !empty($documents['leaving_certificate']) && !empty($documents['aadhaar'])) {
+                $success_msg = "Documents uploaded successfully! All required documents are complete. <a href='payment.php' class='alert-link'>Proceed to pay processing fee <i class='fa-solid fa-arrow-right ms-1'></i></a>";
+            } else {
+                $success_msg = "Document uploaded successfully!";
+            }
             
         } catch (PDOException $e) {
             $error_msg = "Database Update Failed: " . $e->getMessage();
@@ -186,6 +191,28 @@ include '../includes/header.php';
         </nav>
 
         <div class="container-fluid">
+            <!-- Stepper Container -->
+            <div class="status-card-premium status-card-step">
+                <div class="status-stepper-premium">
+                    <div class="status-stepper-step-premium completed">
+                        <div class="status-stepper-dot-premium"><i class="fa-solid fa-check"></i></div>
+                        <div class="status-stepper-label-premium">Fill Details</div>
+                    </div>
+                    <div class="status-stepper-step-premium active">
+                        <div class="status-stepper-dot-premium">2</div>
+                        <div class="status-stepper-label-premium">Upload Docs</div>
+                    </div>
+                    <div class="status-stepper-step-premium">
+                        <div class="status-stepper-dot-premium">3</div>
+                        <div class="status-stepper-label-premium">Payment</div>
+                    </div>
+                    <div class="status-stepper-step-premium">
+                        <div class="status-stepper-dot-premium">4</div>
+                        <div class="status-stepper-label-premium">Submit</div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Notifications -->
             <?php if (!empty($success_msg)): ?>
                 <div class="alert alert-success" role="alert">

@@ -46,8 +46,9 @@ try {
 // Process Form Submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Sanitize input values
-    $first_name = trim($_POST['first_name']);
-    $last_name = trim($_POST['last_name']);
+    $full_name = trim($_POST['full_name']);
+    $father_name = trim($_POST['father_name']);
+    $mother_name = trim($_POST['mother_name']);
     $gender = $_POST['gender'];
     $dob = $_POST['dob'];
     $category = trim($_POST['category']);
@@ -65,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $course_id = intval($_POST['course_id']);
     
     // Validation
-    if (empty($first_name) || empty($last_name) || empty($gender) || empty($dob) || empty($category) || empty($mobile) || empty($address) || empty($city) || empty($state) || empty($pincode) || empty($school_name) || empty($passing_year) || empty($course_id)) {
+    if (empty($full_name) || empty($father_name) || empty($mother_name) || empty($gender) || empty($dob) || empty($category) || empty($mobile) || empty($address) || empty($city) || empty($state) || empty($pincode) || empty($school_name) || empty($passing_year) || empty($course_id)) {
         $error_msg = "All fields are compulsory.";
     } elseif ($twelfth_percentage < 35.0) {
         // Minimum Eligibility Rule
@@ -92,7 +93,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 if ($has_record) {
                     // Update Existing Record
                     $update_sql = "UPDATE students SET 
-                        first_name = :first_name, last_name = :last_name, gender = :gender, dob = :dob,
+                        full_name = :full_name, father_name = :father_name, mother_name = :mother_name, gender = :gender, dob = :dob,
                         category = :category, mobile = :mobile, address = :address, city = :city,
                         state = :state, pincode = :pincode, tenth_percentage = :tenth_percentage,
                         twelfth_percentage = :twelfth_percentage, school_name = :school_name,
@@ -101,8 +102,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     
                     $update_stmt = $pdo->prepare($update_sql);
                     $update_stmt->execute([
-                        'first_name' => $first_name,
-                        'last_name' => $last_name,
+                        'full_name' => $full_name,
+                        'father_name' => $father_name,
+                        'mother_name' => $mother_name,
                         'gender' => $gender,
                         'dob' => $dob,
                         'category' => $category,
@@ -135,11 +137,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     
                     // Insert into students table
                     $insert_sql = "INSERT INTO students (
-                        user_id, admission_no, first_name, last_name, gender, dob, category, mobile, email,
+                        user_id, admission_no, full_name, father_name, mother_name, gender, dob, category, mobile, email,
                         address, city, state, pincode, tenth_percentage, twelfth_percentage, school_name,
                         passing_year, course_id, status, is_submitted
                     ) VALUES (
-                        :user_id, :admission_no, :first_name, :last_name, :gender, :dob, :category, :mobile, :email,
+                        :user_id, :admission_no, :full_name, :father_name, :mother_name, :gender, :dob, :category, :mobile, :email,
                         :address, :city, :state, :pincode, :tenth_percentage, :twelfth_percentage, :school_name,
                         :passing_year, :course_id, 'Pending', 0
                     )";
@@ -148,8 +150,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $insert_stmt->execute([
                         'user_id' => $user_id,
                         'admission_no' => $admission_no,
-                        'first_name' => $first_name,
-                        'last_name' => $last_name,
+                        'full_name' => $full_name,
+                        'father_name' => $father_name,
+                        'mother_name' => $mother_name,
                         'gender' => $gender,
                         'dob' => $dob,
                         'category' => $category,
@@ -200,6 +203,28 @@ include '../includes/header.php';
         </nav>
 
         <div class="container-fluid">
+            <!-- Stepper Container -->
+            <div class="status-card-premium status-card-step">
+                <div class="status-stepper-premium">
+                    <div class="status-stepper-step-premium active">
+                        <div class="status-stepper-dot-premium">1</div>
+                        <div class="status-stepper-label-premium">Fill Details</div>
+                    </div>
+                    <div class="status-stepper-step-premium">
+                        <div class="status-stepper-dot-premium">2</div>
+                        <div class="status-stepper-label-premium">Upload Docs</div>
+                    </div>
+                    <div class="status-stepper-step-premium">
+                        <div class="status-stepper-dot-premium">3</div>
+                        <div class="status-stepper-label-premium">Payment</div>
+                    </div>
+                    <div class="status-stepper-step-premium">
+                        <div class="status-stepper-dot-premium">4</div>
+                        <div class="status-stepper-label-premium">Submit</div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Notification Alert -->
             <?php if (!empty($error_msg)): ?>
                 <div class="alert alert-danger" role="alert">
@@ -217,17 +242,23 @@ include '../includes/header.php';
                         <!-- 1. Personal Information -->
                         <h5 class="fw-bold text-primary border-bottom pb-2 mb-4"><i class="fa-solid fa-user me-2"></i>Personal Information</h5>
                         <div class="row g-3 mb-4">
-                            <!-- First Name -->
-                            <div class="col-md-4">
-                                <label for="first_name" class="form-label form-label-custom">First Name</label>
-                                <input type="text" class="form-control form-control-custom" id="first_name" name="first_name" 
-                                    value="<?php echo $has_record ? htmlspecialchars($student['first_name']) : ''; ?>" required>
+                            <!-- Full Name -->
+                            <div class="col-md-6">
+                                <label for="full_name" class="form-label form-label-custom">Student Full Name</label>
+                                <input type="text" class="form-control form-control-custom" id="full_name" name="full_name" 
+                                    value="<?php echo $has_record ? htmlspecialchars($student['full_name']) : ''; ?>" required>
                             </div>
-                            <!-- Last Name -->
-                            <div class="col-md-4">
-                                <label for="last_name" class="form-label form-label-custom">Last Name</label>
-                                <input type="text" class="form-control form-control-custom" id="last_name" name="last_name" 
-                                    value="<?php echo $has_record ? htmlspecialchars($student['last_name']) : ''; ?>" required>
+                            <!-- Father's Name -->
+                            <div class="col-md-3">
+                                <label for="father_name" class="form-label form-label-custom">Father's Name</label>
+                                <input type="text" class="form-control form-control-custom" id="father_name" name="father_name" 
+                                    value="<?php echo $has_record ? htmlspecialchars($student['father_name']) : ''; ?>" required>
+                            </div>
+                            <!-- Mother's Name -->
+                            <div class="col-md-3">
+                                <label for="mother_name" class="form-label form-label-custom">Mother's Name</label>
+                                <input type="text" class="form-control form-control-custom" id="mother_name" name="mother_name" 
+                                    value="<?php echo $has_record ? htmlspecialchars($student['mother_name']) : ''; ?>" required>
                             </div>
                             <!-- Gender -->
                             <div class="col-md-4">
@@ -358,16 +389,68 @@ include '../includes/header.php';
     </div>
 </div>
 
-<!-- JavaScript to dynamically check 12th minimum percentage on submission -->
+<!-- JavaScript to dynamically check 12th minimum percentage and auto-save form details on page refresh -->
 <script>
-document.getElementById('admissionForm').addEventListener('submit', function(event) {
-    const percentageInput = document.getElementById('twelfth_percentage');
-    const percentage = parseFloat(percentageInput.value);
-    
-    if (percentage < 35.0) {
-        alert("Eligibility Block: You must have scored a minimum of 35% in your 12th standard examinations to apply.");
-        event.preventDefault(); // Stop form submission
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('admissionForm');
+    if (!form) return;
+
+    const userId = '<?php echo $_SESSION['user_id']; ?>';
+    const storageKey = `admission_form_draft_${userId}`;
+
+    // Load saved details from localStorage
+    function loadSavedData() {
+        const saved = localStorage.getItem(storageKey);
+        if (saved) {
+            try {
+                const data = JSON.parse(saved);
+                for (const key in data) {
+                    const field = form.elements[key];
+                    if (field && key !== 'email') { // Keep registered email read-only
+                        if (field.type === 'checkbox' || field.type === 'radio') {
+                            field.checked = (field.value === data[key]);
+                        } else {
+                            field.value = data[key];
+                        }
+                    }
+                }
+            } catch (e) {
+                console.error('Error loading saved form data:', e);
+            }
+        }
     }
+
+    // Save details to localStorage
+    function saveData() {
+        const data = {};
+        const formData = new FormData(form);
+        for (const [key, value] of formData.entries()) {
+            data[key] = value;
+        }
+        localStorage.setItem(storageKey, JSON.stringify(data));
+    }
+
+    // Restore form values on load
+    loadSavedData();
+
+    // Listen for inputs and changes to auto-save
+    form.addEventListener('input', saveData);
+    form.addEventListener('change', saveData);
+
+    // Dynamic 12th eligibility validation and clearing of local storage on submit
+    form.addEventListener('submit', function(event) {
+        const percentageInput = document.getElementById('twelfth_percentage');
+        const percentage = parseFloat(percentageInput.value);
+        
+        if (percentage < 35.0) {
+            alert("Eligibility Block: You must have scored a minimum of 35% in your 12th standard examinations to apply.");
+            event.preventDefault(); // Stop form submission
+            return;
+        }
+
+        // Clear local storage since it is successfully submitted
+        localStorage.removeItem(storageKey);
+    });
 });
 </script>
 

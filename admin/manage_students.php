@@ -71,8 +71,9 @@ if (isset($_GET['delete_id']) && !empty($_GET['delete_id'])) {
 // 2. Edit Student Details (Update details in students table)
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'update_student') {
     $student_id = intval($_POST['student_id']);
-    $first_name = trim($_POST['first_name']);
-    $last_name = trim($_POST['last_name']);
+    $full_name = trim($_POST['full_name']);
+    $father_name = trim($_POST['father_name']);
+    $mother_name = trim($_POST['mother_name']);
     $gender = $_POST['gender'];
     $dob = $_POST['dob'];
     $category = trim($_POST['category']);
@@ -90,7 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     $course_id = intval($_POST['course_id']);
     $status = $_POST['status'];
 
-    if (empty($first_name) || empty($last_name) || empty($gender) || empty($dob) || empty($category) || empty($mobile) || empty($address) || empty($city) || empty($state) || empty($pincode) || empty($school_name) || empty($passing_year) || empty($course_id)) {
+    if (empty($full_name) || empty($father_name) || empty($mother_name) || empty($gender) || empty($dob) || empty($category) || empty($mobile) || empty($address) || empty($city) || empty($state) || empty($pincode) || empty($school_name) || empty($passing_year) || empty($course_id)) {
         $error_msg = "All fields are required.";
     } else {
         try {
@@ -110,7 +111,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
 
                 $update_sql = "
                     UPDATE students SET 
-                        first_name = :first_name, last_name = :last_name, gender = :gender, dob = :dob,
+                        full_name = :full_name, father_name = :father_name, mother_name = :mother_name, gender = :gender, dob = :dob,
                         category = :category, mobile = :mobile, address = :address, city = :city,
                         state = :state, pincode = :pincode, tenth_percentage = :tenth_percentage,
                         twelfth_percentage = :twelfth_percentage, school_name = :school_name,
@@ -119,8 +120,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
                 ";
                 $update_stmt = $pdo->prepare($update_sql);
                 $update_stmt->execute([
-                    'first_name' => $first_name,
-                    'last_name' => $last_name,
+                    'full_name' => $full_name,
+                    'father_name' => $father_name,
+                    'mother_name' => $mother_name,
                     'gender' => $gender,
                     'dob' => $dob,
                     'category' => $category,
@@ -185,7 +187,7 @@ try {
     
     if (!empty($search)) {
         $list_sql .= " WHERE s.admission_no LIKE :search 
-                      OR CONCAT(s.first_name, ' ', s.last_name) LIKE :search 
+                      OR s.full_name LIKE :search 
                       OR s.mobile LIKE :search";
         $list_params['search'] = "%$search%";
     }
@@ -281,7 +283,7 @@ include '../includes/header.php';
                                     <?php foreach ($students as $s): ?>
                                         <tr>
                                             <td class="fw-bold text-primary"><?php echo htmlspecialchars($s['admission_no']); ?></td>
-                                            <td><?php echo htmlspecialchars($s['first_name'] . ' ' . $s['last_name']); ?></td>
+                                            <td><?php echo htmlspecialchars($s['full_name']); ?></td>
                                             <td><?php echo htmlspecialchars($s['course_name']); ?></td>
                                             <td><?php echo htmlspecialchars($s['mobile']); ?></td>
                                             <td><?php echo htmlspecialchars($s['twelfth_percentage']); ?>%</td>

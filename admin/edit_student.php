@@ -41,8 +41,9 @@ try {
 
 // Process update request
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'update_student') {
-    $first_name = trim($_POST['first_name']);
-    $last_name = trim($_POST['last_name']);
+    $full_name = trim($_POST['full_name']);
+    $father_name = trim($_POST['father_name']);
+    $mother_name = trim($_POST['mother_name']);
     $gender = $_POST['gender'];
     $dob = $_POST['dob'];
     $category = trim($_POST['category']);
@@ -60,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     $course_id = intval($_POST['course_id']);
     $status = $_POST['status'];
 
-    if (empty($first_name) || empty($last_name) || empty($gender) || empty($dob) || empty($category) || empty($mobile) || empty($address) || empty($city) || empty($state) || empty($pincode) || empty($school_name) || empty($passing_year) || empty($course_id)) {
+    if (empty($full_name) || empty($father_name) || empty($mother_name) || empty($gender) || empty($dob) || empty($category) || empty($mobile) || empty($address) || empty($city) || empty($state) || empty($pincode) || empty($school_name) || empty($passing_year) || empty($course_id)) {
         $error_msg = "All fields are compulsory.";
     } else {
         try {
@@ -80,7 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
 
                 $update_sql = "
                     UPDATE students SET 
-                        first_name = :first_name, last_name = :last_name, gender = :gender, dob = :dob,
+                        full_name = :full_name, father_name = :father_name, mother_name = :mother_name, gender = :gender, dob = :dob,
                         category = :category, mobile = :mobile, address = :address, city = :city,
                         state = :state, pincode = :pincode, tenth_percentage = :tenth_percentage,
                         twelfth_percentage = :twelfth_percentage, school_name = :school_name,
@@ -89,8 +90,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
                 ";
                 $update_stmt = $pdo->prepare($update_sql);
                 $update_stmt->execute([
-                    'first_name' => $first_name,
-                    'last_name' => $last_name,
+                    'full_name' => $full_name,
+                    'father_name' => $father_name,
+                    'mother_name' => $mother_name,
                     'gender' => $gender,
                     'dob' => $dob,
                     'category' => $category,
@@ -172,13 +174,17 @@ include '../includes/header.php';
                         
                         <h6 class="fw-bold text-primary border-bottom pb-2 mb-3">1. Personal Information</h6>
                         <div class="row g-3 mb-4">
-                            <div class="col-md-3">
-                                <label class="form-label form-label-custom">First Name</label>
-                                <input type="text" class="form-control form-control-custom" name="first_name" value="<?php echo htmlspecialchars($student['first_name']); ?>" required>
+                            <div class="col-md-4">
+                                <label class="form-label form-label-custom">Student Full Name</label>
+                                <input type="text" class="form-control form-control-custom" name="full_name" value="<?php echo htmlspecialchars($student['full_name']); ?>" required>
                             </div>
-                            <div class="col-md-3">
-                                <label class="form-label form-label-custom">Last Name</label>
-                                <input type="text" class="form-control form-control-custom" name="last_name" value="<?php echo htmlspecialchars($student['last_name']); ?>" required>
+                            <div class="col-md-4">
+                                <label class="form-label form-label-custom">Father's Name</label>
+                                <input type="text" class="form-control form-control-custom" name="father_name" value="<?php echo htmlspecialchars($student['father_name']); ?>" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label form-label-custom">Mother's Name</label>
+                                <input type="text" class="form-control form-control-custom" name="mother_name" value="<?php echo htmlspecialchars($student['mother_name']); ?>" required>
                             </div>
                             <div class="col-md-3">
                                 <label class="form-label form-label-custom">Gender</label>

@@ -99,13 +99,18 @@ $pdf->SetFont('Arial', '', 10);
 $pdf->SetTextColor(33, 37, 41);
 
 // Grid table structure
-$pdf->Cell(45, 8, 'First Name:', 0, 0, 'L');
+$pdf->Cell(45, 8, 'Student Full Name:', 0, 0, 'L');
 $pdf->SetFont('Arial', 'B', 10);
-$pdf->Cell(50, 8, $student['first_name'], 0, 0, 'L');
+$pdf->Cell(135, 8, $student['full_name'], 0, 1, 'L');
+
 $pdf->SetFont('Arial', '', 10);
-$pdf->Cell(45, 8, 'Last Name:', 0, 0, 'L');
+$pdf->Cell(45, 8, "Father's Name:", 0, 0, 'L');
 $pdf->SetFont('Arial', 'B', 10);
-$pdf->Cell(50, 8, $student['last_name'], 0, 1, 'L');
+$pdf->Cell(50, 8, $student['father_name'], 0, 0, 'L');
+$pdf->SetFont('Arial', '', 10);
+$pdf->Cell(45, 8, "Mother's Name:", 0, 0, 'L');
+$pdf->SetFont('Arial', 'B', 10);
+$pdf->Cell(50, 8, $student['mother_name'], 0, 1, 'L');
 
 $pdf->SetFont('Arial', '', 10);
 $pdf->Cell(45, 8, 'Gender:', 0, 0, 'L');

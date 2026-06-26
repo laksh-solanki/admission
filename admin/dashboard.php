@@ -68,7 +68,6 @@ include '../includes/header.php';
                 <span class="navbar-brand ms-3">Administrator Command Center</span>
                 <div class="ms-auto d-flex align-items-center">
                     <span class="badge bg-danger me-2"><i class="fa-solid fa-shield-halved me-1"></i>Secure Admin</span>
-                    <span class="text-muted small"><?php echo htmlspecialchars($_SESSION['name']); ?></span>
                 </div>
             </div>
         </nav>

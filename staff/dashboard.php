@@ -34,7 +34,7 @@ try {
 
     if (!empty($search)) {
         $query .= " AND (s.admission_no LIKE :search 
-                     OR CONCAT(s.first_name, ' ', s.last_name) LIKE :search 
+                     OR s.full_name LIKE :search 
                      OR s.mobile LIKE :search)";
         $params['search'] = "%$search%";
     }
@@ -186,7 +186,7 @@ include '../includes/header.php';
                                     <?php foreach ($applications as $app): ?>
                                         <tr>
                                             <td class="fw-bold text-primary"><?php echo htmlspecialchars($app['admission_no']); ?></td>
-                                            <td><?php echo htmlspecialchars($app['first_name'] . ' ' . $app['last_name']); ?></td>
+                                            <td><?php echo htmlspecialchars($app['full_name']); ?></td>
                                             <td><?php echo htmlspecialchars($app['course_name']); ?></td>
                                             <td><?php echo htmlspecialchars($app['mobile']); ?></td>
                                             <td><?php echo htmlspecialchars($app['twelfth_percentage']); ?>%</td>

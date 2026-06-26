@@ -21,7 +21,7 @@ if (isset($_GET['export']) && $_GET['export'] === 'csv') {
     try {
         // Build export query
         $export_query = "
-            SELECT s.admission_no, s.first_name, s.last_name, s.gender, s.dob, s.category, 
+            SELECT s.admission_no, s.full_name, s.father_name, s.mother_name, s.gender, s.dob, s.category, 
                    s.mobile, s.email, s.tenth_percentage, s.twelfth_percentage, 
                    s.school_name, s.passing_year, c.course_name, s.status, s.created_at
             FROM students s 
@@ -58,7 +58,7 @@ if (isset($_GET['export']) && $_GET['export'] === 'csv') {
         
         // Write Column Headers
         fputcsv($output, [
-            'Admission ID', 'First Name', 'Last Name', 'Gender', 'DOB', 'Category', 
+            'Admission ID', 'Full Name', "Father's Name", "Mother's Name", 'Gender', 'DOB', 'Category', 
             'Mobile', 'Email', '10th %', '12th %', 'School Name', 'Passing Year', 
             'Course Selected', 'Status', 'Date Submitted'
         ]);
@@ -67,8 +67,9 @@ if (isset($_GET['export']) && $_GET['export'] === 'csv') {
         foreach ($records as $row) {
             fputcsv($output, [
                 $row['admission_no'],
-                $row['first_name'],
-                $row['last_name'],
+                $row['full_name'],
+                $row['father_name'],
+                $row['mother_name'],
                 $row['gender'],
                 $row['dob'],
                 $row['category'],
@@ -218,7 +219,7 @@ include '../includes/header.php';
                                     <?php foreach ($applicants as $app): ?>
                                         <tr>
                                             <td class="fw-bold text-primary"><?php echo htmlspecialchars($app['admission_no']); ?></td>
-                                            <td><?php echo htmlspecialchars($app['first_name'] . ' ' . $app['last_name']); ?></td>
+                                            <td><?php echo htmlspecialchars($app['full_name']); ?></td>
                                             <td><?php echo htmlspecialchars($app['course_name']); ?></td>
                                             <td><?php echo htmlspecialchars($app['gender']); ?></td>
                                             <td><?php echo htmlspecialchars($app['tenth_percentage']); ?>%</td>

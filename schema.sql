@@ -38,8 +38,9 @@ CREATE TABLE IF NOT EXISTS `students` (
     `student_id` INT AUTO_INCREMENT PRIMARY KEY,
     `user_id` INT NOT NULL,
     `admission_no` VARCHAR(20) NOT NULL UNIQUE,
-    `first_name` VARCHAR(50) NOT NULL,
-    `last_name` VARCHAR(50) NOT NULL,
+    `full_name` VARCHAR(100) NOT NULL,
+    `father_name` VARCHAR(100) NOT NULL,
+    `mother_name` VARCHAR(100) NOT NULL,
     `gender` ENUM('Male', 'Female', 'Other') NOT NULL,
     `dob` DATE NOT NULL,
     `category` VARCHAR(50) NOT NULL, -- e.g., General, OBC, SC, ST
@@ -56,6 +57,8 @@ CREATE TABLE IF NOT EXISTS `students` (
     `course_id` INT DEFAULT NULL,
     `status` ENUM('Pending', 'Approved', 'Rejected') NOT NULL DEFAULT 'Pending',
     `is_submitted` TINYINT(1) NOT NULL DEFAULT 0,
+    `payment_status` ENUM('Unpaid', 'Paid') NOT NULL DEFAULT 'Unpaid',
+    `transaction_id` VARCHAR(100) DEFAULT NULL,
     `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (`user_id`) REFERENCES `users`(`user_id`) ON DELETE CASCADE,
     FOREIGN KEY (`course_id`) REFERENCES `courses`(`course_id`) ON DELETE SET NULL

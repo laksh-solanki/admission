@@ -95,6 +95,12 @@ include '../includes/header.php';
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             <?php endif; ?>
+            <?php if (isset($_GET['msg']) && $_GET['msg'] === 'paid'): ?>
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <i class="fa-solid fa-circle-check me-2"></i>Your processing fee payment of ₹500.00 has been recorded successfully! You can now finalize and submit your application.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            <?php endif; ?>
 
             <div class="row mb-4">
                 <div class="col-md-12">
@@ -105,69 +111,290 @@ include '../includes/header.php';
                 </div>
             </div>
 
-            <!-- Wizard / Application Flow Status Alert -->
+            <!-- Wizard / Application Flow Status Card -->
             <div class="row mb-4">
                 <div class="col-md-12">
                     <?php if (!$has_form): ?>
                         <!-- Step 1: Form Fill Pending -->
-                        <div class="alert alert-warning p-4 border-start border-warning border-4 shadow-sm" role="alert">
-                            <h4 class="alert-heading fw-bold"><i class="fa-solid fa-circle-exclamation me-2 text-warning"></i>Step 1: Fill Admission Form</h4>
-                            <p>You have not filled the admission form yet. Please enter your personal details, academic percentages, and course preferences to start the admission process.</p>
-                            <hr>
-                            <a href="apply.php" class="btn btn-custom-primary"><i class="fa-solid fa-pen-to-square me-2"></i>Fill Form Now</a>
+                        <div class="status-card-premium status-card-step">
+                            <div class="status-stepper-premium">
+                                <div class="status-stepper-step-premium active">
+                                    <div class="status-stepper-dot-premium">1</div>
+                                    <div class="status-stepper-label-premium">Fill Details</div>
+                                </div>
+                                <div class="status-stepper-step-premium">
+                                    <div class="status-stepper-dot-premium">2</div>
+                                    <div class="status-stepper-label-premium">Upload Docs</div>
+                                </div>
+                                <div class="status-stepper-step-premium">
+                                    <div class="status-stepper-dot-premium">3</div>
+                                    <div class="status-stepper-label-premium">Payment</div>
+                                </div>
+                                <div class="status-stepper-step-premium">
+                                    <div class="status-stepper-dot-premium">4</div>
+                                    <div class="status-stepper-label-premium">Submit</div>
+                                </div>
+                            </div>
+                            
+                            <div class="status-header-premium">
+                                <div class="status-icon-wrapper-premium">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </div>
+                                <div>
+                                    <div class="status-title-premium">Step 1: Fill Admission Form</div>
+                                    <div class="status-subtitle-premium">Action Required</div>
+                                </div>
+                            </div>
+                            <div class="status-body-premium">
+                                <p>You have not filled the admission form yet. Please enter your personal details, academic percentages, and course preferences to start the admission process.</p>
+                            </div>
+                            <div class="status-action-row-premium">
+                                <a href="apply.php" class="btn btn-custom-primary"><i class="fa-solid fa-pen-to-square me-2"></i>Fill Form Now</a>
+                            </div>
                         </div>
                     <?php elseif ($has_form && !$has_docs): ?>
                         <!-- Step 2: Document Upload Pending -->
-                        <div class="alert alert-info p-4 border-start border-info border-4 shadow-sm" role="alert">
-                            <h4 class="alert-heading fw-bold"><i class="fa-solid fa-cloud-arrow-up me-2 text-info"></i>Step 2: Upload Documents</h4>
-                            <p>Your details have been saved, but your required certificates are missing. You must upload your passport photo, 10th & 12th marksheets, leaving certificate, and Aadhaar card to proceed.</p>
-                            <hr>
-                            <a href="upload.php" class="btn btn-custom-secondary"><i class="fa-solid fa-file-arrow-up me-2"></i>Upload Documents</a>
-                            <a href="apply.php" class="btn btn-outline-secondary ms-2"><i class="fa-solid fa-pen"></i> Edit Form Details</a>
+                        <div class="status-card-premium status-card-step">
+                            <div class="status-stepper-premium">
+                                <div class="status-stepper-step-premium completed">
+                                    <div class="status-stepper-dot-premium"><i class="fa-solid fa-check"></i></div>
+                                    <div class="status-stepper-label-premium">Fill Details</div>
+                                </div>
+                                <div class="status-stepper-step-premium active">
+                                    <div class="status-stepper-dot-premium">2</div>
+                                    <div class="status-stepper-label-premium">Upload Docs</div>
+                                </div>
+                                <div class="status-stepper-step-premium">
+                                    <div class="status-stepper-dot-premium">3</div>
+                                    <div class="status-stepper-label-premium">Payment</div>
+                                </div>
+                                <div class="status-stepper-step-premium">
+                                    <div class="status-stepper-dot-premium">4</div>
+                                    <div class="status-stepper-label-premium">Submit</div>
+                                </div>
+                            </div>
+                            
+                            <div class="status-header-premium">
+                                <div class="status-icon-wrapper-premium">
+                                    <i class="fa-solid fa-cloud-arrow-up"></i>
+                                </div>
+                                <div>
+                                    <div class="status-title-premium">Step 2: Upload Documents</div>
+                                    <div class="status-subtitle-premium">Action Required</div>
+                                </div>
+                            </div>
+                            <div class="status-body-premium">
+                                <p>Your details have been saved, but your required certificates are missing. You must upload your passport photo, 10th & 12th marksheets, leaving certificate, and Aadhaar card to proceed.</p>
+                            </div>
+                            <div class="status-action-row-premium">
+                                <a href="upload.php" class="btn btn-custom-primary"><i class="fa-solid fa-file-arrow-up me-2"></i>Upload Documents</a>
+                                <a href="apply.php" class="btn btn-custom-secondary"><i class="fa-solid fa-pen me-2"></i>Edit Form Details</a>
+                            </div>
                         </div>
-                    <?php elseif ($has_form && $has_docs && $student['is_submitted'] == 0): ?>
-                        <!-- Step 3: Final Submit Pending -->
-                        <div class="alert alert-primary p-4 border-start border-primary border-4 shadow-sm" role="alert">
-                            <h4 class="alert-heading fw-bold"><i class="fa-solid fa-clipboard-check me-2 text-primary"></i>Step 3: Finalize and Submit Application</h4>
-                            <p>Your admission form and documents are successfully compiled. Please review the details below. Once submitted, you cannot edit details unless rejected by staff.</p>
-                            <hr>
-                            <form action="dashboard.php" method="POST" class="d-inline">
-                                <input type="hidden" name="action" value="final_submit">
-                                <button type="submit" class="btn btn-success fw-bold" onclick="return confirm('Are you sure you want to finalize and submit? You will not be able to edit this form.');">
-                                    <i class="fa-solid fa-paper-plane me-2"></i>Final Submit Application
-                                </button>
-                            </form>
-                            <a href="apply.php" class="btn btn-outline-secondary ms-2"><i class="fa-solid fa-pen"></i> Edit Form</a>
-                            <a href="upload.php" class="btn btn-outline-secondary ms-2"><i class="fa-solid fa-file-image"></i> Manage Uploads</a>
+                    <?php elseif ($has_form && $has_docs && $student['payment_status'] === 'Unpaid'): ?>
+                        <!-- Step 3: Payment Pending -->
+                        <div class="status-card-premium status-card-step">
+                            <div class="status-stepper-premium">
+                                <div class="status-stepper-step-premium completed">
+                                    <div class="status-stepper-dot-premium"><i class="fa-solid fa-check"></i></div>
+                                    <div class="status-stepper-label-premium">Fill Details</div>
+                                </div>
+                                <div class="status-stepper-step-premium completed">
+                                    <div class="status-stepper-dot-premium"><i class="fa-solid fa-check"></i></div>
+                                    <div class="status-stepper-label-premium">Upload Docs</div>
+                                </div>
+                                <div class="status-stepper-step-premium active">
+                                    <div class="status-stepper-dot-premium">3</div>
+                                    <div class="status-stepper-label-premium">Payment</div>
+                                </div>
+                                <div class="status-stepper-step-premium">
+                                    <div class="status-stepper-dot-premium">4</div>
+                                    <div class="status-stepper-label-premium">Submit</div>
+                                </div>
+                            </div>
+                            
+                            <div class="status-header-premium">
+                                <div class="status-icon-wrapper-premium">
+                                    <i class="fa-solid fa-credit-card"></i>
+                                </div>
+                                <div>
+                                    <div class="status-title-premium">Step 3: Pay Processing Fee</div>
+                                    <div class="status-subtitle-premium">Action Required</div>
+                                </div>
+                            </div>
+                            <div class="status-body-premium">
+                                <p>Your details and documents are successfully compiled. You must now complete the online fee payment of ₹500.00 to submit your application.</p>
+                            </div>
+                            <div class="status-action-row-premium">
+                                <a href="payment.php" class="btn btn-custom-primary"><i class="fa-solid fa-credit-card me-2"></i>Pay Fees Now</a>
+                                <a href="apply.php" class="btn btn-custom-secondary"><i class="fa-solid fa-pen me-2"></i>Edit Form</a>
+                                <a href="upload.php" class="btn btn-custom-secondary"><i class="fa-solid fa-file-image me-2"></i>Manage Uploads</a>
+                            </div>
+                        </div>
+                    <?php elseif ($has_form && $has_docs && $student['payment_status'] === 'Paid' && $student['is_submitted'] == 0): ?>
+                        <!-- Step 4: Final Submit Pending -->
+                        <div class="status-card-premium status-card-step">
+                            <div class="status-stepper-premium">
+                                <div class="status-stepper-step-premium completed">
+                                    <div class="status-stepper-dot-premium"><i class="fa-solid fa-check"></i></div>
+                                    <div class="status-stepper-label-premium">Fill Details</div>
+                                </div>
+                                <div class="status-stepper-step-premium completed">
+                                    <div class="status-stepper-dot-premium"><i class="fa-solid fa-check"></i></div>
+                                    <div class="status-stepper-label-premium">Upload Docs</div>
+                                </div>
+                                <div class="status-stepper-step-premium completed">
+                                    <div class="status-stepper-dot-premium"><i class="fa-solid fa-check"></i></div>
+                                    <div class="status-stepper-label-premium">Payment</div>
+                                </div>
+                                <div class="status-stepper-step-premium active">
+                                    <div class="status-stepper-dot-premium">4</div>
+                                    <div class="status-stepper-label-premium">Submit</div>
+                                </div>
+                            </div>
+                            
+                            <div class="status-header-premium">
+                                <div class="status-icon-wrapper-premium">
+                                    <i class="fa-solid fa-clipboard-check"></i>
+                                </div>
+                                <div>
+                                    <div class="status-title-premium">Step 4: Finalize and Submit Application</div>
+                                    <div class="status-subtitle-premium">Action Required</div>
+                                </div>
+                            </div>
+                            <div class="status-body-premium">
+                                <p>Your fee payment (Transaction ID: <strong><?php echo htmlspecialchars($student['transaction_id']); ?></strong>) was recorded successfully. Please review the details below. Once submitted, you cannot edit details unless rejected by staff.</p>
+                            </div>
+                            <div class="status-action-row-premium">
+                                <form action="dashboard.php" method="POST" class="d-inline">
+                                    <input type="hidden" name="action" value="final_submit">
+                                    <button type="submit" class="btn btn-custom-primary fw-bold" onclick="return confirm('Are you sure you want to finalize and submit? You will not be able to edit this form.');">
+                                        <i class="fa-solid fa-paper-plane me-2"></i>Final Submit Application
+                                    </button>
+                                </form>
+                                <a href="apply.php" class="btn btn-custom-secondary"><i class="fa-solid fa-pen me-2"></i>Edit Form</a>
+                                <a href="upload.php" class="btn btn-custom-secondary"><i class="fa-solid fa-file-image me-2"></i>Manage Uploads</a>
+                            </div>
                         </div>
                     <?php else: ?>
                         <!-- Application Submitted and Locked -->
                         <?php if ($student['status'] === 'Pending'): ?>
-                            <div class="alert alert-warning p-4 border-start border-warning border-4 shadow-sm" role="alert">
-                                <h4 class="alert-heading fw-bold"><i class="fa-solid fa-spinner fa-spin me-2 text-warning"></i>Application Status: PENDING VERIFICATION</h4>
-                                <p>Your application (Admission ID: <strong><?php echo htmlspecialchars($student['admission_no']); ?></strong>) was submitted on <strong><?php echo date('d-M-Y H:i', strtotime($student['created_at'])); ?></strong>. It is currently under review by our admission staff. We will notify you here once verified.</p>
+                            <div class="status-card-premium status-card-pending">
+                                <div class="status-stepper-premium">
+                                    <div class="status-stepper-step-premium completed">
+                                        <div class="status-stepper-dot-premium"><i class="fa-solid fa-check"></i></div>
+                                        <div class="status-stepper-label-premium">Fill Details</div>
+                                    </div>
+                                    <div class="status-stepper-step-premium completed">
+                                        <div class="status-stepper-dot-premium"><i class="fa-solid fa-check"></i></div>
+                                        <div class="status-stepper-label-premium">Upload Docs</div>
+                                    </div>
+                                    <div class="status-stepper-step-premium completed">
+                                        <div class="status-stepper-dot-premium"><i class="fa-solid fa-check"></i></div>
+                                        <div class="status-stepper-label-premium">Payment</div>
+                                    </div>
+                                    <div class="status-stepper-step-premium active">
+                                        <div class="status-stepper-dot-premium"><i class="fa-solid fa-spinner fa-spin"></i></div>
+                                        <div class="status-stepper-label-premium">Verification</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="status-header-premium">
+                                    <div class="status-icon-wrapper-premium">
+                                        <i class="fa-solid fa-clock-rotate-left"></i>
+                                    </div>
+                                    <div>
+                                        <div class="status-title-premium">Application Status: PENDING VERIFICATION</div>
+                                        <div class="status-subtitle-premium">Under Review</div>
+                                    </div>
+                                </div>
+                                <div class="status-body-premium">
+                                    <p>Your application (Admission ID: <strong><?php echo htmlspecialchars($student['admission_no']); ?></strong>) was submitted on <strong><?php echo date('d-M-Y H:i', strtotime($student['created_at'])); ?></strong>. It is currently under review by our admission staff. We will notify you here once verified.</p>
+                                </div>
                             </div>
                         <?php elseif ($student['status'] === 'Approved'): ?>
-                            <div class="alert alert-success p-4 border-start border-success border-4 shadow-sm" role="alert">
-                                <h4 class="alert-heading fw-bold"><i class="fa-solid fa-circle-check me-2 text-success"></i>Application Status: APPROVED</h4>
-                                <p>Congratulations! Your admission application for <strong><?php echo htmlspecialchars($student['course_name']); ?></strong> has been verified and approved. You can now download your official admission receipt below.</p>
-                                <hr>
-                                <a href="receipt.php" target="_blank" class="btn btn-success"><i class="fa-solid fa-file-pdf me-2"></i>Download Admission Receipt</a>
+                            <div class="status-card-premium status-card-approved">
+                                <div class="status-stepper-premium">
+                                    <div class="status-stepper-step-premium completed">
+                                        <div class="status-stepper-dot-premium"><i class="fa-solid fa-check"></i></div>
+                                        <div class="status-stepper-label-premium">Fill Details</div>
+                                    </div>
+                                    <div class="status-stepper-step-premium completed">
+                                        <div class="status-stepper-dot-premium"><i class="fa-solid fa-check"></i></div>
+                                        <div class="status-stepper-label-premium">Upload Docs</div>
+                                    </div>
+                                    <div class="status-stepper-step-premium completed">
+                                        <div class="status-stepper-dot-premium"><i class="fa-solid fa-check"></i></div>
+                                        <div class="status-stepper-label-premium">Payment</div>
+                                    </div>
+                                    <div class="status-stepper-step-premium completed">
+                                        <div class="status-stepper-dot-premium"><i class="fa-solid fa-check"></i></div>
+                                        <div class="status-stepper-label-premium">Verification</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="status-header-premium">
+                                    <div class="status-icon-wrapper-premium">
+                                        <i class="fa-solid fa-circle-check"></i>
+                                    </div>
+                                    <div>
+                                        <div class="status-title-premium">Application Status: APPROVED</div>
+                                        <div class="status-subtitle-premium">Process Complete</div>
+                                    </div>
+                                </div>
+                                <div class="status-body-premium">
+                                    <p>Congratulations! Your admission application for <strong><?php echo htmlspecialchars($student['course_name']); ?></strong> has been verified and approved. You can now download your official admission receipt below.</p>
+                                </div>
+                                <div class="status-action-row-premium">
+                                    <a href="receipt.php" target="_blank" class="btn btn-custom-primary"><i class="fa-solid fa-file-pdf me-2"></i>Download Admission Receipt</a>
+                                </div>
                             </div>
                         <?php elseif ($student['status'] === 'Rejected'): ?>
-                            <div class="alert alert-danger p-4 border-start border-danger border-4 shadow-sm" role="alert">
-                                <h4 class="alert-heading fw-bold"><i class="fa-solid fa-circle-xmark me-2 text-danger"></i>Application Status: REJECTED</h4>
-                                <p>Your application was rejected by the admission staff due to verification issues.</p>
-                                <?php
-                                    // Fetch the latest remarks from status history
-                                    $hist_stmt = $pdo->prepare("SELECT remarks FROM status_history WHERE student_id = :student_id ORDER BY history_id DESC LIMIT 1");
-                                    $hist_stmt->execute(['student_id' => $student['student_id']]);
-                                    $history = $hist_stmt->fetch();
-                                ?>
-                                <p class="fw-bold">Staff Remarks: <span class="text-dark bg-white px-2 py-1 rounded border border-danger-subtle"><?php echo htmlspecialchars($history ? $history['remarks'] : 'No remarks provided.'); ?></span></p>
-                                <hr>
-                                <p class="small text-muted">You can edit your details and re-upload documents to correct the error and re-submit.</p>
-                                <a href="apply.php" class="btn btn-danger"><i class="fa-solid fa-pen-to-square me-2"></i>Edit Form & Re-Submit</a>
+                            <div class="status-card-premium status-card-rejected">
+                                <div class="status-stepper-premium">
+                                    <div class="status-stepper-step-premium completed">
+                                        <div class="status-stepper-dot-premium"><i class="fa-solid fa-check"></i></div>
+                                        <div class="status-stepper-label-premium">Fill Details</div>
+                                    </div>
+                                    <div class="status-stepper-step-premium completed">
+                                        <div class="status-stepper-dot-premium"><i class="fa-solid fa-check"></i></div>
+                                        <div class="status-stepper-label-premium">Upload Docs</div>
+                                    </div>
+                                    <div class="status-stepper-step-premium completed">
+                                        <div class="status-stepper-dot-premium"><i class="fa-solid fa-check"></i></div>
+                                        <div class="status-stepper-label-premium">Payment</div>
+                                    </div>
+                                    <div class="status-stepper-step-premium active">
+                                        <div class="status-stepper-dot-premium"><i class="fa-solid fa-xmark"></i></div>
+                                        <div class="status-stepper-label-premium">Verification</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="status-header-premium">
+                                    <div class="status-icon-wrapper-premium">
+                                        <i class="fa-solid fa-triangle-exclamation"></i>
+                                    </div>
+                                    <div>
+                                        <div class="status-title-premium">Application Status: REJECTED</div>
+                                        <div class="status-subtitle-premium">Action Required</div>
+                                    </div>
+                                </div>
+                                <div class="status-body-premium">
+                                    <p>Your application was rejected by the admission staff due to verification issues.</p>
+                                    <?php
+                                        // Fetch the latest remarks from status history
+                                        $hist_stmt = $pdo->prepare("SELECT remarks FROM status_history WHERE student_id = :student_id ORDER BY history_id DESC LIMIT 1");
+                                        $hist_stmt->execute(['student_id' => $student['student_id']]);
+                                        $history = $hist_stmt->fetch();
+                                    ?>
+                                    <div class="status-remarks-box">
+                                        <strong>Staff Remarks:</strong> <?php echo htmlspecialchars($history ? $history['remarks'] : 'No remarks provided.'); ?>
+                                    </div>
+                                    <p class="small text-muted">You can edit your details and re-upload documents to correct the error and re-submit.</p>
+                                </div>
+                                <div class="status-action-row-premium">
+                                    <a href="apply.php" class="btn btn-custom-primary"><i class="fa-solid fa-pen-to-square me-2"></i>Edit Form & Re-Submit</a>
+                                </div>
                             </div>
                         <?php endif; ?>
                     <?php endif; ?>
@@ -197,11 +424,14 @@ include '../includes/header.php';
                                     <div class="col-md-6 mb-2">
                                         <strong>Applied Course:</strong> <?php echo htmlspecialchars($student['course_name']); ?>
                                     </div>
-                                    <div class="col-md-6 mb-2">
-                                        <strong>First Name:</strong> <?php echo htmlspecialchars($student['first_name']); ?>
+                                    <div class="col-md-12 mb-2">
+                                        <strong>Student Full Name:</strong> <?php echo htmlspecialchars($student['full_name']); ?>
                                     </div>
                                     <div class="col-md-6 mb-2">
-                                        <strong>Last Name:</strong> <?php echo htmlspecialchars($student['last_name']); ?>
+                                        <strong>Father's Name:</strong> <?php echo htmlspecialchars($student['father_name']); ?>
+                                    </div>
+                                    <div class="col-md-6 mb-2">
+                                        <strong>Mother's Name:</strong> <?php echo htmlspecialchars($student['mother_name']); ?>
                                     </div>
                                     <div class="col-md-6 mb-2">
                                         <strong>Gender:</strong> <?php echo htmlspecialchars($student['gender']); ?>

@@ -24,8 +24,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = $_POST['password'];
     
     // Admission Form details
-    $first_name = trim($_POST['first_name']);
-    $last_name = trim($_POST['last_name']);
+    $full_name = trim($_POST['full_name']);
+    $father_name = trim($_POST['father_name']);
+    $mother_name = trim($_POST['mother_name']);
     $gender = $_POST['gender'];
     $dob = $_POST['dob'];
     $category = trim($_POST['category']);
@@ -43,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $course_id = intval($_POST['course_id']);
 
     // Validation
-    if (empty($name) || empty($email) || empty($password) || empty($first_name) || empty($last_name) || empty($mobile) || empty($address) || empty($school_name) || empty($course_id)) {
+    if (empty($name) || empty($email) || empty($password) || empty($full_name) || empty($father_name) || empty($mother_name) || empty($mobile) || empty($address) || empty($school_name) || empty($course_id)) {
         $error_msg = "Please fill in all mandatory account and admission fields.";
     } elseif ($twelfth_percentage < 35) {
         $error_msg = "Eligibility Alert: Applicant must have at least 35% in 12th standard.";
@@ -85,11 +86,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 // 3. Insert Student details
                 $ins_student = $pdo->prepare("
                     INSERT INTO students (
-                        user_id, admission_no, first_name, last_name, gender, dob, category, mobile, email,
+                        user_id, admission_no, full_name, father_name, mother_name, gender, dob, category, mobile, email,
                         address, city, state, pincode, tenth_percentage, twelfth_percentage, school_name,
                         passing_year, course_id, status, is_submitted
                     ) VALUES (
-                        :user_id, :admission_no, :first_name, :last_name, :gender, :dob, :category, :mobile, :email,
+                        :user_id, :admission_no, :full_name, :father_name, :mother_name, :gender, :dob, :category, :mobile, :email,
                         :address, :city, :state, :pincode, :tenth_percentage, :twelfth_percentage, :school_name,
                         :passing_year, :course_id, 'Pending', 1
                     )
@@ -98,8 +99,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $ins_student->execute([
                     'user_id' => $new_user_id,
                     'admission_no' => $admission_no,
-                    'first_name' => $first_name,
-                    'last_name' => $last_name,
+                    'full_name' => $full_name,
+                    'father_name' => $father_name,
+                    'mother_name' => $mother_name,
                     'gender' => $gender,
                     'dob' => $dob,
                     'category' => $category,
@@ -198,12 +200,16 @@ include '../includes/header.php';
                         <h5 class="fw-bold text-primary border-bottom pb-2 mb-3"><i class="fa-solid fa-address-card me-2"></i>2. Personal Details</h5>
                         <div class="row g-3 mb-4">
                             <div class="col-md-4">
-                                <label class="form-label form-label-custom">First Name</label>
-                                <input type="text" class="form-control form-control-custom" name="first_name" required>
+                                <label class="form-label form-label-custom">Student Full Name</label>
+                                <input type="text" class="form-control form-control-custom" name="full_name" required>
                             </div>
                             <div class="col-md-4">
-                                <label class="form-label form-label-custom">Last Name</label>
-                                <input type="text" class="form-control form-control-custom" name="last_name" required>
+                                <label class="form-label form-label-custom">Father's Name</label>
+                                <input type="text" class="form-control form-control-custom" name="father_name" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label form-label-custom">Mother's Name</label>
+                                <input type="text" class="form-control form-control-custom" name="mother_name" required>
                             </div>
                             <div class="col-md-4">
                                 <label class="form-label form-label-custom">Gender</label>

@@ -42,9 +42,6 @@ $user_name = isset($_SESSION['name']) ? $_SESSION['name'] : 'Guest';
             <li class="<?php echo ($current_page === 'manage_students.php') ? 'active' : ''; ?>">
                 <a href="<?php echo $base_path; ?>admin/manage_students.php"><i class="fa-solid fa-users"></i> Manage Students</a>
             </li>
-            <li class="<?php echo ($current_page === 'backup_restore.php') ? 'active' : ''; ?>">
-                <a href="<?php echo $base_path; ?>admin/backup_restore.php"><i class="fa-solid fa-database"></i> Backup & Restore</a>
-            </li>
 
         <?php elseif ($role === 'staff'): ?>
             <!-- Staff Navigation Items -->
@@ -68,6 +65,9 @@ $user_name = isset($_SESSION['name']) ? $_SESSION['name'] : 'Guest';
             </li>
             <li class="<?php echo ($current_page === 'upload.php') ? 'active' : ''; ?>">
                 <a href="<?php echo $base_path; ?>student/upload.php"><i class="fa-solid fa-file-arrow-up"></i> Upload Documents</a>
+            </li>
+            <li class="<?php echo ($current_page === 'payment.php') ? 'active' : ''; ?>">
+                <a href="<?php echo $base_path; ?>student/payment.php"><i class="fa-solid fa-credit-card"></i> Pay Processing Fee</a>
             </li>
             <li class="<?php echo ($current_page === 'status.php') ? 'active' : ''; ?>">
                 <a href="<?php echo $base_path; ?>student/status.php"><i class="fa-solid fa-clock-rotate-left"></i> Track Application</a>

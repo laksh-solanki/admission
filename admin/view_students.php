@@ -106,8 +106,9 @@ include '../includes/header.php';
                             <!-- Personal Information -->
                             <h6 class="fw-bold text-primary border-bottom pb-2 mb-3">1. Personal Information</h6>
                             <div class="row g-2 mb-4">
-                                <div class="col-md-6"><strong>First Name:</strong> <?php echo htmlspecialchars($student['first_name']); ?></div>
-                                <div class="col-md-6"><strong>Last Name:</strong> <?php echo htmlspecialchars($student['last_name']); ?></div>
+                                <div class="col-md-12"><strong>Student Full Name:</strong> <?php echo htmlspecialchars($student['full_name']); ?></div>
+                                <div class="col-md-6"><strong>Father's Name:</strong> <?php echo htmlspecialchars($student['father_name']); ?></div>
+                                <div class="col-md-6"><strong>Mother's Name:</strong> <?php echo htmlspecialchars($student['mother_name']); ?></div>
                                 <div class="col-md-6"><strong>Gender:</strong> <?php echo htmlspecialchars($student['gender']); ?></div>
                                 <div class="col-md-6"><strong>Date of Birth:</strong> <?php echo date('d-M-Y', strtotime($student['dob'])); ?></div>
                                 <div class="col-md-6"><strong>Category:</strong> <?php echo htmlspecialchars($student['category']); ?></div>
@@ -128,10 +129,27 @@ include '../includes/header.php';
 
                             <!-- Preferred Program -->
                             <h6 class="fw-bold text-primary border-bottom pb-2 mb-3">3. Preferred Course Detail</h6>
-                            <div class="row g-2">
+                            <div class="row g-2 mb-4">
                                 <div class="col-md-12"><strong>Program:</strong> <?php echo htmlspecialchars($student['course_name']); ?></div>
                                 <div class="col-md-6"><strong>Department:</strong> <?php echo htmlspecialchars($student['department']); ?></div>
                                 <div class="col-md-6"><strong>Semester:</strong> <?php echo htmlspecialchars($student['semester']); ?></div>
+                            </div>
+
+                            <!-- Processing Fee Details -->
+                            <h6 class="fw-bold text-primary border-bottom pb-2 mb-3">4. Processing Fee Payment Detail</h6>
+                            <div class="row g-2">
+                                <div class="col-md-6">
+                                    <strong>Payment Status:</strong> 
+                                    <?php if ($student['payment_status'] === 'Paid'): ?>
+                                        <span class="badge bg-success-subtle text-success font-weight-bold px-2 py-1"><i class="fa-solid fa-circle-check me-1"></i>Paid</span>
+                                    <?php else: ?>
+                                        <span class="badge bg-danger-subtle text-danger font-weight-bold px-2 py-1"><i class="fa-solid fa-circle-xmark me-1"></i>Unpaid</span>
+                                    <?php endif; ?>
+                                </div>
+                                <div class="col-md-6">
+                                    <strong>UPI UTR/Ref ID:</strong> 
+                                    <span class="font-monospace text-dark fw-bold"><?php echo htmlspecialchars($student['transaction_id'] ? $student['transaction_id'] : 'N/A'); ?></span>
+                                </div>
                             </div>
                         </div>
                     </div>
