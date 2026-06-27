@@ -144,9 +144,9 @@ include '../includes/header.php';
     <!-- Page Content -->
     <div id="content">
         <!-- Top Navbar -->
-        <nav class="navbar navbar-expand-lg navbar-custom">
+        <nav class="navbar navbar-expand-lg navbar">
             <div class="container-fluid">
-                <button type="button" id="sidebarCollapse" class="btn btn-custom-primary">
+                <button type="button" id="sidebarCollapse" class="btn btn-primary">
                     <i class="fa-solid fa-bars"></i>
                 </button>
                 <span class="navbar-brand ms-3">Edit Applicant Info</span>
@@ -164,91 +164,91 @@ include '../includes/header.php';
                 </div>
             <?php endif; ?>
 
-            <div class="card-custom">
-                <div class="card-header-custom">
+            <div class="card">
+                <div class="card-header">
                     <i class="fa-solid fa-user-pen me-2"></i>Modify Student Profile: <?php echo htmlspecialchars($student['admission_no']); ?>
                 </div>
-                <div class="card-body-custom">
+                <div class="card-body">
                     <form action="edit_student.php?id=<?php echo $student_id; ?>" method="POST">
                         <input type="hidden" name="action" value="update_student">
                         
                         <h6 class="fw-bold text-primary border-bottom pb-2 mb-3">1. Personal Information</h6>
                         <div class="row g-3 mb-4">
                             <div class="col-md-4">
-                                <label class="form-label form-label-custom">Student Full Name</label>
-                                <input type="text" class="form-control form-control-custom" name="full_name" value="<?php echo htmlspecialchars($student['full_name']); ?>" required>
+                                <label class="form-label form-label">Student Full Name</label>
+                                <input type="text" class="form-control form-control" name="full_name" value="<?php echo htmlspecialchars($student['full_name']); ?>" required>
                             </div>
                             <div class="col-md-4">
-                                <label class="form-label form-label-custom">Father's Name</label>
-                                <input type="text" class="form-control form-control-custom" name="father_name" value="<?php echo htmlspecialchars($student['father_name']); ?>" required>
+                                <label class="form-label form-label">Father's Name</label>
+                                <input type="text" class="form-control form-control" name="father_name" value="<?php echo htmlspecialchars($student['father_name']); ?>" required>
                             </div>
                             <div class="col-md-4">
-                                <label class="form-label form-label-custom">Mother's Name</label>
-                                <input type="text" class="form-control form-control-custom" name="mother_name" value="<?php echo htmlspecialchars($student['mother_name']); ?>" required>
+                                <label class="form-label form-label">Mother's Name</label>
+                                <input type="text" class="form-control form-control" name="mother_name" value="<?php echo htmlspecialchars($student['mother_name']); ?>" required>
                             </div>
                             <div class="col-md-3">
-                                <label class="form-label form-label-custom">Gender</label>
-                                <select class="form-select form-control-custom" name="gender" required>
+                                <label class="form-label form-label">Gender</label>
+                                <select class="form-select form-control" name="gender" required>
                                     <option value="Male" <?php echo ($student['gender'] === 'Male') ? 'selected' : ''; ?>>Male</option>
                                     <option value="Female" <?php echo ($student['gender'] === 'Female') ? 'selected' : ''; ?>>Female</option>
                                     <option value="Other" <?php echo ($student['gender'] === 'Other') ? 'selected' : ''; ?>>Other</option>
                                 </select>
                             </div>
                             <div class="col-md-3">
-                                <label class="form-label form-label-custom">DOB</label>
-                                <input type="date" class="form-control form-control-custom" name="dob" value="<?php echo htmlspecialchars($student['dob']); ?>" required>
+                                <label class="form-label form-label">DOB</label>
+                                <input type="date" class="form-control form-control" name="dob" value="<?php echo htmlspecialchars($student['dob']); ?>" required>
                             </div>
                             <div class="col-md-3">
-                                <label class="form-label form-label-custom">Category</label>
-                                <input type="text" class="form-control form-control-custom" name="category" value="<?php echo htmlspecialchars($student['category']); ?>" required>
+                                <label class="form-label form-label">Category</label>
+                                <input type="text" class="form-control form-control" name="category" value="<?php echo htmlspecialchars($student['category']); ?>" required>
                             </div>
                             <div class="col-md-3">
-                                <label class="form-label form-label-custom">Mobile</label>
-                                <input type="text" class="form-control form-control-custom" name="mobile" value="<?php echo htmlspecialchars($student['mobile']); ?>" required>
+                                <label class="form-label form-label">Mobile</label>
+                                <input type="text" class="form-control form-control" name="mobile" value="<?php echo htmlspecialchars($student['mobile']); ?>" required>
                             </div>
                             <div class="col-md-6">
-                                <label class="form-label form-label-custom">Address</label>
-                                <input type="text" class="form-control form-control-custom" name="address" value="<?php echo htmlspecialchars($student['address']); ?>" required>
+                                <label class="form-label form-label">Address</label>
+                                <input type="text" class="form-control form-control" name="address" value="<?php echo htmlspecialchars($student['address']); ?>" required>
                             </div>
                             <div class="col-md-4">
-                                <label class="form-label form-label-custom">City</label>
-                                <input type="text" class="form-control form-control-custom" name="city" value="<?php echo htmlspecialchars($student['city']); ?>" required>
+                                <label class="form-label form-label">City</label>
+                                <input type="text" class="form-control form-control" name="city" value="<?php echo htmlspecialchars($student['city']); ?>" required>
                             </div>
                             <div class="col-md-4">
-                                <label class="form-label form-label-custom">State</label>
-                                <input type="text" class="form-control form-control-custom" name="state" value="<?php echo htmlspecialchars($student['state']); ?>" required>
+                                <label class="form-label form-label">State</label>
+                                <input type="text" class="form-control form-control" name="state" value="<?php echo htmlspecialchars($student['state']); ?>" required>
                             </div>
                             <div class="col-md-4">
-                                <label class="form-label form-label-custom">Pincode</label>
-                                <input type="text" class="form-control form-control-custom" name="pincode" value="<?php echo htmlspecialchars($student['pincode']); ?>" required>
+                                <label class="form-label form-label">Pincode</label>
+                                <input type="text" class="form-control form-control" name="pincode" value="<?php echo htmlspecialchars($student['pincode']); ?>" required>
                             </div>
                         </div>
 
                         <h6 class="fw-bold text-primary border-bottom pb-2 mb-3">2. Academic Information</h6>
                         <div class="row g-3 mb-4">
                             <div class="col-md-3">
-                                <label class="form-label form-label-custom">10th Std (%)</label>
-                                <input type="number" step="0.01" min="0" max="100" class="form-control form-control-custom" name="tenth_percentage" value="<?php echo htmlspecialchars($student['tenth_percentage']); ?>" required>
+                                <label class="form-label form-label">10th Std (%)</label>
+                                <input type="number" step="0.01" min="0" max="100" class="form-control form-control" name="tenth_percentage" value="<?php echo htmlspecialchars($student['tenth_percentage']); ?>" required>
                             </div>
                             <div class="col-md-3">
-                                <label class="form-label form-label-custom">12th Std (%)</label>
-                                <input type="number" step="0.01" min="0" max="100" class="form-control form-control-custom" name="twelfth_percentage" value="<?php echo htmlspecialchars($student['twelfth_percentage']); ?>" required>
+                                <label class="form-label form-label">12th Std (%)</label>
+                                <input type="number" step="0.01" min="0" max="100" class="form-control form-control" name="twelfth_percentage" value="<?php echo htmlspecialchars($student['twelfth_percentage']); ?>" required>
                             </div>
                             <div class="col-md-4">
-                                <label class="form-label form-label-custom">School Name</label>
-                                <input type="text" class="form-control form-control-custom" name="school_name" value="<?php echo htmlspecialchars($student['school_name']); ?>" required>
+                                <label class="form-label form-label">School Name</label>
+                                <input type="text" class="form-control form-control" name="school_name" value="<?php echo htmlspecialchars($student['school_name']); ?>" required>
                             </div>
                             <div class="col-md-2">
-                                <label class="form-label form-label-custom">Passing Year</label>
-                                <input type="number" class="form-control form-control-custom" name="passing_year" value="<?php echo htmlspecialchars($student['passing_year']); ?>" required>
+                                <label class="form-label form-label">Passing Year</label>
+                                <input type="number" class="form-control form-control" name="passing_year" value="<?php echo htmlspecialchars($student['passing_year']); ?>" required>
                             </div>
                         </div>
 
                         <h6 class="fw-bold text-primary border-bottom pb-2 mb-3">3. Status & Program Preference</h6>
                         <div class="row g-3 mb-5">
                             <div class="col-md-6">
-                                <label class="form-label form-label-custom">Select Degree</label>
-                                <select class="form-select form-control-custom" name="course_id" required>
+                                <label class="form-label form-label">Select Degree</label>
+                                <select class="form-select form-control" name="course_id" required>
                                     <?php foreach ($courses as $c): ?>
                                         <option value="<?php echo $c['course_id']; ?>" <?php echo ($student['course_id'] == $c['course_id']) ? 'selected' : ''; ?>>
                                             <?php echo htmlspecialchars($c['course_name']); ?>
@@ -257,8 +257,8 @@ include '../includes/header.php';
                                 </select>
                             </div>
                             <div class="col-md-6">
-                                <label class="form-label form-label-custom">Admission Status</label>
-                                <select class="form-select form-control-custom" name="status" required>
+                                <label class="form-label form-label">Admission Status</label>
+                                <select class="form-select form-control" name="status" required>
                                     <option value="Pending" <?php echo ($student['status'] === 'Pending') ? 'selected' : ''; ?>>Pending</option>
                                     <option value="Approved" <?php echo ($student['status'] === 'Approved') ? 'selected' : ''; ?>>Approved</option>
                                     <option value="Rejected" <?php echo ($student['status'] === 'Rejected') ? 'selected' : ''; ?>>Rejected</option>
@@ -268,7 +268,7 @@ include '../includes/header.php';
 
                         <div class="d-flex justify-content-between pt-3 border-top">
                             <a href="manage_students.php" class="btn btn-outline-secondary py-2"><i class="fa-solid fa-arrow-left me-1"></i>Cancel</a>
-                            <button type="submit" class="btn btn-custom-primary px-5 py-2 fw-bold">Update Details</button>
+                            <button type="submit" class="btn btn-primary px-5 py-2 fw-bold">Update Details</button>
                         </div>
                     </form>
                 </div>
@@ -278,3 +278,4 @@ include '../includes/header.php';
 </div>
 
 <?php include '../includes/footer.php'; ?>
+

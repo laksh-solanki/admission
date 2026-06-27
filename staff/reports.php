@@ -140,9 +140,9 @@ include '../includes/header.php';
     <!-- Page Content -->
     <div id="content">
         <!-- Top Navbar -->
-        <nav class="navbar navbar-expand-lg navbar-custom">
+        <nav class="navbar navbar-expand-lg navbar">
             <div class="container-fluid">
-                <button type="button" id="sidebarCollapse" class="btn btn-custom-primary">
+                <button type="button" id="sidebarCollapse" class="btn btn-primary">
                     <i class="fa-solid fa-bars"></i>
                 </button>
                 <span class="navbar-brand ms-3">Reports & Audits</span>
@@ -151,13 +151,13 @@ include '../includes/header.php';
 
         <div class="container-fluid">
             <!-- Filter Options Form -->
-            <div class="card-custom mb-4">
-                <div class="card-body-custom">
+            <div class="card mb-4">
+                <div class="card-body">
                     <form action="reports.php" method="GET" class="row g-3 align-items-end">
                         <!-- Course Filter -->
                         <div class="col-md-4">
-                            <label for="course_filter" class="form-label form-label-custom">Filter by Course</label>
-                            <select class="form-select form-control-custom" id="course_filter" name="course_filter">
+                            <label for="course_filter" class="form-label form-label">Filter by Course</label>
+                            <select class="form-select form-control" id="course_filter" name="course_filter">
                                 <option value="">All Courses</option>
                                 <?php foreach ($courses as $c): ?>
                                     <option value="<?php echo $c['course_id']; ?>" <?php echo ($course_filter == $c['course_id']) ? 'selected' : ''; ?>>
@@ -168,8 +168,8 @@ include '../includes/header.php';
                         </div>
                         <!-- Status Filter -->
                         <div class="col-md-4">
-                            <label for="status_filter" class="form-label form-label-custom">Filter by Status</label>
-                            <select class="form-select form-control-custom" id="status_filter" name="status_filter">
+                            <label for="status_filter" class="form-label form-label">Filter by Status</label>
+                            <select class="form-select form-control" id="status_filter" name="status_filter">
                                 <option value="">All Statuses</option>
                                 <option value="Pending" <?php echo ($status_filter === 'Pending') ? 'selected' : ''; ?>>Pending</option>
                                 <option value="Approved" <?php echo ($status_filter === 'Approved') ? 'selected' : ''; ?>>Approved</option>
@@ -178,7 +178,7 @@ include '../includes/header.php';
                         </div>
                         <!-- Buttons -->
                         <div class="col-md-4 d-flex gap-2">
-                            <button type="submit" class="btn btn-custom-primary flex-grow-1 py-2">
+                            <button type="submit" class="btn btn-primary flex-grow-1 py-2">
                                 <i class="fa-solid fa-arrows-rotate me-1"></i>Apply Filters
                             </button>
                             <!-- Export Button -->
@@ -191,13 +191,13 @@ include '../includes/header.php';
             </div>
 
             <!-- Report Results Table -->
-            <div class="card-custom">
-                <div class="card-header-custom">
+            <div class="card">
+                <div class="card-header">
                     <i class="fa-solid fa-file-invoice me-2"></i>Admission Records List
                 </div>
-                <div class="card-body-custom p-0">
+                <div class="card-body p-0">
                     <div class="table-responsive">
-                        <table class="table table-custom align-middle">
+                        <table class="table table align-middle">
                             <thead>
                                 <tr>
                                     <th>Admission ID</th>
@@ -248,3 +248,4 @@ include '../includes/header.php';
 </div>
 
 <?php include '../includes/footer.php'; ?>
+

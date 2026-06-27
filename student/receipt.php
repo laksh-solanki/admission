@@ -163,22 +163,30 @@ $pdf->Cell(145, 8, $student['course_name'], 0, 1, 'L');
 $pdf->SetFont('Arial', '', 10);
 
 $pdf->Cell(45, 8, 'Department:', 0, 0, 'L');
-$pdf->Cell(50, 8, $student['department'], 0, 0, 'L');
+$pdf->Cell(50, 8, $student['department'], 0, 1, 'L');
 $pdf->Cell(45, 8, 'Semester:', 0, 0, 'L');
-$pdf->Cell(50, 8, $student['semester'], 0, 1, 'L');
+$pdf->Cell(50, 8, $student['semester'], 0, 0, 'L');
 $pdf->Ln(15);
 
 // Stamp and Signature Layout
+$pdf->Ln(10);
+$sig_y = $pdf->GetY();
+
 $pdf->SetFont('Arial', 'B', 12);
 $pdf->SetTextColor(40, 167, 69); // Success Green color
-$pdf->Cell(90, 8, '[ STATUS: CONFIRMED / APPROVED ]', 0, 0, 'L');
+$pdf->Cell(90, 15, '[ STATUS: CONFIRMED / APPROVED ]', 0, 0, 'L');
+
+// Draw signature line on the right side
+$pdf->Line(135, $sig_y + 10, 195, $sig_y + 10);
 
 $pdf->SetFont('Arial', '', 10);
 $pdf->SetTextColor(33, 37, 41);
-$pdf->Cell(90, 8, 'Authorized Registrar Signatory', 0, 1, 'R');
+// Position signatory text below the signature line
+$pdf->SetXY(135, $sig_y + 12);
+$pdf->Cell(60, 8, 'Authorized Registrar Signatory', 0, 1, 'C');
 
-$pdf->Line(135, 185, 195, 185); // Signature line
-$pdf->Ln(2);
+$pdf->Ln(5);
+$pdf->SetY($sig_y + 22);
 
 $pdf->SetFont('Arial', 'I', 8);
 $pdf->SetTextColor(108, 117, 125);
@@ -187,3 +195,4 @@ $pdf->Cell(0, 5, 'Note: This is a computer-generated confirmation slip. No manua
 // Output PDF in inline mode download
 $pdf->Output('I', 'Admission_Receipt_' . $student['admission_no'] . '.pdf');
 ?>
+

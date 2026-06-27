@@ -75,12 +75,12 @@ include 'includes/header.php';
 <div class="container py-5">
     <div class="row justify-content-center">
         <div class="col-md-6 col-lg-5">
-            <div class="card-custom">
-                <div class="card-header-custom text-center bg-white border-0 pt-4">
+            <div class="card">
+                <div class="card-header text-center bg-white border-0 pt-4">
                     <h3 class="fw-bold color-primary"><i class="fa-solid fa-user-plus me-2"></i>Student Registration</h3>
                     <p class="text-muted small">Create an account to start your admission process</p>
                 </div>
-                <div class="card-body-custom pt-0">
+                <div class="card-body pt-0">
                     
                     <?php if (!empty($error_msg)): ?>
                         <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -92,35 +92,35 @@ include 'includes/header.php';
                     <form action="student_register.php" method="POST">
                         <!-- Full Name -->
                         <div class="mb-3">
-                            <label for="name" class="form-label form-label-custom">Full Name</label>
-                            <input type="text" class="form-control form-control-custom" id="name" name="name" value="<?php echo isset($name) ? htmlspecialchars($name) : ''; ?>" required>
+                            <label for="name" class="form-label form-label">Full Name</label>
+                            <input type="text" class="form-control form-control" id="name" name="name" value="<?php echo isset($name) ? htmlspecialchars($name) : ''; ?>" required>
                         </div>
 
                         <!-- Email -->
                         <div class="mb-3">
-                            <label for="email" class="form-label form-label-custom">Email Address</label>
-                            <input type="email" class="form-control form-control-custom" id="email" name="email" value="<?php echo isset($email) ? htmlspecialchars($email) : ''; ?>" required>
+                            <label for="email" class="form-label form-label">Email Address</label>
+                            <input type="email" class="form-control form-control" id="email" name="email" value="<?php echo isset($email) ? htmlspecialchars($email) : ''; ?>" required>
                         </div>
 
                         <!-- Password -->
                         <div class="mb-3">
-                            <label for="password" class="form-label form-label-custom">Password (Min. 6 chars)</label>
-                            <input type="password" class="form-control form-control-custom" id="password" name="password" required>
+                            <label for="password" class="form-label form-label">Password (Min. 6 chars)</label>
+                            <input type="password" class="form-control form-control" id="password" name="password" required>
                         </div>
 
                         <!-- Confirm Password -->
                         <div class="mb-4">
-                            <label for="confirm_password" class="form-label form-label-custom">Confirm Password</label>
-                            <input type="password" class="form-control form-control-custom" id="confirm_password" name="confirm_password" required>
+                            <label for="confirm_password" class="form-label form-label">Confirm Password</label>
+                            <input type="password" class="form-control form-control" id="confirm_password" name="confirm_password" required>
                         </div>
 
                         <!-- Submit Button -->
-                        <button type="submit" class="btn btn-custom-primary w-100 py-2.5 mb-3">Register Now</button>
+                        <button type="submit" class="btn btn-primary w-100 py-2.5 mb-3">Register Now</button>
                     </form>
                     
                     <div class="text-center mt-3">
                         <span class="text-muted small">Already have an account?</span>
-                        <a href="student_login.php" class="text-decoration-none small fw-bold ms-1">Login here</a>
+                        <a href="login.php?role=student" class="text-decoration-none small fw-bold ms-1">Login here</a>
                     </div>
                     <div class="text-center mt-2">
                         <a href="index.php" class="text-decoration-none small text-muted"><i class="fa-solid fa-arrow-left me-1"></i>Back to Home</a>
@@ -132,3 +132,4 @@ include 'includes/header.php';
 </div>
 
 <?php include 'includes/footer.php'; ?>
+

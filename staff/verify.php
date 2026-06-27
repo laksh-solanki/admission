@@ -124,9 +124,9 @@ include '../includes/header.php';
     <!-- Page Content -->
     <div id="content">
         <!-- Top Navbar -->
-        <nav class="navbar navbar-expand-lg navbar-custom">
+        <nav class="navbar navbar-expand-lg navbar">
             <div class="container-fluid">
-                <button type="button" id="sidebarCollapse" class="btn btn-custom-primary">
+                <button type="button" id="sidebarCollapse" class="btn btn-primary">
                     <i class="fa-solid fa-bars"></i>
                 </button>
                 <span class="navbar-brand ms-3">Verification Desk</span>
@@ -153,11 +153,11 @@ include '../includes/header.php';
                 <!-- Left Column: Student Details -->
                 <div class="col-lg-6">
                     <!-- Profile Card -->
-                    <div class="card-custom">
-                        <div class="card-header-custom">
+                    <div class="card">
+                        <div class="card-header">
                             <i class="fa-solid fa-address-card me-2"></i>Applicant Details Preview
                         </div>
-                        <div class="card-body-custom">
+                        <div class="card-body">
                             <!-- Admission Meta -->
                             <div class="row mb-4 p-3 bg-light rounded border border-light-subtle">
                                 <div class="col-md-6">
@@ -232,11 +232,11 @@ include '../includes/header.php';
                 <!-- Right Column: Documents and Actions -->
                 <div class="col-lg-6">
                     <!-- Documents Checklist Card -->
-                    <div class="card-custom">
-                        <div class="card-header-custom">
+                    <div class="card">
+                        <div class="card-header">
                             <i class="fa-solid fa-folder-open me-2"></i>Document Verification Checklist
                         </div>
-                        <div class="card-body-custom">
+                        <div class="card-body">
                             <?php if (!$documents): ?>
                                 <div class="alert alert-danger" role="alert">
                                     <i class="fa-solid fa-triangle-exclamation me-2"></i>No documents uploaded yet by this applicant.
@@ -323,8 +323,8 @@ include '../includes/header.php';
                                     <form action="verify.php?id=<?php echo $student_id; ?>" method="POST" id="verifyForm">
                                         <!-- Remarks input -->
                                         <div class="mb-3">
-                                            <label for="remarks" class="form-label form-label-custom">Review Remarks / Reason for Rejection</label>
-                                            <textarea class="form-control form-control-custom" id="remarks" name="remarks" rows="3" placeholder="Enter feedback here... Required for rejections."></textarea>
+                                            <label for="remarks" class="form-label form-label">Review Remarks / Reason for Rejection</label>
+                                            <textarea class="form-control form-control" id="remarks" name="remarks" rows="3" placeholder="Enter feedback here... Required for rejections."></textarea>
                                         </div>
 
                                         <div class="row g-2">
@@ -369,3 +369,4 @@ function confirmReject() {
 </script>
 
 <?php include '../includes/footer.php'; ?>
+

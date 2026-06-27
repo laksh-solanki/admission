@@ -63,9 +63,9 @@ include '../includes/header.php';
     <!-- Page Content -->
     <div id="content">
         <!-- Top Navbar -->
-        <nav class="navbar navbar-expand-lg navbar-custom">
+        <nav class="navbar navbar-expand-lg navbar">
             <div class="container-fluid">
-                <button type="button" id="sidebarCollapse" class="btn btn-custom-primary">
+                <button type="button" id="sidebarCollapse" class="btn btn-primary">
                     <i class="fa-solid fa-bars"></i>
                 </button>
                 <span class="navbar-brand ms-3">Student Profile Viewer</span>
@@ -79,11 +79,11 @@ include '../includes/header.php';
             <div class="row">
                 <!-- Profile details -->
                 <div class="col-lg-7">
-                    <div class="card-custom">
-                        <div class="card-header-custom">
+                    <div class="card">
+                        <div class="card-header">
                             <i class="fa-solid fa-user-shield me-2 text-primary"></i>Student Admission Profile Details
                         </div>
-                        <div class="card-body-custom">
+                        <div class="card-body">
                             <div class="row mb-4 p-3 bg-light rounded border">
                                 <div class="col-6">
                                     <small class="text-muted block">Admission Number</small>
@@ -158,11 +158,11 @@ include '../includes/header.php';
                 <!-- Documents and Status History -->
                 <div class="col-lg-5">
                     <!-- Documents Preview -->
-                    <div class="card-custom mb-4">
-                        <div class="card-header-custom">
+                    <div class="card mb-4">
+                        <div class="card-header">
                             <i class="fa-solid fa-folder-closed me-2 text-primary"></i>Uploaded Certificates File
                         </div>
-                        <div class="card-body-custom p-0">
+                        <div class="card-body p-0">
                             <div class="list-group list-group-flush px-3 py-2">
                                 <?php
                                 $file_names = [
@@ -190,11 +190,11 @@ include '../includes/header.php';
                     </div>
 
                     <!-- Status Log timeline -->
-                    <div class="card-custom">
-                        <div class="card-header-custom">
+                    <div class="card">
+                        <div class="card-header">
                             <i class="fa-solid fa-timeline me-2 text-primary"></i>Application Review Timeline
                         </div>
-                        <div class="card-body-custom">
+                        <div class="card-body">
                             <?php if (empty($history)): ?>
                                 <p class="text-muted text-center mb-0">No application reviews logged yet.</p>
                             <?php else: ?>
@@ -222,3 +222,4 @@ include '../includes/header.php';
 </div>
 
 <?php include '../includes/footer.php'; ?>
+

@@ -131,14 +131,14 @@ include '../includes/header.php';
     <!-- Page Content -->
     <div id="content">
         <!-- Top Navbar -->
-        <nav class="navbar navbar-expand-lg navbar-custom">
+        <nav class="navbar navbar-expand-lg navbar">
             <div class="container-fluid">
-                <button type="button" id="sidebarCollapse" class="btn btn-custom-primary">
+                <button type="button" id="sidebarCollapse" class="btn btn-primary">
                     <i class="fa-solid fa-bars"></i>
                 </button>
                 <span class="navbar-brand ms-3">Staff Management Portal</span>
                 <div class="ms-auto">
-                    <button type="button" class="btn btn-sm btn-custom-primary" data-bs-toggle="modal" data-bs-target="#addStaffModal">
+                    <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addStaffModal">
                         <i class="fa-solid fa-plus me-1"></i>Create Staff Account
                     </button>
                 </div>
@@ -159,13 +159,13 @@ include '../includes/header.php';
             <?php endif; ?>
 
             <!-- Staff Accounts Table -->
-            <div class="card-custom">
-                <div class="card-header-custom">
+            <div class="card">
+                <div class="card-header">
                     <i class="fa-solid fa-user-tie me-2"></i>Admission Staff Accounts
                 </div>
-                <div class="card-body-custom p-0">
+                <div class="card-body p-0">
                     <div class="table-responsive">
-                        <table class="table table-custom align-middle">
+                        <table class="table table align-middle">
                             <thead>
                                 <tr>
                                     <th># ID</th>
@@ -223,21 +223,21 @@ include '../includes/header.php';
                 <input type="hidden" name="action" value="add">
                 <div class="modal-body">
                     <div class="mb-3">
-                        <label for="name" class="form-label form-label-custom">Staff Full Name</label>
-                        <input type="text" class="form-control form-control-custom" id="name" name="name" placeholder="e.g. John Doe" required>
+                        <label for="name" class="form-label form-label">Staff Full Name</label>
+                        <input type="text" class="form-control form-control" id="name" name="name" placeholder="e.g. John Doe" required>
                     </div>
                     <div class="mb-3">
-                        <label for="email" class="form-label form-label-custom">Secure Email Address</label>
-                        <input type="email" class="form-control form-control-custom" id="email" name="email" placeholder="e.g. staff@college.com" required>
+                        <label for="email" class="form-label form-label">Secure Email Address</label>
+                        <input type="email" class="form-control form-control" id="email" name="email" placeholder="e.g. staff@college.com" required>
                     </div>
                     <div class="mb-3">
-                        <label for="password" class="form-label form-label-custom">Account Password (Min. 6 chars)</label>
-                        <input type="password" class="form-control form-control-custom" id="password" name="password" required>
+                        <label for="password" class="form-label form-label">Account Password (Min. 6 chars)</label>
+                        <input type="password" class="form-control form-control" id="password" name="password" required>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-custom-primary btn-sm">Create Account</button>
+                    <button type="submit" class="btn btn-primary btn-sm">Create Account</button>
                 </div>
             </form>
         </div>
@@ -257,21 +257,21 @@ include '../includes/header.php';
                 <input type="hidden" id="edit_staff_id" name="staff_id">
                 <div class="modal-body">
                     <div class="mb-3">
-                        <label for="edit_name" class="form-label form-label-custom">Staff Full Name</label>
-                        <input type="text" class="form-control form-control-custom" id="edit_name" name="name" required>
+                        <label for="edit_name" class="form-label form-label">Staff Full Name</label>
+                        <input type="text" class="form-control form-control" id="edit_name" name="name" required>
                     </div>
                     <div class="mb-3">
-                        <label for="edit_email" class="form-label form-label-custom">Secure Email Address</label>
-                        <input type="email" class="form-control form-control-custom" id="edit_email" name="email" required>
+                        <label for="edit_email" class="form-label form-label">Secure Email Address</label>
+                        <input type="email" class="form-control form-control" id="edit_email" name="email" required>
                     </div>
                     <div class="mb-3">
-                        <label for="edit_password" class="form-label form-label-custom">Password (Leave blank to keep current)</label>
-                        <input type="password" class="form-control form-control-custom" id="edit_password" name="password" placeholder="Change password...">
+                        <label for="edit_password" class="form-label form-label">Password (Leave blank to keep current)</label>
+                        <input type="password" class="form-control form-control" id="edit_password" name="password" placeholder="Change password...">
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-custom-primary btn-sm">Update Details</button>
+                    <button type="submit" class="btn btn-primary btn-sm">Update Details</button>
                 </div>
             </form>
         </div>
@@ -293,3 +293,4 @@ function editStaff(staff) {
 </script>
 
 <?php include '../includes/footer.php'; ?>
+

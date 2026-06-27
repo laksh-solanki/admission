@@ -58,11 +58,11 @@ function check_access($allowed_roles) {
         $current_path = $_SERVER['PHP_SELF'];
         
         if (strpos($current_path, '/admin/') !== false) {
-            header("Location: ../admin_login.php");
+            header("Location: ../login.php?role=admin");
         } elseif (strpos($current_path, '/staff/') !== false) {
-            header("Location: ../staff_login.php");
+            header("Location: ../login.php?role=staff");
         } else {
-            header("Location: ../student_login.php");
+            header("Location: ../login.php?role=student");
         }
         exit;
     }
@@ -100,3 +100,4 @@ function redirect_if_logged_in() {
     }
 }
 ?>
+

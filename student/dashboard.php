@@ -75,9 +75,9 @@ include '../includes/header.php';
     <!-- Page Content -->
     <div id="content">
         <!-- Top Navbar -->
-        <nav class="navbar navbar-expand-lg navbar-custom">
+        <nav class="navbar navbar-expand-lg navbar">
             <div class="container-fluid">
-                <button type="button" id="sidebarCollapse" class="btn btn-custom-primary">
+                <button type="button" id="sidebarCollapse" class="btn btn-primary">
                     <i class="fa-solid fa-bars"></i>
                 </button>
                 <span class="navbar-brand ms-3">Student Admission Portal</span>
@@ -104,7 +104,7 @@ include '../includes/header.php';
 
             <div class="row mb-4">
                 <div class="col-md-12">
-                    <div class="card-custom bg-white p-4">
+                    <div class="card bg-white p-4">
                         <h2>Welcome, <?php echo htmlspecialchars($_SESSION['name']); ?>!</h2>
                         <p class="text-muted">Manage your college admission process step-by-step from this dashboard.</p>
                     </div>
@@ -149,7 +149,7 @@ include '../includes/header.php';
                                 <p>You have not filled the admission form yet. Please enter your personal details, academic percentages, and course preferences to start the admission process.</p>
                             </div>
                             <div class="status-action-row-premium">
-                                <a href="apply.php" class="btn btn-custom-primary"><i class="fa-solid fa-pen-to-square me-2"></i>Fill Form Now</a>
+                                <a href="apply.php" class="btn btn-primary"><i class="fa-solid fa-pen-to-square me-2"></i>Fill Form Now</a>
                             </div>
                         </div>
                     <?php elseif ($has_form && !$has_docs): ?>
@@ -187,8 +187,8 @@ include '../includes/header.php';
                                 <p>Your details have been saved, but your required certificates are missing. You must upload your passport photo, 10th & 12th marksheets, leaving certificate, and Aadhaar card to proceed.</p>
                             </div>
                             <div class="status-action-row-premium">
-                                <a href="upload.php" class="btn btn-custom-primary"><i class="fa-solid fa-file-arrow-up me-2"></i>Upload Documents</a>
-                                <a href="apply.php" class="btn btn-custom-secondary"><i class="fa-solid fa-pen me-2"></i>Edit Form Details</a>
+                                <a href="upload.php" class="btn btn-primary"><i class="fa-solid fa-file-arrow-up me-2"></i>Upload Documents</a>
+                                <a href="apply.php" class="btn btn-secondary"><i class="fa-solid fa-pen me-2"></i>Edit Form Details</a>
                             </div>
                         </div>
                     <?php elseif ($has_form && $has_docs && $student['payment_status'] === 'Unpaid'): ?>
@@ -226,9 +226,9 @@ include '../includes/header.php';
                                 <p>Your details and documents are successfully compiled. You must now complete the online fee payment of ₹500.00 to submit your application.</p>
                             </div>
                             <div class="status-action-row-premium">
-                                <a href="payment.php" class="btn btn-custom-primary"><i class="fa-solid fa-credit-card me-2"></i>Pay Fees Now</a>
-                                <a href="apply.php" class="btn btn-custom-secondary"><i class="fa-solid fa-pen me-2"></i>Edit Form</a>
-                                <a href="upload.php" class="btn btn-custom-secondary"><i class="fa-solid fa-file-image me-2"></i>Manage Uploads</a>
+                                <a href="payment.php" class="btn btn-primary"><i class="fa-solid fa-credit-card me-2"></i>Pay Fees Now</a>
+                                <a href="apply.php" class="btn btn-secondary"><i class="fa-solid fa-pen me-2"></i>Edit Form</a>
+                                <a href="upload.php" class="btn btn-secondary"><i class="fa-solid fa-file-image me-2"></i>Manage Uploads</a>
                             </div>
                         </div>
                     <?php elseif ($has_form && $has_docs && $student['payment_status'] === 'Paid' && $student['is_submitted'] == 0): ?>
@@ -268,12 +268,12 @@ include '../includes/header.php';
                             <div class="status-action-row-premium">
                                 <form action="dashboard.php" method="POST" class="d-inline">
                                     <input type="hidden" name="action" value="final_submit">
-                                    <button type="submit" class="btn btn-custom-primary fw-bold" onclick="return confirm('Are you sure you want to finalize and submit? You will not be able to edit this form.');">
+                                    <button type="submit" class="btn btn-primary fw-bold" onclick="return confirm('Are you sure you want to finalize and submit? You will not be able to edit this form.');">
                                         <i class="fa-solid fa-paper-plane me-2"></i>Final Submit Application
                                     </button>
                                 </form>
-                                <a href="apply.php" class="btn btn-custom-secondary"><i class="fa-solid fa-pen me-2"></i>Edit Form</a>
-                                <a href="upload.php" class="btn btn-custom-secondary"><i class="fa-solid fa-file-image me-2"></i>Manage Uploads</a>
+                                <a href="apply.php" class="btn btn-secondary"><i class="fa-solid fa-pen me-2"></i>Edit Form</a>
+                                <a href="upload.php" class="btn btn-secondary"><i class="fa-solid fa-file-image me-2"></i>Manage Uploads</a>
                             </div>
                         </div>
                     <?php else: ?>
@@ -346,7 +346,7 @@ include '../includes/header.php';
                                     <p>Congratulations! Your admission application for <strong><?php echo htmlspecialchars($student['course_name']); ?></strong> has been verified and approved. You can now download your official admission receipt below.</p>
                                 </div>
                                 <div class="status-action-row-premium">
-                                    <a href="receipt.php" target="_blank" class="btn btn-custom-primary"><i class="fa-solid fa-file-pdf me-2"></i>Download Admission Receipt</a>
+                                    <a href="receipt.php" target="_blank" class="btn btn-primary"><i class="fa-solid fa-file-pdf me-2"></i>Download Admission Receipt</a>
                                 </div>
                             </div>
                         <?php elseif ($student['status'] === 'Rejected'): ?>
@@ -393,7 +393,7 @@ include '../includes/header.php';
                                     <p class="small text-muted">You can edit your details and re-upload documents to correct the error and re-submit.</p>
                                 </div>
                                 <div class="status-action-row-premium">
-                                    <a href="apply.php" class="btn btn-custom-primary"><i class="fa-solid fa-pen-to-square me-2"></i>Edit Form & Re-Submit</a>
+                                    <a href="apply.php" class="btn btn-primary"><i class="fa-solid fa-pen-to-square me-2"></i>Edit Form & Re-Submit</a>
                                 </div>
                             </div>
                         <?php endif; ?>
@@ -406,8 +406,8 @@ include '../includes/header.php';
                 <div class="row">
                     <!-- Personal & Academic Details Card -->
                     <div class="col-lg-8">
-                        <div class="card-custom">
-                            <div class="card-header-custom">
+                        <div class="card">
+                            <div class="card-header">
                                 <i class="fa-solid fa-user me-2"></i>Application Details Preview
                                 <?php if ($student['is_submitted'] == 0): ?>
                                     <span class="badge bg-secondary float-end">Draft (Unsubmitted)</span>
@@ -415,7 +415,7 @@ include '../includes/header.php';
                                     <span class="badge bg-success float-end">Submitted</span>
                                 <?php endif; ?>
                             </div>
-                            <div class="card-body-custom">
+                            <div class="card-body">
                                 <div class="row mb-4">
                                     <h5 class="fw-bold text-primary border-bottom pb-2">Personal Information</h5>
                                     <div class="col-md-6 mb-2">
@@ -477,19 +477,19 @@ include '../includes/header.php';
 
                     <!-- Uploaded Documents Card -->
                     <div class="col-lg-4">
-                        <div class="card-custom">
-                            <div class="card-header-custom">
+                        <div class="card">
+                            <div class="card-header">
                                 <i class="fa-solid fa-file-lines me-2"></i>Required Documents
                             </div>
-                            <div class="card-body-custom">
+                            <div class="card-body">
                                 <ul class="list-group list-group-flush">
                                     <!-- Photo Status -->
                                     <li class="list-group-item d-flex justify-content-between align-items-center px-0 py-3">
                                         <span><i class="fa-regular fa-image me-2 text-primary"></i>Student Photo</span>
                                         <?php if ($documents && !empty($documents['photo'])): ?>
-                                            <span class="badge bg-success-subtle text-success badge-custom"><i class="fa-solid fa-check me-1"></i>Uploaded</span>
+                                            <span class="badge bg-success-subtle text-success badge"><i class="fa-solid fa-check me-1"></i>Uploaded</span>
                                         <?php else: ?>
-                                            <span class="badge bg-danger-subtle text-danger badge-custom"><i class="fa-solid fa-xmark me-1"></i>Missing</span>
+                                            <span class="badge bg-danger-subtle text-danger badge"><i class="fa-solid fa-xmark me-1"></i>Missing</span>
                                         <?php endif; ?>
                                     </li>
 
@@ -497,9 +497,9 @@ include '../includes/header.php';
                                     <li class="list-group-item d-flex justify-content-between align-items-center px-0 py-3">
                                         <span><i class="fa-regular fa-file-pdf me-2 text-danger"></i>10th Marksheet</span>
                                         <?php if ($documents && !empty($documents['marksheet10'])): ?>
-                                            <span class="badge bg-success-subtle text-success badge-custom"><i class="fa-solid fa-check me-1"></i>Uploaded</span>
+                                            <span class="badge bg-success-subtle text-success badge"><i class="fa-solid fa-check me-1"></i>Uploaded</span>
                                         <?php else: ?>
-                                            <span class="badge bg-danger-subtle text-danger badge-custom"><i class="fa-solid fa-xmark me-1"></i>Missing</span>
+                                            <span class="badge bg-danger-subtle text-danger badge"><i class="fa-solid fa-xmark me-1"></i>Missing</span>
                                         <?php endif; ?>
                                     </li>
 
@@ -507,9 +507,9 @@ include '../includes/header.php';
                                     <li class="list-group-item d-flex justify-content-between align-items-center px-0 py-3">
                                         <span><i class="fa-regular fa-file-pdf me-2 text-danger"></i>12th Marksheet</span>
                                         <?php if ($documents && !empty($documents['marksheet12'])): ?>
-                                            <span class="badge bg-success-subtle text-success badge-custom"><i class="fa-solid fa-check me-1"></i>Uploaded</span>
+                                            <span class="badge bg-success-subtle text-success badge"><i class="fa-solid fa-check me-1"></i>Uploaded</span>
                                         <?php else: ?>
-                                            <span class="badge bg-danger-subtle text-danger badge-custom"><i class="fa-solid fa-xmark me-1"></i>Missing</span>
+                                            <span class="badge bg-danger-subtle text-danger badge"><i class="fa-solid fa-xmark me-1"></i>Missing</span>
                                         <?php endif; ?>
                                     </li>
 
@@ -517,9 +517,9 @@ include '../includes/header.php';
                                     <li class="list-group-item d-flex justify-content-between align-items-center px-0 py-3">
                                         <span><i class="fa-regular fa-file-word me-2 text-info"></i>Leaving Certificate</span>
                                         <?php if ($documents && !empty($documents['leaving_certificate'])): ?>
-                                            <span class="badge bg-success-subtle text-success badge-custom"><i class="fa-solid fa-check me-1"></i>Uploaded</span>
+                                            <span class="badge bg-success-subtle text-success badge"><i class="fa-solid fa-check me-1"></i>Uploaded</span>
                                         <?php else: ?>
-                                            <span class="badge bg-danger-subtle text-danger badge-custom"><i class="fa-solid fa-xmark me-1"></i>Missing</span>
+                                            <span class="badge bg-danger-subtle text-danger badge"><i class="fa-solid fa-xmark me-1"></i>Missing</span>
                                         <?php endif; ?>
                                     </li>
 
@@ -527,9 +527,9 @@ include '../includes/header.php';
                                     <li class="list-group-item d-flex justify-content-between align-items-center px-0 py-3">
                                         <span><i class="fa-regular fa-address-card me-2 text-success"></i>Aadhaar Card</span>
                                         <?php if ($documents && !empty($documents['aadhaar'])): ?>
-                                            <span class="badge bg-success-subtle text-success badge-custom"><i class="fa-solid fa-check me-1"></i>Uploaded</span>
+                                            <span class="badge bg-success-subtle text-success badge"><i class="fa-solid fa-check me-1"></i>Uploaded</span>
                                         <?php else: ?>
-                                            <span class="badge bg-danger-subtle text-danger badge-custom"><i class="fa-solid fa-xmark me-1"></i>Missing</span>
+                                            <span class="badge bg-danger-subtle text-danger badge"><i class="fa-solid fa-xmark me-1"></i>Missing</span>
                                         <?php endif; ?>
                                     </li>
                                 </ul>
@@ -549,3 +549,4 @@ include '../includes/header.php';
 </div>
 
 <?php include '../includes/footer.php'; ?>
+

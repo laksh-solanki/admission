@@ -39,3 +39,4 @@ if (in_array($current_dir, ['admin', 'staff', 'student'])) {
     <link rel="stylesheet" href="<?php echo $base_path; ?>assets/css/style.css">
 </head>
 <body class="<?php echo isset($body_class) ? $body_class : ''; ?>">
+

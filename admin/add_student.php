@@ -77,10 +77,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 
                 // 2. Generate Admission Number
                 $year = date('Y');
-                $count_stmt = $pdo->prepare("SELECT COUNT(*) as current_count FROM students WHERE admission_no LIKE :prefix");
-                $count_stmt->execute(['prefix' => "ADM" . $year . "%"]);
-                $row = $count_stmt->fetch();
-                $seq_num = $row['current_count'] + 1;
+                $prefix = "ADM" . $year;
+                
+                $max_stmt = $pdo->prepare("SELECT admission_no FROM students WHERE admission_no LIKE :prefix ORDER BY admission_no DESC LIMIT 1");
+                $max_stmt->execute(['prefix' => $prefix . "%"]);
+                $row = $max_stmt->fetch();
+                
+                if ($row) {
+                    $last_num = (int) substr($row['admission_no'], 7);
+                    $seq_num = $last_num + 1;
+                } else {
+                    $seq_num = 1;
+                }
                 $admission_no = sprintf("ADM%s%03d", $year, $seq_num);
                 
                 // 3. Insert Student details
@@ -152,9 +160,9 @@ include '../includes/header.php';
     <!-- Page Content -->
     <div id="content">
         <!-- Top Navbar -->
-        <nav class="navbar navbar-expand-lg navbar-custom">
+        <nav class="navbar navbar-expand-lg navbar">
             <div class="container-fluid">
-                <button type="button" id="sidebarCollapse" class="btn btn-custom-primary">
+                <button type="button" id="sidebarCollapse" class="btn btn-primary">
                     <i class="fa-solid fa-bars"></i>
                 </button>
                 <span class="navbar-brand ms-3">Create Student Application</span>
@@ -172,27 +180,27 @@ include '../includes/header.php';
                 </div>
             <?php endif; ?>
 
-            <div class="card-custom">
-                <div class="card-header-custom">
+            <div class="card">
+                <div class="card-header">
                     <i class="fa-solid fa-user-plus me-2"></i>Register Student Details
                 </div>
-                <div class="card-body-custom">
+                <div class="card-body">
                     <form action="add_student.php" method="POST">
                         
                         <!-- 1. Account Credentials -->
                         <h5 class="fw-bold text-primary border-bottom pb-2 mb-3"><i class="fa-solid fa-key me-2"></i>1. Login Account Credentials</h5>
                         <div class="row g-3 mb-4">
                             <div class="col-md-4">
-                                <label class="form-label form-label-custom">Account Display Name</label>
-                                <input type="text" class="form-control form-control-custom" name="name" placeholder="e.g. Samuel Jackson" required>
+                                <label class="form-label form-label">Account Display Name</label>
+                                <input type="text" class="form-control form-control" name="name" placeholder="e.g. Samuel Jackson" required>
                             </div>
                             <div class="col-md-4">
-                                <label class="form-label form-label-custom">Account Email Address</label>
-                                <input type="email" class="form-control form-control-custom" name="email" placeholder="e.g. sam@gmail.com" required>
+                                <label class="form-label form-label">Account Email Address</label>
+                                <input type="email" class="form-control form-control" name="email" placeholder="e.g. sam@gmail.com" required>
                             </div>
                             <div class="col-md-4">
-                                <label class="form-label form-label-custom">Password</label>
-                                <input type="password" class="form-control form-control-custom" name="password" placeholder="Min. 6 characters" required>
+                                <label class="form-label form-label">Password</label>
+                                <input type="password" class="form-control form-control" name="password" placeholder="Min. 6 characters" required>
                             </div>
                         </div>
 
@@ -200,20 +208,20 @@ include '../includes/header.php';
                         <h5 class="fw-bold text-primary border-bottom pb-2 mb-3"><i class="fa-solid fa-address-card me-2"></i>2. Personal Details</h5>
                         <div class="row g-3 mb-4">
                             <div class="col-md-4">
-                                <label class="form-label form-label-custom">Student Full Name</label>
-                                <input type="text" class="form-control form-control-custom" name="full_name" required>
+                                <label class="form-label form-label">Student Full Name</label>
+                                <input type="text" class="form-control form-control" name="full_name" required>
                             </div>
                             <div class="col-md-4">
-                                <label class="form-label form-label-custom">Father's Name</label>
-                                <input type="text" class="form-control form-control-custom" name="father_name" required>
+                                <label class="form-label form-label">Father's Name</label>
+                                <input type="text" class="form-control form-control" name="father_name" required>
                             </div>
                             <div class="col-md-4">
-                                <label class="form-label form-label-custom">Mother's Name</label>
-                                <input type="text" class="form-control form-control-custom" name="mother_name" required>
+                                <label class="form-label form-label">Mother's Name</label>
+                                <input type="text" class="form-control form-control" name="mother_name" required>
                             </div>
                             <div class="col-md-4">
-                                <label class="form-label form-label-custom">Gender</label>
-                                <select class="form-select form-control-custom" name="gender" required>
+                                <label class="form-label form-label">Gender</label>
+                                <select class="form-select form-control" name="gender" required>
                                     <option value="">Choose...</option>
                                     <option value="Male">Male</option>
                                     <option value="Female">Female</option>
@@ -221,12 +229,12 @@ include '../includes/header.php';
                                 </select>
                             </div>
                             <div class="col-md-4">
-                                <label class="form-label form-label-custom">Date of Birth</label>
-                                <input type="date" class="form-control form-control-custom" name="dob" required>
+                                <label class="form-label form-label">Date of Birth</label>
+                                <input type="date" class="form-control form-control" name="dob" required>
                             </div>
                             <div class="col-md-4">
-                                <label class="form-label form-label-custom">Category</label>
-                                <select class="form-select form-control-custom" name="category" required>
+                                <label class="form-label form-label">Category</label>
+                                <select class="form-select form-control" name="category" required>
                                     <option value="">Choose...</option>
                                     <option value="General">General</option>
                                     <option value="OBC">OBC</option>
@@ -236,24 +244,24 @@ include '../includes/header.php';
                                 </select>
                             </div>
                             <div class="col-md-4">
-                                <label class="form-label form-label-custom">Mobile Number</label>
-                                <input type="tel" class="form-control form-control-custom" name="mobile" required>
+                                <label class="form-label form-label">Mobile Number</label>
+                                <input type="tel" class="form-control form-control" name="mobile" required>
                             </div>
                             <div class="col-md-6">
-                                <label class="form-label form-label-custom">Address</label>
-                                <input type="text" class="form-control form-control-custom" name="address" required>
+                                <label class="form-label form-label">Address</label>
+                                <input type="text" class="form-control form-control" name="address" required>
                             </div>
                             <div class="col-md-2">
-                                <label class="form-label form-label-custom">City</label>
-                                <input type="text" class="form-control form-control-custom" name="city" required>
+                                <label class="form-label form-label">City</label>
+                                <input type="text" class="form-control form-control" name="city" required>
                             </div>
                             <div class="col-md-2">
-                                <label class="form-label form-label-custom">State</label>
-                                <input type="text" class="form-control form-control-custom" name="state" required>
+                                <label class="form-label form-label">State</label>
+                                <input type="text" class="form-control form-control" name="state" required>
                             </div>
                             <div class="col-md-2">
-                                <label class="form-label form-label-custom">Pincode</label>
-                                <input type="text" class="form-control form-control-custom" name="pincode" required>
+                                <label class="form-label form-label">Pincode</label>
+                                <input type="text" class="form-control form-control" name="pincode" required>
                             </div>
                         </div>
 
@@ -261,21 +269,21 @@ include '../includes/header.php';
                         <h5 class="fw-bold text-primary border-bottom pb-2 mb-3"><i class="fa-solid fa-graduation-cap me-2"></i>3. Academic Scores</h5>
                         <div class="row g-3 mb-4">
                             <div class="col-md-3">
-                                <label class="form-label form-label-custom">10th Std Percentage (%)</label>
-                                <input type="number" step="0.01" min="0" max="100" class="form-control form-control-custom" name="tenth_percentage" required>
+                                <label class="form-label form-label">10th Std Percentage (%)</label>
+                                <input type="number" step="0.01" min="0" max="100" class="form-control form-control" name="tenth_percentage" required>
                             </div>
                             <div class="col-md-3">
-                                <label class="form-label form-label-custom">12th Std Percentage (%)</label>
-                                <input type="number" step="0.01" min="0" max="100" class="form-control form-control-custom" name="twelfth_percentage" required>
+                                <label class="form-label form-label">12th Std Percentage (%)</label>
+                                <input type="number" step="0.01" min="0" max="100" class="form-control form-control" name="twelfth_percentage" required>
                                 <small class="text-muted">Min eligibility: 35%</small>
                             </div>
                             <div class="col-md-4">
-                                <label class="form-label form-label-custom">Previous School Board Name</label>
-                                <input type="text" class="form-control form-control-custom" name="school_name" required>
+                                <label class="form-label form-label">Previous School Board Name</label>
+                                <input type="text" class="form-control form-control" name="school_name" required>
                             </div>
                             <div class="col-md-2">
-                                <label class="form-label form-label-custom">Passing Year</label>
-                                <input type="number" class="form-control form-control-custom" name="passing_year" value="<?php echo date('Y'); ?>" required>
+                                <label class="form-label form-label">Passing Year</label>
+                                <input type="number" class="form-control form-control" name="passing_year" value="<?php echo date('Y'); ?>" required>
                             </div>
                         </div>
 
@@ -283,8 +291,8 @@ include '../includes/header.php';
                         <h5 class="fw-bold text-primary border-bottom pb-2 mb-3"><i class="fa-solid fa-book-bookmark me-2"></i>4. Degree Selection</h5>
                         <div class="row g-3 mb-5">
                             <div class="col-md-12">
-                                <label class="form-label form-label-custom">Select Preferred Course</label>
-                                <select class="form-select form-control-custom" name="course_id" required>
+                                <label class="form-label form-label">Select Preferred Course</label>
+                                <select class="form-select form-control" name="course_id" required>
                                     <option value="">Select course...</option>
                                     <?php foreach ($courses as $c): ?>
                                         <option value="<?php echo $c['course_id']; ?>">
@@ -297,7 +305,7 @@ include '../includes/header.php';
 
                         <div class="d-flex justify-content-between pt-3 border-top">
                             <a href="manage_students.php" class="btn btn-outline-secondary py-2"><i class="fa-solid fa-arrow-left me-1"></i>Cancel</a>
-                            <button type="submit" class="btn btn-custom-primary px-5 py-2 fw-bold">Register Student</button>
+                            <button type="submit" class="btn btn-primary px-5 py-2 fw-bold">Register Student</button>
                         </div>
                     </form>
                 </div>
@@ -307,3 +315,4 @@ include '../includes/header.php';
 </div>
 
 <?php include '../includes/footer.php'; ?>
+

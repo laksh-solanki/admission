@@ -117,9 +117,9 @@ include 'includes/header.php';
     <!-- Page Content -->
     <div id="content">
         <!-- Top Navbar -->
-        <nav class="navbar navbar-expand-lg navbar-custom">
+        <nav class="navbar navbar-expand-lg navbar">
             <div class="container-fluid">
-                <button type="button" id="sidebarCollapse" class="btn btn-custom-primary">
+                <button type="button" id="sidebarCollapse" class="btn btn-primary">
                     <i class="fa-solid fa-bars"></i>
                 </button>
                 <span class="navbar-brand ms-3">User Profile Desk</span>
@@ -142,46 +142,46 @@ include 'includes/header.php';
             <div class="row">
                 <!-- Profile Editor Column -->
                 <div class="col-lg-7">
-                    <div class="card-custom">
-                        <div class="card-header-custom">
+                    <div class="card">
+                        <div class="card-header">
                             <i class="fa-solid fa-user-gear me-2"></i>Account Settings
                         </div>
-                        <div class="card-body-custom">
+                        <div class="card-body">
                             <form action="profile.php" method="POST">
                                 <!-- Email (Disabled Username) -->
                                 <div class="mb-3">
-                                    <label class="form-label form-label-custom">Email Address (Registered Login)</label>
-                                    <input type="email" class="form-control form-control-custom bg-light" value="<?php echo htmlspecialchars($user_email); ?>" readonly disabled>
+                                    <label class="form-label form-label">Email Address (Registered Login)</label>
+                                    <input type="email" class="form-control form-control bg-light" value="<?php echo htmlspecialchars($user_email); ?>" readonly disabled>
                                     <div class="form-text small text-muted">Email address acts as login username and cannot be altered.</div>
                                 </div>
 
                                 <!-- Display Name -->
                                 <div class="mb-3">
-                                    <label for="name" class="form-label form-label-custom">Display Name</label>
-                                    <input type="text" class="form-control form-control-custom" id="name" name="name" value="<?php echo htmlspecialchars($user_name); ?>" required>
+                                    <label for="name" class="form-label form-label">Display Name</label>
+                                    <input type="text" class="form-control form-control" id="name" name="name" value="<?php echo htmlspecialchars($user_name); ?>" required>
                                 </div>
 
                                 <!-- Current Password verification -->
                                 <div class="mb-4 pt-3 border-top">
-                                    <label for="current_password" class="form-label form-label-custom text-danger">Current Password <span class="text-danger">*</span></label>
-                                    <input type="password" class="form-control form-control-custom" id="current_password" name="current_password" placeholder="Confirm current password to save changes" required>
+                                    <label for="current_password" class="form-label form-label text-danger">Current Password <span class="text-danger">*</span></label>
+                                    <input type="password" class="form-control form-control" id="current_password" name="current_password" placeholder="Confirm current password to save changes" required>
                                 </div>
 
                                 <!-- New Password Fields -->
                                 <h6 class="fw-bold text-primary border-bottom pb-2 mb-3">Change Account Password (Optional)</h6>
                                 <div class="row g-3 mb-4">
                                     <div class="col-md-6">
-                                        <label for="new_password" class="form-label form-label-custom">New Password</label>
-                                        <input type="password" class="form-control form-control-custom" id="new_password" name="new_password" placeholder="Min. 6 characters">
+                                        <label for="new_password" class="form-label form-label">New Password</label>
+                                        <input type="password" class="form-control form-control" id="new_password" name="new_password" placeholder="Min. 6 characters">
                                     </div>
                                     <div class="col-md-6">
-                                        <label for="confirm_password" class="form-label form-label-custom">Confirm New Password</label>
-                                        <input type="password" class="form-control form-control-custom" id="confirm_password" name="confirm_password" placeholder="Re-enter new password">
+                                        <label for="confirm_password" class="form-label form-label">Confirm New Password</label>
+                                        <input type="password" class="form-control form-control" id="confirm_password" name="confirm_password" placeholder="Re-enter new password">
                                     </div>
                                 </div>
 
                                 <div class="d-flex justify-content-end">
-                                    <button type="submit" class="btn btn-custom-primary px-5 py-2 fw-bold"><i class="fa-solid fa-floppy-disk me-1"></i>Save Changes</button>
+                                    <button type="submit" class="btn btn-primary px-5 py-2 fw-bold"><i class="fa-solid fa-floppy-disk me-1"></i>Save Changes</button>
                                 </div>
                             </form>
                         </div>
@@ -190,11 +190,11 @@ include 'includes/header.php';
 
                 <!-- Info summary column -->
                 <div class="col-lg-5">
-                    <div class="card-custom bg-white">
-                        <div class="card-header-custom bg-light">
+                    <div class="card bg-white">
+                        <div class="card-header bg-light">
                             <i class="fa-solid fa-shield-halved me-1 text-primary"></i>Security Center
                         </div>
-                        <div class="card-body-custom text-center">
+                        <div class="card-body text-center">
                             <i class="fa-solid fa-circle-user text-primary mb-3" style="font-size: 72px;"></i>
                             <h4 class="fw-bold mb-1"><?php echo htmlspecialchars($user_name); ?></h4>
                             <span class="badge bg-secondary mb-3"><?php echo strtoupper($role); ?> ACCOUNT</span>
@@ -215,3 +215,4 @@ include 'includes/header.php';
 </div>
 
 <?php include 'includes/header.php'; ?>
+

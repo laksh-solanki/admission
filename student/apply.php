@@ -125,15 +125,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 } else {
                     // Create New Record - Auto Generate Admission Number (format: ADM[YEAR][001])
                     $year = date('Y');
+                    $prefix = "ADM" . $year;
                     
-                    // Fetch count of students for current year to determine next sequential number
-                    $count_stmt = $pdo->prepare("SELECT COUNT(*) as current_count FROM students WHERE admission_no LIKE :prefix");
-                    $count_stmt->execute(['prefix' => "ADM" . $year . "%"]);
-                    $row = $count_stmt->fetch();
-                    $seq_num = $row['current_count'] + 1;
+                    // Fetch the highest sequential admission number for the current year to avoid duplicates
+                    $max_stmt = $pdo->prepare("SELECT admission_no FROM students WHERE admission_no LIKE :prefix ORDER BY admission_no DESC LIMIT 1");
+                    $max_stmt->execute(['prefix' => $prefix . "%"]);
+                    $row = $max_stmt->fetch();
                     
-                    // Format: ADM2026001
+                    if ($row) {
+                        $last_num = (int) substr($row['admission_no'], 7);
+                        $seq_num = $last_num + 1;
+                    } else {
+                        $seq_num = 1;
+                    }
+                    
                     $admission_no = sprintf("ADM%s%03d", $year, $seq_num);
+                    
                     
                     // Insert into students table
                     $insert_sql = "INSERT INTO students (
@@ -193,9 +200,9 @@ include '../includes/header.php';
     <!-- Page Content -->
     <div id="content">
         <!-- Top Navbar -->
-        <nav class="navbar navbar-expand-lg navbar-custom">
+        <nav class="navbar navbar-expand-lg navbar">
             <div class="container-fluid">
-                <button type="button" id="sidebarCollapse" class="btn btn-custom-primary">
+                <button type="button" id="sidebarCollapse" class="btn btn-primary">
                     <i class="fa-solid fa-bars"></i>
                 </button>
                 <span class="navbar-brand ms-3"><?php echo $page_title; ?></span>
@@ -232,11 +239,11 @@ include '../includes/header.php';
                 </div>
             <?php endif; ?>
 
-            <div class="card-custom">
-                <div class="card-header-custom bg-white">
+            <div class="card">
+                <div class="card-header bg-white">
                     <i class="fa-solid fa-file-invoice me-2 text-primary"></i>Admission Registration Form
                 </div>
-                <div class="card-body-custom">
+                <div class="card-body">
                     <form action="apply.php" method="POST" id="admissionForm">
                         
                         <!-- 1. Personal Information -->
@@ -244,26 +251,26 @@ include '../includes/header.php';
                         <div class="row g-3 mb-4">
                             <!-- Full Name -->
                             <div class="col-md-6">
-                                <label for="full_name" class="form-label form-label-custom">Student Full Name</label>
-                                <input type="text" class="form-control form-control-custom" id="full_name" name="full_name" 
+                                <label for="full_name" class="form-label form-label">Student Full Name</label>
+                                <input type="text" class="form-control form-control" id="full_name" name="full_name" 
                                     value="<?php echo $has_record ? htmlspecialchars($student['full_name']) : ''; ?>" required>
                             </div>
                             <!-- Father's Name -->
                             <div class="col-md-3">
-                                <label for="father_name" class="form-label form-label-custom">Father's Name</label>
-                                <input type="text" class="form-control form-control-custom" id="father_name" name="father_name" 
+                                <label for="father_name" class="form-label form-label">Father's Name</label>
+                                <input type="text" class="form-control form-control" id="father_name" name="father_name" 
                                     value="<?php echo $has_record ? htmlspecialchars($student['father_name']) : ''; ?>" required>
                             </div>
                             <!-- Mother's Name -->
                             <div class="col-md-3">
-                                <label for="mother_name" class="form-label form-label-custom">Mother's Name</label>
-                                <input type="text" class="form-control form-control-custom" id="mother_name" name="mother_name" 
+                                <label for="mother_name" class="form-label form-label">Mother's Name</label>
+                                <input type="text" class="form-control form-control" id="mother_name" name="mother_name" 
                                     value="<?php echo $has_record ? htmlspecialchars($student['mother_name']) : ''; ?>" required>
                             </div>
                             <!-- Gender -->
                             <div class="col-md-4">
-                                <label for="gender" class="form-label form-label-custom">Gender</label>
-                                <select class="form-select form-control-custom" id="gender" name="gender" required>
+                                <label for="gender" class="form-label form-label">Gender</label>
+                                <select class="form-select form-control" id="gender" name="gender" required>
                                     <option value="">Choose...</option>
                                     <option value="Male" <?php echo ($has_record && $student['gender'] === 'Male') ? 'selected' : ''; ?>>Male</option>
                                     <option value="Female" <?php echo ($has_record && $student['gender'] === 'Female') ? 'selected' : ''; ?>>Female</option>
@@ -272,14 +279,14 @@ include '../includes/header.php';
                             </div>
                             <!-- DOB -->
                             <div class="col-md-4">
-                                <label for="dob" class="form-label form-label-custom">Date of Birth</label>
-                                <input type="date" class="form-control form-control-custom" id="dob" name="dob" 
+                                <label for="dob" class="form-label form-label">Date of Birth</label>
+                                <input type="date" class="form-control form-control" id="dob" name="dob" 
                                     value="<?php echo $has_record ? htmlspecialchars($student['dob']) : ''; ?>" required>
                             </div>
                             <!-- Category -->
                             <div class="col-md-4">
-                                <label for="category" class="form-label form-label-custom">Category</label>
-                                <select class="form-select form-control-custom" id="category" name="category" required>
+                                <label for="category" class="form-label form-label">Category</label>
+                                <select class="form-select form-control" id="category" name="category" required>
                                     <option value="">Choose...</option>
                                     <option value="General" <?php echo ($has_record && $student['category'] === 'General') ? 'selected' : ''; ?>>General</option>
                                     <option value="OBC" <?php echo ($has_record && $student['category'] === 'OBC') ? 'selected' : ''; ?>>OBC</option>
@@ -290,38 +297,38 @@ include '../includes/header.php';
                             </div>
                             <!-- Mobile -->
                             <div class="col-md-4">
-                                <label for="mobile" class="form-label form-label-custom">Mobile Number</label>
-                                <input type="tel" class="form-control form-control-custom" id="mobile" name="mobile" 
+                                <label for="mobile" class="form-label form-label">Mobile Number</label>
+                                <input type="tel" class="form-control form-control" id="mobile" name="mobile" 
                                     value="<?php echo $has_record ? htmlspecialchars($student['mobile']) : ''; ?>" required>
                             </div>
                             <!-- Email (Auto-filled read-only) -->
                             <div class="col-md-6">
-                                <label for="email" class="form-label form-label-custom">Email (Registered)</label>
-                                <input type="email" class="form-control form-control-custom bg-light" id="email" name="email" 
+                                <label for="email" class="form-label form-label">Email (Registered)</label>
+                                <input type="email" class="form-control form-control bg-light" id="email" name="email" 
                                     value="<?php echo $_SESSION['email']; ?>" readonly>
                             </div>
                             <!-- Address -->
                             <div class="col-md-6">
-                                <label for="address" class="form-label form-label-custom">Correspondence Address</label>
-                                <input type="text" class="form-control form-control-custom" id="address" name="address" 
+                                <label for="address" class="form-label form-label">Correspondence Address</label>
+                                <input type="text" class="form-control form-control" id="address" name="address" 
                                     value="<?php echo $has_record ? htmlspecialchars($student['address']) : ''; ?>" required>
                             </div>
                             <!-- City -->
                             <div class="col-md-4">
-                                <label for="city" class="form-label form-label-custom">City</label>
-                                <input type="text" class="form-control form-control-custom" id="city" name="city" 
+                                <label for="city" class="form-label form-label">City</label>
+                                <input type="text" class="form-control form-control" id="city" name="city" 
                                     value="<?php echo $has_record ? htmlspecialchars($student['city']) : ''; ?>" required>
                             </div>
                             <!-- State -->
                             <div class="col-md-4">
-                                <label for="state" class="form-label form-label-custom">State</label>
-                                <input type="text" class="form-control form-control-custom" id="state" name="state" 
+                                <label for="state" class="form-label form-label">State</label>
+                                <input type="text" class="form-control form-control" id="state" name="state" 
                                     value="<?php echo $has_record ? htmlspecialchars($student['state']) : ''; ?>" required>
                             </div>
                             <!-- Pincode -->
                             <div class="col-md-4">
-                                <label for="pincode" class="form-label form-label-custom">Pincode</label>
-                                <input type="text" class="form-control form-control-custom" id="pincode" name="pincode" 
+                                <label for="pincode" class="form-label form-label">Pincode</label>
+                                <input type="text" class="form-control form-control" id="pincode" name="pincode" 
                                     value="<?php echo $has_record ? htmlspecialchars($student['pincode']) : ''; ?>" required>
                             </div>
                         </div>
@@ -331,27 +338,27 @@ include '../includes/header.php';
                         <div class="row g-3 mb-4">
                             <!-- 10th Percentage -->
                             <div class="col-md-3">
-                                <label for="tenth_percentage" class="form-label form-label-custom">10th Std Percentage (%)</label>
-                                <input type="number" step="0.01" min="0" max="100" class="form-control form-control-custom" id="tenth_percentage" name="tenth_percentage" 
+                                <label for="tenth_percentage" class="form-label form-label">10th Std Percentage (%)</label>
+                                <input type="number" step="0.01" min="0" max="100" class="form-control form-control" id="tenth_percentage" name="tenth_percentage" 
                                     value="<?php echo $has_record ? htmlspecialchars($student['tenth_percentage']) : ''; ?>" required>
                             </div>
                             <!-- 12th Percentage -->
                             <div class="col-md-3">
-                                <label for="twelfth_percentage" class="form-label form-label-custom">12th Std Percentage (%)</label>
-                                <input type="number" step="0.01" min="0" max="100" class="form-control form-control-custom" id="twelfth_percentage" name="twelfth_percentage" 
+                                <label for="twelfth_percentage" class="form-label form-label">12th Std Percentage (%)</label>
+                                <input type="number" step="0.01" min="0" max="100" class="form-control form-control" id="twelfth_percentage" name="twelfth_percentage" 
                                     value="<?php echo $has_record ? htmlspecialchars($student['twelfth_percentage']) : ''; ?>" required>
                                 <small class="text-muted">Eligibility: Minimum 35% required</small>
                             </div>
                             <!-- School Name -->
                             <div class="col-md-4">
-                                <label for="school_name" class="form-label form-label-custom">Previous School / Board Name</label>
-                                <input type="text" class="form-control form-control-custom" id="school_name" name="school_name" 
+                                <label for="school_name" class="form-label form-label">Previous School / Board Name</label>
+                                <input type="text" class="form-control form-control" id="school_name" name="school_name" 
                                     value="<?php echo $has_record ? htmlspecialchars($student['school_name']) : ''; ?>" required>
                             </div>
                             <!-- Passing Year -->
                             <div class="col-md-2">
-                                <label for="passing_year" class="form-label form-label-custom">Passing Year</label>
-                                <input type="number" min="2000" max="2026" class="form-control form-control-custom" id="passing_year" name="passing_year" 
+                                <label for="passing_year" class="form-label form-label">Passing Year</label>
+                                <input type="number" min="2000" max="2026" class="form-control form-control" id="passing_year" name="passing_year" 
                                     value="<?php echo $has_record ? htmlspecialchars($student['passing_year']) : date('Y'); ?>" required>
                             </div>
                         </div>
@@ -361,8 +368,8 @@ include '../includes/header.php';
                         <div class="row g-3 mb-4">
                             <!-- Course Name Selection -->
                             <div class="col-md-12">
-                                <label for="course_id" class="form-label form-label-custom">Select Preferred Program</label>
-                                <select class="form-select form-control-custom" id="course_id" name="course_id" required>
+                                <label for="course_id" class="form-label form-label">Select Preferred Program</label>
+                                <select class="form-select form-control" id="course_id" name="course_id" required>
                                     <option value="">Select a Course...</option>
                                     <?php foreach ($courses as $course): ?>
                                         <option value="<?php echo $course['course_id']; ?>" 
@@ -377,7 +384,7 @@ include '../includes/header.php';
                         <!-- Submit Section -->
                         <div class="d-flex justify-content-between mt-5 pt-3 border-top">
                             <a href="dashboard.php" class="btn btn-outline-secondary py-2"><i class="fa-solid fa-arrow-left me-1"></i>Cancel & Back</a>
-                            <button type="submit" class="btn btn-custom-primary px-5 py-2 fw-bold">
+                            <button type="submit" class="btn btn-primary px-5 py-2 fw-bold">
                                 <i class="fa-solid fa-floppy-disk me-1"></i>Save Details
                             </button>
                         </div>
@@ -455,3 +462,4 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 <?php include '../includes/footer.php'; ?>
+

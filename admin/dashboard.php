@@ -60,9 +60,9 @@ include '../includes/header.php';
     <!-- Page Content -->
     <div id="content">
         <!-- Top Navbar -->
-        <nav class="navbar navbar-expand-lg navbar-custom">
+        <nav class="navbar navbar-expand-lg navbar">
             <div class="container-fluid">
-                <button type="button" id="sidebarCollapse" class="btn btn-custom-primary">
+                <button type="button" id="sidebarCollapse" class="btn btn-primary">
                     <i class="fa-solid fa-bars"></i>
                 </button>
                 <span class="navbar-brand ms-3">Administrator Command Center</span>
@@ -77,7 +77,7 @@ include '../includes/header.php';
             <div class="row g-4 mb-4">
                 <!-- Total Applications -->
                 <div class="col-md-4 col-xl-2">
-                    <div class="card-custom bg-white p-3 stat-card courses">
+                    <div class="card bg-white p-3 stat-card courses">
                         <div class="d-flex justify-content-between align-items-center">
                             <div>
                                 <small class="text-muted fw-bold">Total Apps</small>
@@ -89,7 +89,7 @@ include '../includes/header.php';
                 </div>
                 <!-- Pending -->
                 <div class="col-md-4 col-xl-2">
-                    <div class="card-custom bg-white p-3 stat-card pending">
+                    <div class="card bg-white p-3 stat-card pending">
                         <div class="d-flex justify-content-between align-items-center">
                             <div>
                                 <small class="text-muted fw-bold">Pending</small>
@@ -101,7 +101,7 @@ include '../includes/header.php';
                 </div>
                 <!-- Approved -->
                 <div class="col-md-4 col-xl-2">
-                    <div class="card-custom bg-white p-3 stat-card approved">
+                    <div class="card bg-white p-3 stat-card approved">
                         <div class="d-flex justify-content-between align-items-center">
                             <div>
                                 <small class="text-muted fw-bold">Approved</small>
@@ -113,7 +113,7 @@ include '../includes/header.php';
                 </div>
                 <!-- Rejected -->
                 <div class="col-md-4 col-xl-2">
-                    <div class="card-custom bg-white p-3 stat-card rejected">
+                    <div class="card bg-white p-3 stat-card rejected">
                         <div class="d-flex justify-content-between align-items-center">
                             <div>
                                 <small class="text-muted fw-bold">Rejected</small>
@@ -125,7 +125,7 @@ include '../includes/header.php';
                 </div>
                 <!-- Courses -->
                 <div class="col-md-4 col-xl-2">
-                    <div class="card-custom bg-white p-3 stat-card courses">
+                    <div class="card bg-white p-3 stat-card courses">
                         <div class="d-flex justify-content-between align-items-center">
                             <div>
                                 <small class="text-muted fw-bold">Active Courses</small>
@@ -137,7 +137,7 @@ include '../includes/header.php';
                 </div>
                 <!-- Staff -->
                 <div class="col-md-4 col-xl-2">
-                    <div class="card-custom bg-white p-3 stat-card approved">
+                    <div class="card bg-white p-3 stat-card approved">
                         <div class="d-flex justify-content-between align-items-center">
                             <div>
                                 <small class="text-muted fw-bold">Active Staff</small>
@@ -153,11 +153,11 @@ include '../includes/header.php';
             <div class="row">
                 <!-- Gender Stats Chart -->
                 <div class="col-lg-6 mb-4">
-                    <div class="card-custom h-100">
-                        <div class="card-header-custom">
+                    <div class="card h-100">
+                        <div class="card-header">
                             <i class="fa-solid fa-chart-pie me-2"></i>Gender-wise Application Statistics
                         </div>
-                        <div class="card-body-custom d-flex justify-content-center align-items-center" style="position: relative; height:320px;">
+                        <div class="card-body d-flex justify-content-center align-items-center" style="position: relative; height:320px;">
                             <?php if (empty($gender_counts)): ?>
                                 <p class="text-muted">No student applications submitted yet to map data.</p>
                             <?php else: ?>
@@ -169,11 +169,11 @@ include '../includes/header.php';
 
                 <!-- Category Stats Chart -->
                 <div class="col-lg-6 mb-4">
-                    <div class="card-custom h-100">
-                        <div class="card-header-custom">
+                    <div class="card h-100">
+                        <div class="card-header">
                             <i class="fa-solid fa-chart-bar me-2"></i>Category-wise Application Statistics
                         </div>
-                        <div class="card-body-custom d-flex justify-content-center align-items-center" style="position: relative; height:320px;">
+                        <div class="card-body d-flex justify-content-center align-items-center" style="position: relative; height:320px;">
                             <?php if (empty($category_counts)): ?>
                                 <p class="text-muted">No student applications submitted yet to map data.</p>
                             <?php else: ?>
@@ -255,3 +255,4 @@ document.addEventListener("DOMContentLoaded", function() {
 </script>
 
 <?php include '../includes/footer.php'; ?>
+

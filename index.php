@@ -38,7 +38,7 @@ include 'includes/header.php';
                     <a class="nav-link" href="#features"><i class="fa-solid fa-star me-1"></i>Portal Features</a>
                 </li>
                 <li class="nav-item ms-lg-3">
-                    <a href="student_login.php" class="btn btn-premium-sky btn-sm py-2 px-4 fw-bold">Student Login</a>
+                    <a href="login.php?role=student" class="btn btn-premium-sky btn-sm py-2 px-4 fw-bold">Student Login</a>
                 </li>
             </ul>
         </div>
@@ -70,7 +70,7 @@ include 'includes/header.php';
                     <p class="text-center text-muted">Register a new profile, submit academic marks, select course preferences, upload mandatory documents, and track approval status.</p>
                 </div>
                 <div class="mt-4 pt-3 border-top border-secondary border-opacity-25">
-                    <a href="student_login.php" class="btn btn-premium-primary w-100 mb-2 fw-bold text-center">Student Login</a>
+                    <a href="login.php?role=student" class="btn btn-premium-primary w-100 mb-2 fw-bold text-center">Student Login</a>
                     <a href="student_register.php" class="btn btn-premium-secondary w-100 text-center">Create New Account</a>
                 </div>
             </div>
@@ -87,7 +87,7 @@ include 'includes/header.php';
                     <p class="text-center text-muted">Access the verification workflow. Review student profiles, verify transcripts, submit comments, approve or reject applications, and download reports.</p>
                 </div>
                 <div class="mt-4 pt-3 border-top border-secondary border-opacity-25">
-                    <a href="staff_login.php" class="btn btn-premium-sky w-100 fw-bold text-center">Staff Login</a>
+                    <a href="login.php?role=staff" class="btn btn-premium-sky w-100 fw-bold text-center">Staff Login</a>
                 </div>
             </div>
         </div>
@@ -103,7 +103,7 @@ include 'includes/header.php';
                     <p class="text-center text-muted">Monitor system statistics, manage course offerings, create/update staff accounts, edit student details, and perform database maintenance tasks.</p>
                 </div>
                 <div class="mt-4 pt-3 border-top border-secondary border-opacity-25">
-                    <a href="admin_login.php" class="btn btn-premium-amber w-100 fw-bold text-center">Administrator Login</a>
+                    <a href="login.php?role=admin" class="btn btn-premium-amber w-100 fw-bold text-center">Administrator Login</a>
                 </div>
             </div>
         </div>
@@ -214,3 +214,4 @@ include 'includes/header.php';
 </footer>
 
 <?php include 'includes/footer.php'; ?>
+

@@ -84,9 +84,9 @@ include '../includes/header.php';
     <!-- Page Content -->
     <div id="content">
         <!-- Top Navbar -->
-        <nav class="navbar navbar-expand-lg navbar-custom">
+        <nav class="navbar navbar-expand-lg navbar">
             <div class="container-fluid">
-                <button type="button" id="sidebarCollapse" class="btn btn-custom-primary">
+                <button type="button" id="sidebarCollapse" class="btn btn-primary">
                     <i class="fa-solid fa-bars"></i>
                 </button>
                 <span class="navbar-brand ms-3">Student Admission Portal</span>
@@ -122,16 +122,16 @@ include '../includes/header.php';
             <div class="row">
                 <!-- Payment Instructions -->
                 <div class="col-lg-7">
-                    <div class="card-custom">
-                        <div class="card-header-custom">
+                    <div class="card">
+                        <div class="card-header">
                             <i class="fa-solid fa-credit-card me-2"></i>Processing Fee Details
                         </div>
-                        <div class="card-body-custom">
+                        <div class="card-body">
                             <?php if ($student['payment_status'] === 'Paid'): ?>
                                 <div class="alert alert-success">
                                     <i class="fa-solid fa-circle-check me-2"></i>You have already completed the payment! Transaction ID: <strong><?php echo htmlspecialchars($student['transaction_id']); ?></strong>
                                 </div>
-                                <a href="dashboard.php" class="btn btn-custom-primary mt-3">Return to Dashboard</a>
+                                <a href="dashboard.php" class="btn btn-primary mt-3">Return to Dashboard</a>
                             <?php else: ?>
                                 <h5 class="fw-bold mb-3 text-primary">Admission Processing Fee: ₹500.00</h5>
                                 <p class="text-muted">Please pay the non-refundable processing fee of ₹500.00 using any UPI application (such as Google Pay, PhonePe, Paytm, BHIM, etc.) to the UPI ID listed below.</p>
@@ -159,11 +159,11 @@ include '../includes/header.php';
                 <!-- Payment Reference Form -->
                 <?php if ($student['payment_status'] !== 'Paid'): ?>
                     <div class="col-lg-5">
-                        <div class="card-custom">
-                            <div class="card-header-custom">
+                        <div class="card">
+                            <div class="card-header">
                                 <i class="fa-solid fa-file-invoice-dollar me-2"></i>Submit Transaction Reference
                             </div>
-                            <div class="card-body-custom">
+                            <div class="card-body">
                                 <?php if (!empty($error_msg)): ?>
                                     <div class="alert alert-danger">
                                         <i class="fa-solid fa-circle-xmark me-2"></i><?php echo htmlspecialchars($error_msg); ?>
@@ -172,8 +172,8 @@ include '../includes/header.php';
 
                                 <form action="payment.php" method="POST">
                                     <div class="mb-3">
-                                        <label for="transaction_id" class="form-label form-label-custom">UPI Transaction Reference ID / UTR</label>
-                                        <input type="text" class="form-control form-control-custom" id="transaction_id" name="transaction_id" placeholder="e.g. 317583920194" required>
+                                        <label for="transaction_id" class="form-label form-label">UPI Transaction Reference ID / UTR</label>
+                                        <input type="text" class="form-control form-control" id="transaction_id" name="transaction_id" placeholder="e.g. 317583920194" required>
                                         <div class="form-text small text-muted">A 12-digit number (or transaction ID) shown on your payment receipt.</div>
                                     </div>
 
@@ -181,7 +181,7 @@ include '../includes/header.php';
                                         <p class="small text-warning-emphasis mb-0"><i class="fa-solid fa-triangle-exclamation me-1"></i>Please ensure you submit the correct UTR reference. The transaction will be manually verified by college staff before admission confirmation.</p>
                                     </div>
 
-                                    <button type="submit" class="btn btn-custom-primary w-100 fw-bold py-2.5">
+                                    <button type="submit" class="btn btn-primary w-100 fw-bold py-2.5">
                                         <i class="fa-solid fa-check me-2"></i>Submit Payment details
                                     </button>
                                 </form>
@@ -195,3 +195,4 @@ include '../includes/header.php';
 </div>
 
 <?php include '../includes/footer.php'; ?>
+

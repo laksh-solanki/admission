@@ -15,6 +15,7 @@ check_access('student');
 $user_id = $_SESSION['user_id'];
 $error_msg = "";
 $success_msg = "";
+$all_uploaded = false;
 
 // 1. Fetch student record and details
 try {
@@ -41,6 +42,13 @@ try {
     $doc_stmt = $pdo->prepare("SELECT * FROM documents WHERE student_id = :student_id");
     $doc_stmt->execute(['student_id' => $student_id]);
     $documents = $doc_stmt->fetch();
+    
+    $all_uploaded = ($documents && 
+                     !empty($documents['photo']) && 
+                     !empty($documents['marksheet10']) && 
+                     !empty($documents['marksheet12']) && 
+                     !empty($documents['leaving_certificate']) && 
+                     !empty($documents['aadhaar']));
     
 } catch (PDOException $e) {
     die("Database Error: " . $e->getMessage());
@@ -155,8 +163,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $doc_stmt->execute(['student_id' => $student_id]);
             $documents = $doc_stmt->fetch();
 
+            $all_uploaded = ($documents && 
+                             !empty($documents['photo']) && 
+                             !empty($documents['marksheet10']) && 
+                             !empty($documents['marksheet12']) && 
+                             !empty($documents['leaving_certificate']) && 
+                             !empty($documents['aadhaar']));
+
             // Check if all 5 documents are uploaded
-            if ($documents && !empty($documents['photo']) && !empty($documents['marksheet10']) && !empty($documents['marksheet12']) && !empty($documents['leaving_certificate']) && !empty($documents['aadhaar'])) {
+            if ($all_uploaded) {
                 $success_msg = "Documents uploaded successfully! All required documents are complete. <a href='payment.php' class='alert-link'>Proceed to pay processing fee <i class='fa-solid fa-arrow-right ms-1'></i></a>";
             } else {
                 $success_msg = "Document uploaded successfully!";
@@ -181,9 +196,9 @@ include '../includes/header.php';
     <!-- Page Content -->
     <div id="content">
         <!-- Top Navbar -->
-        <nav class="navbar navbar-expand-lg navbar-custom">
+        <nav class="navbar navbar-expand-lg navbar">
             <div class="container-fluid">
-                <button type="button" id="sidebarCollapse" class="btn btn-custom-primary">
+                <button type="button" id="sidebarCollapse" class="btn btn-primary">
                     <i class="fa-solid fa-bars"></i>
                 </button>
                 <span class="navbar-brand ms-3">Document Upload Center</span>
@@ -228,17 +243,26 @@ include '../includes/header.php';
             <div class="row">
                 <!-- Upload Form -->
                 <div class="col-lg-8">
-                    <div class="card-custom">
-                        <div class="card-header-custom">
+                    <div class="card">
+                        <div class="card-header">
                             <i class="fa-solid fa-cloud-arrow-up me-2 text-primary"></i>Upload Documents (Max 2MB per file)
                         </div>
-                        <div class="card-body-custom">
+                        <div class="card-body">
+                            <?php if ($all_uploaded): ?>
+                                <div class="alert alert-success d-flex align-items-center p-3 mb-4 rounded-3 border-0 bg-success bg-opacity-10 text-success" role="alert">
+                                    <i class="fa-solid fa-circle-check fa-xl me-3"></i>
+                                    <div>
+                                        <strong class="d-block mb-1">All Documents Uploaded!</strong>
+                                        All 5 required documents have been completely uploaded. You can now proceed to the processing fee payment.
+                                    </div>
+                                </div>
+                            <?php endif; ?>
                             <form action="upload.php" method="POST" enctype="multipart/form-data">
                                 
                                 <!-- Student Photo -->
                                 <div class="mb-4 pb-3 border-bottom">
-                                    <label class="form-label form-label-custom">1. Student Passport Size Photograph <span class="text-danger">*</span></label>
-                                    <input type="file" name="photo" class="form-control form-control-custom" <?php echo ($documents && !empty($documents['photo'])) ? '' : 'required'; ?>>
+                                    <label class="form-label form-label">1. Student Passport Size Photograph <span class="text-danger">*</span></label>
+                                    <input type="file" name="photo" class="form-control form-control" <?php echo ($documents && !empty($documents['photo'])) ? '' : 'required'; ?>>
                                     <div class="form-text small text-muted">Formats: JPG, JPEG, PNG only.</div>
                                     <?php if ($documents && !empty($documents['photo'])): ?>
                                         <div class="mt-2 text-success small">
@@ -250,8 +274,8 @@ include '../includes/header.php';
 
                                 <!-- 10th Marksheet -->
                                 <div class="mb-4 pb-3 border-bottom">
-                                    <label class="form-label form-label-custom">2. 10th Standard Marksheet <span class="text-danger">*</span></label>
-                                    <input type="file" name="marksheet10" class="form-control form-control-custom" <?php echo ($documents && !empty($documents['marksheet10'])) ? '' : 'required'; ?>>
+                                    <label class="form-label form-label">2. 10th Standard Marksheet <span class="text-danger">*</span></label>
+                                    <input type="file" name="marksheet10" class="form-control form-control" <?php echo ($documents && !empty($documents['marksheet10'])) ? '' : 'required'; ?>>
                                     <div class="form-text small text-muted">Formats: JPG, JPEG, PNG, PDF.</div>
                                     <?php if ($documents && !empty($documents['marksheet10'])): ?>
                                         <div class="mt-2 text-success small">
@@ -263,8 +287,8 @@ include '../includes/header.php';
 
                                 <!-- 12th Marksheet -->
                                 <div class="mb-4 pb-3 border-bottom">
-                                    <label class="form-label form-label-custom">3. 12th Standard Marksheet <span class="text-danger">*</span></label>
-                                    <input type="file" name="marksheet12" class="form-control form-control-custom" <?php echo ($documents && !empty($documents['marksheet12'])) ? '' : 'required'; ?>>
+                                    <label class="form-label form-label">3. 12th Standard Marksheet <span class="text-danger">*</span></label>
+                                    <input type="file" name="marksheet12" class="form-control form-control" <?php echo ($documents && !empty($documents['marksheet12'])) ? '' : 'required'; ?>>
                                     <div class="form-text small text-muted">Formats: JPG, JPEG, PNG, PDF.</div>
                                     <?php if ($documents && !empty($documents['marksheet12'])): ?>
                                         <div class="mt-2 text-success small">
@@ -276,8 +300,8 @@ include '../includes/header.php';
 
                                 <!-- School Leaving Certificate -->
                                 <div class="mb-4 pb-3 border-bottom">
-                                    <label class="form-label form-label-custom">4. School Leaving Certificate <span class="text-danger">*</span></label>
-                                    <input type="file" name="leaving_certificate" class="form-control form-control-custom" <?php echo ($documents && !empty($documents['leaving_certificate'])) ? '' : 'required'; ?>>
+                                    <label class="form-label form-label">4. School Leaving Certificate <span class="text-danger">*</span></label>
+                                    <input type="file" name="leaving_certificate" class="form-control form-control" <?php echo ($documents && !empty($documents['leaving_certificate'])) ? '' : 'required'; ?>>
                                     <div class="form-text small text-muted">Formats: JPG, JPEG, PNG, PDF.</div>
                                     <?php if ($documents && !empty($documents['leaving_certificate'])): ?>
                                         <div class="mt-2 text-success small">
@@ -289,8 +313,8 @@ include '../includes/header.php';
 
                                 <!-- Aadhaar Card -->
                                 <div class="mb-4">
-                                    <label class="form-label form-label-custom">5. Aadhaar Card <span class="text-danger">*</span></label>
-                                    <input type="file" name="aadhaar" class="form-control form-control-custom" <?php echo ($documents && !empty($documents['aadhaar'])) ? '' : 'required'; ?>>
+                                    <label class="form-label form-label">5. Aadhaar Card <span class="text-danger">*</span></label>
+                                    <input type="file" name="aadhaar" class="form-control form-control" <?php echo ($documents && !empty($documents['aadhaar'])) ? '' : 'required'; ?>>
                                     <div class="form-text small text-muted">Formats: JPG, JPEG, PNG, PDF.</div>
                                     <?php if ($documents && !empty($documents['aadhaar'])): ?>
                                         <div class="mt-2 text-success small">
@@ -303,9 +327,16 @@ include '../includes/header.php';
                                 <!-- Buttons -->
                                 <div class="d-flex justify-content-between mt-5 pt-3 border-top">
                                     <a href="dashboard.php" class="btn btn-outline-secondary py-2"><i class="fa-solid fa-arrow-left me-1"></i>Back to Dashboard</a>
-                                    <button type="submit" class="btn btn-custom-secondary px-5 py-2 fw-bold">
-                                        <i class="fa-solid fa-arrow-up-from-bracket me-1"></i>Upload Selected
-                                    </button>
+                                    <div class="d-flex gap-2">
+                                        <button type="submit" class="btn btn-secondary px-4 py-2 fw-bold">
+                                            <i class="fa-solid fa-arrow-up-from-bracket me-1"></i>Upload Selected
+                                        </button>
+                                        <?php if ($all_uploaded): ?>
+                                            <a href="payment.php" class="btn btn-success px-4 py-2 fw-bold d-inline-flex align-items-center">
+                                                <i class="fa-solid fa-credit-card me-2"></i>Proceed to Payment
+                                            </a>
+                                        <?php endif; ?>
+                                    </div>
                                 </div>
 
                             </form>
@@ -315,11 +346,11 @@ include '../includes/header.php';
 
                 <!-- Info Help Sidebar -->
                 <div class="col-lg-4">
-                    <div class="card-custom bg-white">
-                        <div class="card-header-custom bg-light">
+                    <div class="card bg-white">
+                        <div class="card-header bg-light">
                             <i class="fa-solid fa-circle-info text-info me-1"></i>Uploading Guideline
                         </div>
-                        <div class="card-body-custom small">
+                        <div class="card-body small">
                             <ul class="list-unstyled ps-0 mb-0">
                                 <li class="mb-2"><i class="fa-solid fa-circle-dot text-primary me-2"></i><strong>Format compatibility:</strong> The passport photo should only be an image file (JPG, JPEG, PNG). The marksheets, Leaving Certificate, and Aadhaar card can be uploaded as PDFs or image files.</li>
                                 <li class="mb-2"><i class="fa-solid fa-circle-dot text-primary me-2"></i><strong>Size Constraint:</strong> Each file must be under 2MB. Files larger than this will fail validation.</li>
@@ -335,3 +366,4 @@ include '../includes/header.php';
 </div>
 
 <?php include '../includes/footer.php'; ?>
+

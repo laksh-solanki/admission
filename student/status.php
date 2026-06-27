@@ -42,9 +42,9 @@ include '../includes/header.php';
     <!-- Page Content -->
     <div id="content">
         <!-- Top Navbar -->
-        <nav class="navbar navbar-expand-lg navbar-custom">
+        <nav class="navbar navbar-expand-lg navbar">
             <div class="container-fluid">
-                <button type="button" id="sidebarCollapse" class="btn btn-custom-primary">
+                <button type="button" id="sidebarCollapse" class="btn btn-primary">
                     <i class="fa-solid fa-bars"></i>
                 </button>
                 <span class="navbar-brand ms-3">Application Status Tracker</span>
@@ -60,7 +60,7 @@ include '../includes/header.php';
                 <div class="row">
                     <!-- Current Status Card -->
                     <div class="col-md-4 mb-4">
-                        <div class="card-custom bg-white p-4">
+                        <div class="card bg-white p-4">
                             <h5 class="fw-bold color-primary mb-3">Application Status</h5>
                             <div class="mb-3">
                                 <strong>Admission Number:</strong>
@@ -88,11 +88,11 @@ include '../includes/header.php';
 
                     <!-- Timeline Card -->
                     <div class="col-md-8">
-                        <div class="card-custom">
-                            <div class="card-header-custom">
+                        <div class="card">
+                            <div class="card-header">
                                 <i class="fa-solid fa-clock-rotate-left me-2"></i>Status History & Remarks Log
                             </div>
-                            <div class="card-body-custom">
+                            <div class="card-body">
                                 <?php if (empty($history)): ?>
                                     <p class="text-muted text-center py-4">No reviews recorded yet. Please submit your application.</p>
                                 <?php else: ?>
@@ -132,3 +132,4 @@ include '../includes/header.php';
 </div>
 
 <?php include '../includes/footer.php'; ?>
+

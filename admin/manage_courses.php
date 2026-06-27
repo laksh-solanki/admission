@@ -92,14 +92,14 @@ include '../includes/header.php';
     <!-- Page Content -->
     <div id="content">
         <!-- Top Navbar -->
-        <nav class="navbar navbar-expand-lg navbar-custom">
+        <nav class="navbar navbar-expand-lg navbar">
             <div class="container-fluid">
-                <button type="button" id="sidebarCollapse" class="btn btn-custom-primary">
+                <button type="button" id="sidebarCollapse" class="btn btn-primary">
                     <i class="fa-solid fa-bars"></i>
                 </button>
                 <span class="navbar-brand ms-3">Course Management Portal</span>
                 <div class="ms-auto">
-                    <button type="button" class="btn btn-sm btn-custom-primary" data-bs-toggle="modal" data-bs-target="#addCourseModal">
+                    <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addCourseModal">
                         <i class="fa-solid fa-plus me-1"></i>Add New Course
                     </button>
                 </div>
@@ -120,13 +120,13 @@ include '../includes/header.php';
             <?php endif; ?>
 
             <!-- Course Catalog Table -->
-            <div class="card-custom">
-                <div class="card-header-custom">
+            <div class="card">
+                <div class="card-header">
                     <i class="fa-solid fa-book-bookmark me-2"></i>Available Courses List
                 </div>
-                <div class="card-body-custom p-0">
+                <div class="card-body p-0">
                     <div class="table-responsive">
-                        <table class="table table-custom align-middle">
+                        <table class="table table align-middle">
                             <thead>
                                 <tr>
                                     <th># ID</th>
@@ -188,25 +188,25 @@ include '../includes/header.php';
                 <input type="hidden" name="action" value="add">
                 <div class="modal-body">
                     <div class="mb-3">
-                        <label for="course_name" class="form-label form-label-custom">Course / Degree Name</label>
-                        <input type="text" class="form-control form-control-custom" id="course_name" name="course_name" placeholder="e.g. B.Sc. Computer Science" required>
+                        <label for="course_name" class="form-label form-label">Course / Degree Name</label>
+                        <input type="text" class="form-control form-control" id="course_name" name="course_name" placeholder="e.g. B.Sc. Computer Science" required>
                     </div>
                     <div class="mb-3">
-                        <label for="department" class="form-label form-label-custom">Department Name</label>
-                        <input type="text" class="form-control form-control-custom" id="department" name="department" placeholder="e.g. Science & IT" required>
+                        <label for="department" class="form-label form-label">Department Name</label>
+                        <input type="text" class="form-control form-control" id="department" name="department" placeholder="e.g. Science & IT" required>
                     </div>
                     <div class="mb-3">
-                        <label for="semester" class="form-label form-label-custom">Semester / Duration</label>
-                        <input type="text" class="form-control form-control-custom" id="semester" name="semester" placeholder="e.g. Semester I" required>
+                        <label for="semester" class="form-label form-label">Semester / Duration</label>
+                        <input type="text" class="form-control form-control" id="semester" name="semester" placeholder="e.g. Semester I" required>
                     </div>
                     <div class="mb-3">
-                        <label for="total_seats" class="form-label form-label-custom">Total Available Seats</label>
-                        <input type="number" min="1" class="form-control form-control-custom" id="total_seats" name="total_seats" placeholder="e.g. 60" required>
+                        <label for="total_seats" class="form-label form-label">Total Available Seats</label>
+                        <input type="number" min="1" class="form-control form-control" id="total_seats" name="total_seats" placeholder="e.g. 60" required>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-custom-primary btn-sm">Add Course</button>
+                    <button type="submit" class="btn btn-primary btn-sm">Add Course</button>
                 </div>
             </form>
         </div>
@@ -226,25 +226,25 @@ include '../includes/header.php';
                 <input type="hidden" id="edit_course_id" name="course_id">
                 <div class="modal-body">
                     <div class="mb-3">
-                        <label for="edit_course_name" class="form-label form-label-custom">Course / Degree Name</label>
-                        <input type="text" class="form-control form-control-custom" id="edit_course_name" name="course_name" required>
+                        <label for="edit_course_name" class="form-label form-label">Course / Degree Name</label>
+                        <input type="text" class="form-control form-control" id="edit_course_name" name="course_name" required>
                     </div>
                     <div class="mb-3">
-                        <label for="edit_department" class="form-label form-label-custom">Department Name</label>
-                        <input type="text" class="form-control form-control-custom" id="edit_department" name="department" required>
+                        <label for="edit_department" class="form-label form-label">Department Name</label>
+                        <input type="text" class="form-control form-control" id="edit_department" name="department" required>
                     </div>
                     <div class="mb-3">
-                        <label for="edit_semester" class="form-label form-label-custom">Semester / Duration</label>
-                        <input type="text" class="form-control form-control-custom" id="edit_semester" name="semester" required>
+                        <label for="edit_semester" class="form-label form-label">Semester / Duration</label>
+                        <input type="text" class="form-control form-control" id="edit_semester" name="semester" required>
                     </div>
                     <div class="mb-3">
-                        <label for="edit_total_seats" class="form-label form-label-custom">Total Available Seats</label>
-                        <input type="number" min="1" class="form-control form-control-custom" id="edit_total_seats" name="total_seats" required>
+                        <label for="edit_total_seats" class="form-label form-label">Total Available Seats</label>
+                        <input type="number" min="1" class="form-control form-control" id="edit_total_seats" name="total_seats" required>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-custom-primary btn-sm">Update Details</button>
+                    <button type="submit" class="btn btn-primary btn-sm">Update Details</button>
                 </div>
             </form>
         </div>
@@ -267,3 +267,4 @@ function editCourse(course) {
 </script>
 
 <?php include '../includes/footer.php'; ?>
+

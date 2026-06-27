@@ -24,7 +24,7 @@ $user_name = isset($_SESSION['name']) ? $_SESSION['name'] : 'Guest';
 <nav id="sidebar">
     <div class="sidebar-header">
         <h4><i class="fa-solid fa-graduation-cap me-2"></i>College Portal</h4>
-        <small class="text-white-50">Welcome, <?php echo htmlspecialchars($user_name); ?></small>
+        <small class="text-white-90">Welcome, <?php echo htmlspecialchars($user_name); ?></small>
     </div>
 
     <ul class="list-unstyled components">
@@ -83,3 +83,4 @@ $user_name = isset($_SESSION['name']) ? $_SESSION['name'] : 'Guest';
         </li>
     </ul>
 </nav>
+
