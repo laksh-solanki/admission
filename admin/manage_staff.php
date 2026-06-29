@@ -216,7 +216,7 @@ include '../includes/header.php';
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title fw-bold" id="addStaffModalLabel"><i class="fa-solid fa-user-plus me-1 text-primary"></i>Create Staff Account</h5>
+                <h5 class="modal-title fw-bold" id="addStaffModalLabel"><i class="fa-solid fa-user-plus me-2 text-primary"></i>Create Staff Account</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form action="manage_staff.php" method="POST">
@@ -224,11 +224,11 @@ include '../includes/header.php';
                 <div class="modal-body">
                     <div class="mb-3">
                         <label for="name" class="form-label form-label">Staff Full Name</label>
-                        <input type="text" class="form-control form-control" id="name" name="name" placeholder="e.g. John Doe" required>
+                        <input type="text" class="form-control form-control" id="name" name="name" required>
                     </div>
                     <div class="mb-3">
                         <label for="email" class="form-label form-label">Secure Email Address</label>
-                        <input type="email" class="form-control form-control" id="email" name="email" placeholder="e.g. staff@college.com" required>
+                        <input type="email" class="form-control form-control" id="email" name="email" required>
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label form-label">Account Password (Min. 6 chars)</label>

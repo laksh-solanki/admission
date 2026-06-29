@@ -1,22 +1,15 @@
 <?php
-// ====================================================================
-// Authentication and Authorization Helper File
-// This file initializes sessions and verifies user login and roles.
-// ====================================================================
-
-// Start session if not already active
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
 /**
- * Check if the user is logged in. If not, redirect to the appropriate login page.
- * If logged in but lacks the required role, redirect to an unauthorized page or dashboard.
+ * Check if the user has access to the requested page based on their role.
  *
  * @param array|string $allowed_roles List of roles permitted to view the page.
  */
+
 function check_access($allowed_roles) {
-    // Verify user still exists in database (handles database resets/deletions)
     global $pdo;
     if (isset($_SESSION['user_id']) && isset($_SESSION['role']) && isset($pdo)) {
         $user_id = $_SESSION['user_id'];
@@ -33,7 +26,6 @@ function check_access($allowed_roles) {
         }
         
         if (!$user_exists) {
-            // User no longer exists in database (e.g. database was reset)
             session_unset();
             session_destroy();
             $current_path = $_SERVER['PHP_SELF'];
@@ -46,15 +38,12 @@ function check_access($allowed_roles) {
         }
     }
 
-    // If a single role string is passed, convert it to an array
     if (!is_array($allowed_roles)) {
         $allowed_roles = [$allowed_roles];
     }
-    
-    // Check if the user is logged in by verifying if the role session is set
+
     if (!isset($_SESSION['role'])) {
-        // Not logged in. Redirect to corresponding login page.
-        // We guess which login page to redirect to based on the current directory.
+
         $current_path = $_SERVER['PHP_SELF'];
         
         if (strpos($current_path, '/admin/') !== false) {
@@ -67,9 +56,7 @@ function check_access($allowed_roles) {
         exit;
     }
     
-    // User is logged in. Verify if their role is permitted.
     if (!in_array($_SESSION['role'], $allowed_roles)) {
-        // Role not permitted. Redirect to their actual dashboard.
         if ($_SESSION['role'] === 'admin') {
             header("Location: ../admin/dashboard.php");
         } elseif ($_SESSION['role'] === 'staff') {
@@ -83,10 +70,6 @@ function check_access($allowed_roles) {
     }
 }
 
-/**
- * Check if the user is already logged in, and redirect them to their dashboard
- * if they try to access login/registration pages.
- */
 function redirect_if_logged_in() {
     if (isset($_SESSION['role'])) {
         if ($_SESSION['role'] === 'admin') {

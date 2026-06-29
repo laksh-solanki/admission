@@ -87,17 +87,17 @@ include 'includes/header.php';
                 <div class="px-4 pt-3">
                     <ul class="nav nav-tabs nav-fill border-bottom-0" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link fw-semibold <?php echo $role === 'student' ? 'active text-primary border-bottom border-primary border-3' : 'text-muted'; ?>" href="login.php?role=student">
+                            <a class="nav-link fw-semibold rounded-2 <?php echo $role === 'student' ? 'active text-primary border-bottom border-primary border-2' : 'text-muted'; ?>" href="login.php?role=student">
                                 <i class="fa-solid fa-user me-1"></i>Student
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link fw-semibold <?php echo $role === 'staff' ? 'active text-info border-bottom border-info border-3' : 'text-muted'; ?>" href="login.php?role=staff">
+                            <a class="nav-link fw-semibold rounded-2 <?php echo $role === 'staff' ? 'active text-info border-bottom border-info border-2' : 'text-muted'; ?>" href="login.php?role=staff">
                                 <i class="fa-solid fa-user-tie me-1"></i>Staff
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link fw-semibold <?php echo $role === 'admin' ? 'active text-danger border-bottom border-danger border-3' : 'text-muted'; ?>" href="login.php?role=admin">
+                            <a class="nav-link fw-semibold rounded-2 <?php echo $role === 'admin' ? 'active text-danger border-bottom border-danger border-2' : 'text-muted'; ?>" href="login.php?role=admin">
                                 <i class="fa-solid fa-screwdriver-wrench me-1"></i>Admin
                             </a>
                         </li>
