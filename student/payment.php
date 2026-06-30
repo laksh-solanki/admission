@@ -83,18 +83,7 @@ include '../includes/header.php';
 
     <!-- Page Content -->
     <div id="content">
-        <!-- Top Navbar -->
-        <nav class="navbar navbar-expand-lg navbar">
-            <div class="container-fluid">
-                <button type="button" id="sidebarCollapse" class="btn btn-primary">
-                    <i class="fa-solid fa-bars"></i>
-                </button>
-                <span class="navbar-brand ms-3">Student Admission Portal</span>
-                <div class="ms-auto d-flex align-items-center">
-                    <span class="me-3 text-muted small"><i class="fa-solid fa-circle-user me-1"></i><?php echo htmlspecialchars($_SESSION['email']); ?></span>
-                </div>
-            </div>
-        </nav>
+        <?php render_topbar('Student Admission Portal', '<span class="text-muted small"><i class="fa-solid fa-circle-user me-1"></i>' . e($_SESSION['email']) . '</span>'); ?>
 
         <div class="container-fluid">
             <!-- Stepper Container -->
@@ -129,12 +118,12 @@ include '../includes/header.php';
                         <div class="card-body">
                             <?php if ($student['payment_status'] === 'Paid'): ?>
                                 <div class="alert alert-success">
-                                    <i class="fa-solid fa-circle-check me-2"></i>You have already completed the payment! Transaction ID: <strong><?php echo htmlspecialchars($student['transaction_id']); ?></strong>
+                                    <i class="fa-solid fa-circle-check me-2"></i>You have already completed the payment! Transaction ID: <strong><?php echo e($student['transaction_id']); ?></strong>
                                 </div>
                                 <a href="dashboard.php" class="btn btn-primary mt-3">Return to Dashboard</a>
                             <?php else: ?>
-                                <h5 class="fw-bold mb-3 text-primary">Admission Processing Fee: ₹500.00</h5>
-                                <p class="text-muted">Please pay the non-refundable processing fee of ₹500.00 using any UPI application (such as Google Pay, PhonePe, Paytm, BHIM, etc.) to the UPI ID listed below.</p>
+                                <h5 class="fw-bold mb-3 text-primary">Admission Processing Fee: â‚¹500.00</h5>
+                                <p class="text-muted">Please pay the non-refundable processing fee of â‚¹500.00 using any UPI application (such as Google Pay, PhonePe, Paytm, BHIM, etc.) to the UPI ID listed below.</p>
                                 
                                 <div class="p-4 my-4 bg-light rounded border border-dashed border-primary text-center">
                                     <h6 class="text-uppercase fw-bold text-muted mb-2">Scan or Pay via UPI</h6>
@@ -146,7 +135,7 @@ include '../includes/header.php';
                                     <h6 class="fw-bold mb-2"><i class="fa-solid fa-circle-info me-2 text-info"></i>How to complete the payment:</h6>
                                     <ol class="small text-muted ps-3">
                                         <li class="mb-2">Open your preferred UPI mobile application.</li>
-                                        <li class="mb-2">Send precisely <strong>₹500.00</strong> to the UPI ID: <strong class="text-dark">sctadmissions@upi</strong>.</li>
+                                        <li class="mb-2">Send precisely <strong>â‚¹500.00</strong> to the UPI ID: <strong class="text-dark">sctadmissions@upi</strong>.</li>
                                         <li class="mb-2">Note down the 12-digit UPI Transaction Reference Number / UTR number from your payment confirmation screen.</li>
                                         <li class="mb-2">Enter that Reference ID in the payment submission form on the right and submit.</li>
                                     </ol>
@@ -166,14 +155,14 @@ include '../includes/header.php';
                             <div class="card-body">
                                 <?php if (!empty($error_msg)): ?>
                                     <div class="alert alert-danger">
-                                        <i class="fa-solid fa-circle-xmark me-2"></i><?php echo htmlspecialchars($error_msg); ?>
+                                        <i class="fa-solid fa-circle-xmark me-2"></i><?php echo e($error_msg); ?>
                                     </div>
                                 <?php endif; ?>
 
                                 <form action="payment.php" method="POST">
                                     <div class="mb-3">
-                                        <label for="transaction_id" class="form-label form-label">UPI Transaction Reference ID / UTR</label>
-                                        <input type="text" class="form-control form-control" id="transaction_id" name="transaction_id" placeholder="e.g. 317583920194" required>
+                                        <label for="transaction_id" class="form-label">UPI Transaction Reference ID / UTR</label>
+                                        <input type="text" class="form-control" id="transaction_id" name="transaction_id" placeholder="e.g. 317583920194" required>
                                         <div class="form-text small text-muted">A 12-digit number (or transaction ID) shown on your payment receipt.</div>
                                     </div>
 
@@ -181,7 +170,7 @@ include '../includes/header.php';
                                         <p class="small text-warning-emphasis mb-0"><i class="fa-solid fa-triangle-exclamation me-1"></i>Please ensure you submit the correct UTR reference. The transaction will be manually verified by college staff before admission confirmation.</p>
                                     </div>
 
-                                    <button type="submit" class="btn btn-primary w-100 fw-bold py-2.5">
+                                    <button type="submit" class="btn btn-primary w-100 fw-bold py-2">
                                         <i class="fa-solid fa-check me-2"></i>Submit Payment details
                                     </button>
                                 </form>

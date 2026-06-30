@@ -139,15 +139,7 @@ include '../includes/header.php';
 
     <!-- Page Content -->
     <div id="content">
-        <!-- Top Navbar -->
-        <nav class="navbar navbar-expand-lg navbar">
-            <div class="container-fluid">
-                <button type="button" id="sidebarCollapse" class="btn btn-primary">
-                    <i class="fa-solid fa-bars"></i>
-                </button>
-                <span class="navbar-brand ms-3">Reports & Audits</span>
-            </div>
-        </nav>
+        <?php render_topbar('Reports & Audits'); ?>
 
         <div class="container-fluid">
             <!-- Filter Options Form -->
@@ -156,19 +148,19 @@ include '../includes/header.php';
                     <form action="reports.php" method="GET" class="row g-3 align-items-end">
                         <!-- Course Filter -->
                         <div class="col-md-4">
-                            <label for="course_filter" class="form-label form-label">Filter by Course</label>
+                            <label for="course_filter" class="form-label">Filter by Course</label>
                             <select class="form-select form-control" id="course_filter" name="course_filter">
                                 <option value="">All Courses</option>
                                 <?php foreach ($courses as $c): ?>
                                     <option value="<?php echo $c['course_id']; ?>" <?php echo ($course_filter == $c['course_id']) ? 'selected' : ''; ?>>
-                                        <?php echo htmlspecialchars($c['course_name']); ?>
+                                        <?php echo e($c['course_name']); ?>
                                     </option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
                         <!-- Status Filter -->
                         <div class="col-md-4">
-                            <label for="status_filter" class="form-label form-label">Filter by Status</label>
+                            <label for="status_filter" class="form-label">Filter by Status</label>
                             <select class="form-select form-control" id="status_filter" name="status_filter">
                                 <option value="">All Statuses</option>
                                 <option value="Pending" <?php echo ($status_filter === 'Pending') ? 'selected' : ''; ?>>Pending</option>
@@ -218,12 +210,12 @@ include '../includes/header.php';
                                 <?php else: ?>
                                     <?php foreach ($applicants as $app): ?>
                                         <tr>
-                                            <td class="fw-bold text-primary"><?php echo htmlspecialchars($app['admission_no']); ?></td>
-                                            <td><?php echo htmlspecialchars($app['full_name']); ?></td>
-                                            <td><?php echo htmlspecialchars($app['course_name']); ?></td>
-                                            <td><?php echo htmlspecialchars($app['gender']); ?></td>
-                                            <td><?php echo htmlspecialchars($app['tenth_percentage']); ?>%</td>
-                                            <td><?php echo htmlspecialchars($app['twelfth_percentage']); ?>%</td>
+                                            <td class="fw-bold text-primary"><?php echo e($app['admission_no']); ?></td>
+                                            <td><?php echo e($app['full_name']); ?></td>
+                                            <td><?php echo e($app['course_name']); ?></td>
+                                            <td><?php echo e($app['gender']); ?></td>
+                                            <td><?php echo e($app['tenth_percentage']); ?>%</td>
+                                            <td><?php echo e($app['twelfth_percentage']); ?>%</td>
                                             <td>
                                                 <?php if ($app['status'] === 'Pending'): ?>
                                                     <span class="badge badge-pending">Pending</span>

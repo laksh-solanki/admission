@@ -1,4 +1,4 @@
 <?php
-// Redirect to unified login page
-header("Location: login.php?role=student");
-exit;
+require_once 'includes/auth.php';
+
+app_redirect('login.php?role=student');

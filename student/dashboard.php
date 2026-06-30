@@ -74,18 +74,7 @@ include '../includes/header.php';
 
     <!-- Page Content -->
     <div id="content">
-        <!-- Top Navbar -->
-        <nav class="navbar navbar-expand-lg navbar">
-            <div class="container-fluid">
-                <button type="button" id="sidebarCollapse" class="btn btn-primary ">
-                    <i class="fa-solid fa-bars"></i>
-                </button>
-                <span class="navbar-brand ms-3">Student Admission Portal</span>
-                <div class="ms-auto d-flex align-items-center">
-                    <span class="me-3 text-muted small"><i class="fa-solid fa-circle-user me-1"></i><?php echo htmlspecialchars($_SESSION['email']); ?></span>
-                </div>
-            </div>
-        </nav>
+        <?php render_topbar('Student Admission Portal', '<span class="text-muted small"><i class="fa-solid fa-circle-user me-1"></i>' . e($_SESSION['email']) . '</span>'); ?>
 
         <div class="container-fluid">
             <!-- Alert Messages -->
@@ -97,7 +86,7 @@ include '../includes/header.php';
             <?php endif; ?>
             <?php if (isset($_GET['msg']) && $_GET['msg'] === 'paid'): ?>
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <i class="fa-solid fa-circle-check me-2"></i>Your processing fee payment of ₹500.00 has been recorded successfully! You can now finalize and submit your application.
+                    <i class="fa-solid fa-circle-check me-2"></i>Your processing fee payment of â‚¹500.00 has been recorded successfully! You can now finalize and submit your application.
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             <?php endif; ?>
@@ -105,7 +94,7 @@ include '../includes/header.php';
             <div class="row mb-4">
                 <div class="col-md-12">
                     <div class="card bg-white p-4">
-                        <h2>Welcome, <?php echo htmlspecialchars($_SESSION['name']); ?>!</h2>
+                        <h2>Welcome, <?php echo e($_SESSION['name']); ?>!</h2>
                         <p class="text-muted">Manage your college admission process step-by-step from this dashboard.</p>
                     </div>
                 </div>
@@ -223,7 +212,7 @@ include '../includes/header.php';
                                 </div>
                             </div>
                             <div class="status-body-premium">
-                                <p>Your details and documents are successfully compiled. You must now complete the online fee payment of ₹500.00 to submit your application.</p>
+                                <p>Your details and documents are successfully compiled. You must now complete the online fee payment of â‚¹500.00 to submit your application.</p>
                             </div>
                             <div class="status-action-row-premium">
                                 <a href="payment.php" class="btn btn-primary"><i class="fa-solid fa-credit-card me-2"></i>Pay Fees Now</a>
@@ -263,7 +252,7 @@ include '../includes/header.php';
                                 </div>
                             </div>
                             <div class="status-body-premium">
-                                <p>Your fee payment (Transaction ID: <strong><?php echo htmlspecialchars($student['transaction_id']); ?></strong>) was recorded successfully. Please review the details below. Once submitted, you cannot edit details unless rejected by staff.</p>
+                                <p>Your fee payment (Transaction ID: <strong><?php echo e($student['transaction_id']); ?></strong>) was recorded successfully. Please review the details below. Once submitted, you cannot edit details unless rejected by staff.</p>
                             </div>
                             <div class="status-action-row-premium">
                                 <form action="dashboard.php" method="POST" class="d-inline">
@@ -309,7 +298,7 @@ include '../includes/header.php';
                                     </div>
                                 </div>
                                 <div class="status-body-premium">
-                                    <p>Your application (Admission ID: <strong><?php echo htmlspecialchars($student['admission_no']); ?></strong>) was submitted on <strong><?php echo date('d-M-Y H:i', strtotime($student['created_at'])); ?></strong>. It is currently under review by our admission staff. We will notify you here once verified.</p>
+                                    <p>Your application (Admission ID: <strong><?php echo e($student['admission_no']); ?></strong>) was submitted on <strong><?php echo date('d-M-Y H:i', strtotime($student['created_at'])); ?></strong>. It is currently under review by our admission staff. We will notify you here once verified.</p>
                                 </div>
                             </div>
                         <?php elseif ($student['status'] === 'Approved'): ?>
@@ -343,7 +332,7 @@ include '../includes/header.php';
                                     </div>
                                 </div>
                                 <div class="status-body-premium">
-                                    <p>Congratulations! Your admission application for <strong><?php echo htmlspecialchars($student['course_name']); ?></strong> has been verified and approved. You can now download your official admission receipt below.</p>
+                                    <p>Congratulations! Your admission application for <strong><?php echo e($student['course_name']); ?></strong> has been verified and approved. You can now download your official admission receipt below.</p>
                                 </div>
                                 <div class="status-action-row-premium">
                                     <a href="receipt.php" target="_blank" class="btn btn-primary"><i class="fa-solid fa-file-pdf me-2"></i>Download Admission Receipt</a>
@@ -388,7 +377,7 @@ include '../includes/header.php';
                                         $history = $hist_stmt->fetch();
                                     ?>
                                     <div class="status-remarks-box">
-                                        <strong>Staff Remarks:</strong> <?php echo htmlspecialchars($history ? $history['remarks'] : 'No remarks provided.'); ?>
+                                        <strong>Staff Remarks:</strong> <?php echo e($history ? $history['remarks'] : 'No remarks provided.'); ?>
                                     </div>
                                     <p class="small text-muted">You can edit your details and re-upload documents to correct the error and re-submit.</p>
                                 </div>
@@ -419,56 +408,56 @@ include '../includes/header.php';
                                 <div class="row mb-4">
                                     <h5 class="fw-bold text-primary border-bottom pb-2">Personal Information</h5>
                                     <div class="col-md-6 mb-2">
-                                        <strong>Admission No:</strong> <?php echo htmlspecialchars($student['admission_no']); ?>
+                                        <strong>Admission No:</strong> <?php echo e($student['admission_no']); ?>
                                     </div>
                                     <div class="col-md-6 mb-2">
-                                        <strong>Applied Course:</strong> <?php echo htmlspecialchars($student['course_name']); ?>
+                                        <strong>Applied Course:</strong> <?php echo e($student['course_name']); ?>
                                     </div>
                                     <div class="col-md-12 mb-2">
-                                        <strong>Student Full Name:</strong> <?php echo htmlspecialchars($student['full_name']); ?>
+                                        <strong>Student Full Name:</strong> <?php echo e($student['full_name']); ?>
                                     </div>
                                     <div class="col-md-6 mb-2">
-                                        <strong>Father's Name:</strong> <?php echo htmlspecialchars($student['father_name']); ?>
+                                        <strong>Father's Name:</strong> <?php echo e($student['father_name']); ?>
                                     </div>
                                     <div class="col-md-6 mb-2">
-                                        <strong>Mother's Name:</strong> <?php echo htmlspecialchars($student['mother_name']); ?>
+                                        <strong>Mother's Name:</strong> <?php echo e($student['mother_name']); ?>
                                     </div>
                                     <div class="col-md-6 mb-2">
-                                        <strong>Gender:</strong> <?php echo htmlspecialchars($student['gender']); ?>
+                                        <strong>Gender:</strong> <?php echo e($student['gender']); ?>
                                     </div>
                                     <div class="col-md-6 mb-2">
                                         <strong>DOB:</strong> <?php echo date('d-M-Y', strtotime($student['dob'])); ?>
                                     </div>
                                     <div class="col-md-6 mb-2">
-                                        <strong>Category:</strong> <?php echo htmlspecialchars($student['category']); ?>
+                                        <strong>Category:</strong> <?php echo e($student['category']); ?>
                                     </div>
                                     <div class="col-md-6 mb-2">
-                                        <strong>Mobile:</strong> <?php echo htmlspecialchars($student['mobile']); ?>
+                                        <strong>Mobile:</strong> <?php echo e($student['mobile']); ?>
                                     </div>
                                     <div class="col-md-6 mb-2">
-                                        <strong>Email Address:</strong> <?php echo htmlspecialchars($student['email']); ?>
+                                        <strong>Email Address:</strong> <?php echo e($student['email']); ?>
                                     </div>
                                     <div class="col-md-6 mb-2">
-                                        <strong>Pincode:</strong> <?php echo htmlspecialchars($student['pincode']); ?>
+                                        <strong>Pincode:</strong> <?php echo e($student['pincode']); ?>
                                     </div>
                                     <div class="col-md-12 mb-2">
-                                        <strong>Address:</strong> <?php echo htmlspecialchars($student['address']) . ", " . htmlspecialchars($student['city']) . ", " . htmlspecialchars($student['state']); ?>
+                                        <strong>Address:</strong> <?php echo e($student['address']) . ", " . e($student['city']) . ", " . e($student['state']); ?>
                                     </div>
                                 </div>
 
                                 <div class="row">
                                     <h5 class="fw-bold text-primary border-bottom pb-2">Academic Information</h5>
                                     <div class="col-md-6 mb-2">
-                                        <strong>10th Percentage:</strong> <?php echo htmlspecialchars($student['tenth_percentage']); ?>%
+                                        <strong>10th Percentage:</strong> <?php echo e($student['tenth_percentage']); ?>%
                                     </div>
                                     <div class="col-md-6 mb-2">
-                                        <strong>12th Percentage:</strong> <?php echo htmlspecialchars($student['twelfth_percentage']); ?>%
+                                        <strong>12th Percentage:</strong> <?php echo e($student['twelfth_percentage']); ?>%
                                     </div>
                                     <div class="col-md-6 mb-2">
-                                        <strong>Previous School:</strong> <?php echo htmlspecialchars($student['school_name']); ?>
+                                        <strong>Previous School:</strong> <?php echo e($student['school_name']); ?>
                                     </div>
                                     <div class="col-md-6 mb-2">
-                                        <strong>Passing Year:</strong> <?php echo htmlspecialchars($student['passing_year']); ?>
+                                        <strong>Passing Year:</strong> <?php echo e($student['passing_year']); ?>
                                     </div>
                                 </div>
                             </div>
@@ -549,4 +538,3 @@ include '../includes/header.php';
 </div>
 
 <?php include '../includes/footer.php'; ?>
-

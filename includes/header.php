@@ -1,20 +1,9 @@
 <?php
-// ====================================================================
-// Header Layout File
-// This file initializes sessions, detects path depth to dynamically
-// link CSS/JS assets, and renders the HTML <head> and styling links.
-// ====================================================================
+require_once __DIR__ . '/auth.php';
 
-if (session_status() == PHP_SESSION_NONE) {
-    session_start();
-}
-
-// Compute the base path to correctly reference assets regardless of page depth
-$base_path = "";
-$current_dir = basename(dirname($_SERVER['PHP_SELF']));
-if (in_array($current_dir, ['admin', 'staff', 'student'])) {
-    $base_path = "../";
-}
+$base_path = app_base_path();
+$title = isset($page_title) ? $page_title . ' - College Portal' : 'Student Admission Management System';
+$body_class = $body_class ?? '';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -22,7 +11,7 @@ if (in_array($current_dir, ['admin', 'staff', 'student'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Student Admission Management System - College Admission Portal">
-    <title><?php echo isset($page_title) ? $page_title . " - College Portal" : "Student Admission Management System"; ?></title>
+    <title><?php echo e($title); ?></title>
     
     <!-- Google Font: Poppins -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -36,7 +25,6 @@ if (in_array($current_dir, ['admin', 'staff', 'student'])) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- Custom Style Sheet -->
-    <link rel="stylesheet" href="<?php echo $base_path; ?>assets/css/style.css">
+    <link rel="stylesheet" href="<?php echo e($base_path); ?>assets/css/style.css">
 </head>
-<body class="<?php echo isset($body_class) ? $body_class : ''; ?>">
-
+<body class="<?php echo e($body_class); ?>">

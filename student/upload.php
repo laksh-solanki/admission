@@ -195,15 +195,7 @@ include '../includes/header.php';
 
     <!-- Page Content -->
     <div id="content">
-        <!-- Top Navbar -->
-        <nav class="navbar navbar-expand-lg navbar">
-            <div class="container-fluid">
-                <button type="button" id="sidebarCollapse" class="btn btn-primary">
-                    <i class="fa-solid fa-bars"></i>
-                </button>
-                <span class="navbar-brand ms-3">Document Upload Center</span>
-            </div>
-        </nav>
+        <?php render_topbar('Document Upload Center'); ?>
 
         <div class="container-fluid">
             <!-- Stepper Container -->
@@ -261,65 +253,65 @@ include '../includes/header.php';
                                 
                                 <!-- Student Photo -->
                                 <div class="mb-4 pb-3 border-bottom">
-                                    <label class="form-label form-label">1. Student Passport Size Photograph <span class="text-danger">*</span></label>
-                                    <input type="file" name="photo" class="form-control form-control" <?php echo ($documents && !empty($documents['photo'])) ? '' : 'required'; ?>>
+                                    <label class="form-label">1. Student Passport Size Photograph <span class="text-danger">*</span></label>
+                                    <input type="file" name="photo" class="form-control" <?php echo ($documents && !empty($documents['photo'])) ? '' : 'required'; ?>>
                                     <div class="form-text small text-muted">Formats: JPG, JPEG, PNG only.</div>
                                     <?php if ($documents && !empty($documents['photo'])): ?>
                                         <div class="mt-2 text-success small">
                                             <i class="fa-solid fa-check-circle me-1"></i>Current File: 
-                                            <a href="../uploads/photo/<?php echo htmlspecialchars($documents['photo']); ?>" target="_blank" class="text-success fw-bold text-decoration-underline"><?php echo htmlspecialchars($documents['photo']); ?></a>
+                                            <a href="../uploads/photo/<?php echo e($documents['photo']); ?>" target="_blank" class="text-success fw-bold text-decoration-underline"><?php echo e($documents['photo']); ?></a>
                                         </div>
                                     <?php endif; ?>
                                 </div>
 
                                 <!-- 10th Marksheet -->
                                 <div class="mb-4 pb-3 border-bottom">
-                                    <label class="form-label form-label">2. 10th Standard Marksheet <span class="text-danger">*</span></label>
-                                    <input type="file" name="marksheet10" class="form-control form-control" <?php echo ($documents && !empty($documents['marksheet10'])) ? '' : 'required'; ?>>
+                                    <label class="form-label">2. 10th Standard Marksheet <span class="text-danger">*</span></label>
+                                    <input type="file" name="marksheet10" class="form-control" <?php echo ($documents && !empty($documents['marksheet10'])) ? '' : 'required'; ?>>
                                     <div class="form-text small text-muted">Formats: JPG, JPEG, PNG, PDF.</div>
                                     <?php if ($documents && !empty($documents['marksheet10'])): ?>
                                         <div class="mt-2 text-success small">
                                             <i class="fa-solid fa-check-circle me-1"></i>Current File: 
-                                            <a href="../uploads/marksheet10/<?php echo htmlspecialchars($documents['marksheet10']); ?>" target="_blank" class="text-success fw-bold text-decoration-underline"><?php echo htmlspecialchars($documents['marksheet10']); ?></a>
+                                            <a href="../uploads/marksheet10/<?php echo e($documents['marksheet10']); ?>" target="_blank" class="text-success fw-bold text-decoration-underline"><?php echo e($documents['marksheet10']); ?></a>
                                         </div>
                                     <?php endif; ?>
                                 </div>
 
                                 <!-- 12th Marksheet -->
                                 <div class="mb-4 pb-3 border-bottom">
-                                    <label class="form-label form-label">3. 12th Standard Marksheet <span class="text-danger">*</span></label>
-                                    <input type="file" name="marksheet12" class="form-control form-control" <?php echo ($documents && !empty($documents['marksheet12'])) ? '' : 'required'; ?>>
+                                    <label class="form-label">3. 12th Standard Marksheet <span class="text-danger">*</span></label>
+                                    <input type="file" name="marksheet12" class="form-control" <?php echo ($documents && !empty($documents['marksheet12'])) ? '' : 'required'; ?>>
                                     <div class="form-text small text-muted">Formats: JPG, JPEG, PNG, PDF.</div>
                                     <?php if ($documents && !empty($documents['marksheet12'])): ?>
                                         <div class="mt-2 text-success small">
                                             <i class="fa-solid fa-check-circle me-1"></i>Current File: 
-                                            <a href="../uploads/marksheet12/<?php echo htmlspecialchars($documents['marksheet12']); ?>" target="_blank" class="text-success fw-bold text-decoration-underline"><?php echo htmlspecialchars($documents['marksheet12']); ?></a>
+                                            <a href="../uploads/marksheet12/<?php echo e($documents['marksheet12']); ?>" target="_blank" class="text-success fw-bold text-decoration-underline"><?php echo e($documents['marksheet12']); ?></a>
                                         </div>
                                     <?php endif; ?>
                                 </div>
 
                                 <!-- School Leaving Certificate -->
                                 <div class="mb-4 pb-3 border-bottom">
-                                    <label class="form-label form-label">4. School Leaving Certificate <span class="text-danger">*</span></label>
-                                    <input type="file" name="leaving_certificate" class="form-control form-control" <?php echo ($documents && !empty($documents['leaving_certificate'])) ? '' : 'required'; ?>>
+                                    <label class="form-label">4. School Leaving Certificate <span class="text-danger">*</span></label>
+                                    <input type="file" name="leaving_certificate" class="form-control" <?php echo ($documents && !empty($documents['leaving_certificate'])) ? '' : 'required'; ?>>
                                     <div class="form-text small text-muted">Formats: JPG, JPEG, PNG, PDF.</div>
                                     <?php if ($documents && !empty($documents['leaving_certificate'])): ?>
                                         <div class="mt-2 text-success small">
                                             <i class="fa-solid fa-check-circle me-1"></i>Current File: 
-                                            <a href="../uploads/leaving_certificate/<?php echo htmlspecialchars($documents['leaving_certificate']); ?>" target="_blank" class="text-success fw-bold text-decoration-underline"><?php echo htmlspecialchars($documents['leaving_certificate']); ?></a>
+                                            <a href="../uploads/leaving_certificate/<?php echo e($documents['leaving_certificate']); ?>" target="_blank" class="text-success fw-bold text-decoration-underline"><?php echo e($documents['leaving_certificate']); ?></a>
                                         </div>
                                     <?php endif; ?>
                                 </div>
 
                                 <!-- Aadhaar Card -->
                                 <div class="mb-4">
-                                    <label class="form-label form-label">5. Aadhaar Card <span class="text-danger">*</span></label>
-                                    <input type="file" name="aadhaar" class="form-control form-control" <?php echo ($documents && !empty($documents['aadhaar'])) ? '' : 'required'; ?>>
+                                    <label class="form-label">5. Aadhaar Card <span class="text-danger">*</span></label>
+                                    <input type="file" name="aadhaar" class="form-control" <?php echo ($documents && !empty($documents['aadhaar'])) ? '' : 'required'; ?>>
                                     <div class="form-text small text-muted">Formats: JPG, JPEG, PNG, PDF.</div>
                                     <?php if ($documents && !empty($documents['aadhaar'])): ?>
                                         <div class="mt-2 text-success small">
                                             <i class="fa-solid fa-check-circle me-1"></i>Current File: 
-                                            <a href="../uploads/aadhaar/<?php echo htmlspecialchars($documents['aadhaar']); ?>" target="_blank" class="text-success fw-bold text-decoration-underline"><?php echo htmlspecialchars($documents['aadhaar']); ?></a>
+                                            <a href="../uploads/aadhaar/<?php echo e($documents['aadhaar']); ?>" target="_blank" class="text-success fw-bold text-decoration-underline"><?php echo e($documents['aadhaar']); ?></a>
                                         </div>
                                     <?php endif; ?>
                                 </div>

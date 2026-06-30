@@ -62,18 +62,7 @@ include '../includes/header.php';
 
     <!-- Page Content -->
     <div id="content">
-        <!-- Top Navbar -->
-        <nav class="navbar navbar-expand-lg navbar">
-            <div class="container-fluid">
-                <button type="button" id="sidebarCollapse" class="btn btn-primary">
-                    <i class="fa-solid fa-bars"></i>
-                </button>
-                <span class="navbar-brand ms-3">Student Profile Viewer</span>
-                <div class="ms-auto">
-                    <a href="manage_students.php" class="btn btn-sm btn-outline-secondary"><i class="fa-solid fa-arrow-left me-1"></i>Back to Database</a>
-                </div>
-            </div>
-        </nav>
+        <?php render_topbar('Student Profile Viewer', '<a href="manage_students.php" class="btn btn-sm btn-outline-secondary"><i class="fa-solid fa-arrow-left me-1"></i>Back to Database</a>'); ?>
 
         <div class="container-fluid">
             <div class="row">
@@ -87,7 +76,7 @@ include '../includes/header.php';
                             <div class="row mb-4 p-3 bg-light rounded border">
                                 <div class="col-6">
                                     <small class="text-muted block">Admission Number</small>
-                                    <div class="fw-bold fs-5 text-primary"><?php echo htmlspecialchars($student['admission_no']); ?></div>
+                                    <div class="fw-bold fs-5 text-primary"><?php echo e($student['admission_no']); ?></div>
                                 </div>
                                 <div class="col-6">
                                     <small class="text-muted block">Current Decision</small>
@@ -106,33 +95,33 @@ include '../includes/header.php';
                             <!-- Personal Information -->
                             <h6 class="fw-bold text-primary border-bottom pb-2 mb-3">1. Personal Information</h6>
                             <div class="row g-2 mb-4">
-                                <div class="col-md-12"><strong>Student Full Name:</strong> <?php echo htmlspecialchars($student['full_name']); ?></div>
-                                <div class="col-md-6"><strong>Father's Name:</strong> <?php echo htmlspecialchars($student['father_name']); ?></div>
-                                <div class="col-md-6"><strong>Mother's Name:</strong> <?php echo htmlspecialchars($student['mother_name']); ?></div>
-                                <div class="col-md-6"><strong>Gender:</strong> <?php echo htmlspecialchars($student['gender']); ?></div>
+                                <div class="col-md-12"><strong>Student Full Name:</strong> <?php echo e($student['full_name']); ?></div>
+                                <div class="col-md-6"><strong>Father's Name:</strong> <?php echo e($student['father_name']); ?></div>
+                                <div class="col-md-6"><strong>Mother's Name:</strong> <?php echo e($student['mother_name']); ?></div>
+                                <div class="col-md-6"><strong>Gender:</strong> <?php echo e($student['gender']); ?></div>
                                 <div class="col-md-6"><strong>Date of Birth:</strong> <?php echo date('d-M-Y', strtotime($student['dob'])); ?></div>
-                                <div class="col-md-6"><strong>Category:</strong> <?php echo htmlspecialchars($student['category']); ?></div>
-                                <div class="col-md-6"><strong>Mobile No:</strong> <?php echo htmlspecialchars($student['mobile']); ?></div>
-                                <div class="col-md-6"><strong>Email Address:</strong> <?php echo htmlspecialchars($student['email']); ?></div>
-                                <div class="col-md-6"><strong>Pincode:</strong> <?php echo htmlspecialchars($student['pincode']); ?></div>
-                                <div class="col-md-12"><strong>Full Address:</strong> <?php echo htmlspecialchars($student['address']) . ", " . htmlspecialchars($student['city']) . ", " . htmlspecialchars($student['state']); ?></div>
+                                <div class="col-md-6"><strong>Category:</strong> <?php echo e($student['category']); ?></div>
+                                <div class="col-md-6"><strong>Mobile No:</strong> <?php echo e($student['mobile']); ?></div>
+                                <div class="col-md-6"><strong>Email Address:</strong> <?php echo e($student['email']); ?></div>
+                                <div class="col-md-6"><strong>Pincode:</strong> <?php echo e($student['pincode']); ?></div>
+                                <div class="col-md-12"><strong>Full Address:</strong> <?php echo e($student['address']) . ", " . e($student['city']) . ", " . e($student['state']); ?></div>
                             </div>
 
                             <!-- Academic Profile -->
                             <h6 class="fw-bold text-primary border-bottom pb-2 mb-3">2. Academic Qualifications</h6>
                             <div class="row g-2 mb-4">
-                                <div class="col-md-6"><strong>10th Percentage:</strong> <?php echo htmlspecialchars($student['tenth_percentage']); ?>%</div>
-                                <div class="col-md-6"><strong>12th Percentage:</strong> <?php echo htmlspecialchars($student['twelfth_percentage']); ?>%</div>
-                                <div class="col-md-6"><strong>Previous School Name:</strong> <?php echo htmlspecialchars($student['school_name']); ?></div>
-                                <div class="col-md-6"><strong>Passing Year:</strong> <?php echo htmlspecialchars($student['passing_year']); ?></div>
+                                <div class="col-md-6"><strong>10th Percentage:</strong> <?php echo e($student['tenth_percentage']); ?>%</div>
+                                <div class="col-md-6"><strong>12th Percentage:</strong> <?php echo e($student['twelfth_percentage']); ?>%</div>
+                                <div class="col-md-6"><strong>Previous School Name:</strong> <?php echo e($student['school_name']); ?></div>
+                                <div class="col-md-6"><strong>Passing Year:</strong> <?php echo e($student['passing_year']); ?></div>
                             </div>
 
                             <!-- Preferred Program -->
                             <h6 class="fw-bold text-primary border-bottom pb-2 mb-3">3. Preferred Course Detail</h6>
                             <div class="row g-2 mb-4">
-                                <div class="col-md-12"><strong>Program:</strong> <?php echo htmlspecialchars($student['course_name']); ?></div>
-                                <div class="col-md-6"><strong>Department:</strong> <?php echo htmlspecialchars($student['department']); ?></div>
-                                <div class="col-md-6"><strong>Semester:</strong> <?php echo htmlspecialchars($student['semester']); ?></div>
+                                <div class="col-md-12"><strong>Program:</strong> <?php echo e($student['course_name']); ?></div>
+                                <div class="col-md-6"><strong>Department:</strong> <?php echo e($student['department']); ?></div>
+                                <div class="col-md-6"><strong>Semester:</strong> <?php echo e($student['semester']); ?></div>
                             </div>
 
                             <!-- Processing Fee Details -->
@@ -148,7 +137,7 @@ include '../includes/header.php';
                                 </div>
                                 <div class="col-md-6">
                                     <strong>UPI UTR/Ref ID:</strong> 
-                                    <span class="font-monospace text-dark fw-bold"><?php echo htmlspecialchars($student['transaction_id'] ? $student['transaction_id'] : 'N/A'); ?></span>
+                                    <span class="font-monospace text-dark fw-bold"><?php echo e($student['transaction_id'] ? $student['transaction_id'] : 'N/A'); ?></span>
                                 </div>
                             </div>
                         </div>
@@ -174,10 +163,10 @@ include '../includes/header.php';
                                 ];
                                 ?>
                                 <?php foreach ($file_names as $col => $lbl): ?>
-                                    <div class="d-flex justify-content-between align-items-center py-2.5 border-bottom last-border-0">
+                                    <div class="d-flex justify-content-between align-items-center py-2 border-bottom last-border-0">
                                         <span><i class="fa-regular <?php echo $lbl[1]; ?> me-2"></i><strong><?php echo $lbl[0]; ?></strong></span>
                                         <?php if ($documents && !empty($documents[$col])): ?>
-                                            <a href="../uploads/<?php echo $col; ?>/<?php echo htmlspecialchars($documents[$col]); ?>" target="_blank" class="btn btn-xs btn-outline-secondary">
+                                            <a href="../uploads/<?php echo $col; ?>/<?php echo e($documents[$col]); ?>" target="_blank" class="btn btn-xs btn-outline-secondary">
                                                 <i class="fa-solid fa-up-right-from-square"></i> Open
                                             </a>
                                         <?php else: ?>
@@ -208,7 +197,7 @@ include '../includes/header.php';
                                                 </span>
                                                 <small class="text-muted"><?php echo date('d-M-Y H:i', strtotime($log['updated_at'])); ?></small>
                                             </div>
-                                            <p class="text-muted small mb-0 bg-light p-2 rounded mt-1 border"><?php echo htmlspecialchars($log['remarks']); ?></p>
+                                            <p class="text-muted small mb-0 bg-light p-2 rounded mt-1 border"><?php echo e($log['remarks']); ?></p>
                                         </div>
                                     <?php endforeach; ?>
                                 </div>

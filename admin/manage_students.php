@@ -245,18 +245,7 @@ include '../includes/header.php';
 
     <!-- Page Content -->
     <div id="content">
-        <!-- Top Navbar -->
-        <nav class="navbar navbar-expand-lg navbar">
-            <div class="container-fluid">
-                <button type="button" id="sidebarCollapse" class="btn btn-primary">
-                    <i class="fa-solid fa-bars"></i>
-                </button>
-                <span class="navbar-brand ms-3">Student Accounts Desk</span>
-                <div class="ms-auto">
-                    <a href="add_student.php" class="btn btn-sm btn-primary"><i class="fa-solid fa-user-plus me-1"></i>Add Student</a>
-                </div>
-            </div>
-        </nav>
+        <?php render_topbar('Student Accounts Desk', '<a href="add_student.php" class="btn btn-sm btn-primary"><i class="fa-solid fa-user-plus me-1"></i>Add Student</a>'); ?>
 
         <div class="container-fluid">
             <!-- Notifications -->
@@ -280,7 +269,7 @@ include '../includes/header.php';
                         <div class="col-md-3">
                             <label for="search" class="form-label">Search</label>
                             <input type="text" class="form-control" id="search" name="search" 
-                                placeholder="ID, Name, Mobile..." value="<?php echo htmlspecialchars($search); ?>">
+                                placeholder="ID, Name, Mobile..." value="<?php echo e($search); ?>">
                         </div>
                         <div class="col-md-2">
                             <label for="status_filter" class="form-label">Status</label>
@@ -305,7 +294,7 @@ include '../includes/header.php';
                                 <option value="">All Courses</option>
                                 <?php foreach ($courses as $c): ?>
                                     <option value="<?php echo $c['course_id']; ?>" <?php echo ($course_filter == $c['course_id']) ? 'selected' : ''; ?>>
-                                        <?php echo htmlspecialchars($c['course_name']); ?>
+                                        <?php echo e($c['course_name']); ?>
                                     </option>
                                 <?php endforeach; ?>
                             </select>
@@ -341,7 +330,6 @@ include '../includes/header.php';
                                     <th>Student Name</th>
                                     <th>Course Preference</th>
                                     <th>Mobile No</th>
-                                    <th>12th Std (%)</th>
                                     <th>Status</th>
                                     <th>Submission</th>
                                     <th class="text-center">Actions</th>
@@ -355,11 +343,10 @@ include '../includes/header.php';
                                 <?php else: ?>
                                     <?php foreach ($students as $s): ?>
                                         <tr>
-                                            <td class="fw-bold text-primary"><?php echo htmlspecialchars($s['admission_no']); ?></td>
-                                            <td><?php echo htmlspecialchars($s['full_name']); ?></td>
-                                            <td><?php echo htmlspecialchars($s['course_name']); ?></td>
-                                            <td><?php echo htmlspecialchars($s['mobile']); ?></td>
-                                            <td><?php echo htmlspecialchars($s['twelfth_percentage']); ?>%</td>
+                                            <td class="fw-bold text-primary"><?php echo e($s['admission_no']); ?></td>
+                                            <td><?php echo e($s['full_name']); ?></td>
+                                            <td><?php echo e($s['course_name']); ?></td>
+                                            <td><?php echo e($s['mobile']); ?></td>
                                             <td>
                                                 <?php if ($s['status'] === 'Pending'): ?>
                                                     <span class="badge badge-pending">Pending</span>
@@ -379,15 +366,15 @@ include '../includes/header.php';
                                             <td class="text-center">
                                                 <!-- View button -->
                                                 <a href="view_students.php?id=<?php echo $s['student_id']; ?>" class="btn btn-sm btn-outline-primary me-1" title="View Profile">
-                                                    <i class="fa-solid fa-eye"></i> View
+                                                    <i class="fa-solid fa-eye"></i>
                                                 </a>
                                                 <!-- Edit button -->
                                                 <a href="edit_student.php?id=<?php echo $s['student_id']; ?>" class="btn btn-sm btn-outline-secondary me-1" title="Edit Profile">
-                                                    <i class="fa-solid fa-user-pen"></i> Edit
+                                                    <i class="fa-solid fa-user-pen"></i>
                                                 </a>
                                                 <!-- Delete button -->
                                                 <a href="manage_students.php?delete_id=<?php echo $s['student_id']; ?>&search=<?php echo urlencode($search); ?>" class="btn btn-sm btn-outline-danger" onclick="return confirm('DANGER: Deleting this student will wipe out their credentials, documents, and logs. Proceed?');">
-                                                    <i class="fa-solid fa-user-minus"></i> Delete
+                                                    <i class="fa-solid fa-user-minus"></i>
                                                 </a>
                                             </td>
                                         </tr>
@@ -434,4 +421,3 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 <?php include '../includes/footer.php'; ?>
-

@@ -123,18 +123,7 @@ include '../includes/header.php';
 
     <!-- Page Content -->
     <div id="content">
-        <!-- Top Navbar -->
-        <nav class="navbar navbar-expand-lg navbar">
-            <div class="container-fluid">
-                <button type="button" id="sidebarCollapse" class="btn btn-primary">
-                    <i class="fa-solid fa-bars"></i>
-                </button>
-                <span class="navbar-brand ms-3">Verification Desk</span>
-                <div class="ms-auto">
-                    <a href="dashboard.php" class="btn btn-sm btn-outline-secondary"><i class="fa-solid fa-arrow-left me-1"></i>Back to Applicants</a>
-                </div>
-            </div>
-        </nav>
+        <?php render_topbar('Verification Desk', '<a href="dashboard.php" class="btn btn-sm btn-outline-secondary"><i class="fa-solid fa-arrow-left me-1"></i>Back to Applicants</a>'); ?>
 
         <div class="container-fluid">
             <!-- Notifications -->
@@ -162,7 +151,7 @@ include '../includes/header.php';
                             <div class="row mb-4 p-3 bg-light rounded border border-light-subtle">
                                 <div class="col-md-6">
                                     <small class="text-muted block">Admission ID</small>
-                                    <div class="fw-bold fs-5 text-primary"><?php echo htmlspecialchars($student['admission_no']); ?></div>
+                                    <div class="fw-bold fs-5 text-primary"><?php echo e($student['admission_no']); ?></div>
                                 </div>
                                 <div class="col-md-6">
                                     <small class="text-muted block">Current Decision</small>
@@ -181,32 +170,32 @@ include '../includes/header.php';
                             <!-- Personal Info Grid -->
                             <h6 class="fw-bold text-primary border-bottom pb-2 mb-3">Personal Details</h6>
                             <div class="row g-2 mb-4">
-                                <div class="col-md-12"><strong>Student Full Name:</strong> <?php echo htmlspecialchars($student['full_name']); ?></div>
-                                <div class="col-md-6"><strong>Father's Name:</strong> <?php echo htmlspecialchars($student['father_name']); ?></div>
-                                <div class="col-md-6"><strong>Mother's Name:</strong> <?php echo htmlspecialchars($student['mother_name']); ?></div>
-                                <div class="col-md-6"><strong>Gender:</strong> <?php echo htmlspecialchars($student['gender']); ?></div>
+                                <div class="col-md-12"><strong>Student Full Name:</strong> <?php echo e($student['full_name']); ?></div>
+                                <div class="col-md-6"><strong>Father's Name:</strong> <?php echo e($student['father_name']); ?></div>
+                                <div class="col-md-6"><strong>Mother's Name:</strong> <?php echo e($student['mother_name']); ?></div>
+                                <div class="col-md-6"><strong>Gender:</strong> <?php echo e($student['gender']); ?></div>
                                 <div class="col-md-6"><strong>DOB:</strong> <?php echo date('d-M-Y', strtotime($student['dob'])); ?></div>
-                                <div class="col-md-6"><strong>Category:</strong> <?php echo htmlspecialchars($student['category']); ?></div>
-                                <div class="col-md-6"><strong>Mobile:</strong> <?php echo htmlspecialchars($student['mobile']); ?></div>
-                                <div class="col-md-6"><strong>Email:</strong> <?php echo htmlspecialchars($student['email']); ?></div>
-                                <div class="col-md-12"><strong>Address:</strong> <?php echo htmlspecialchars($student['address']) . ", " . htmlspecialchars($student['city']) . ", " . htmlspecialchars($student['state']) . " - " . htmlspecialchars($student['pincode']); ?></div>
+                                <div class="col-md-6"><strong>Category:</strong> <?php echo e($student['category']); ?></div>
+                                <div class="col-md-6"><strong>Mobile:</strong> <?php echo e($student['mobile']); ?></div>
+                                <div class="col-md-6"><strong>Email:</strong> <?php echo e($student['email']); ?></div>
+                                <div class="col-md-12"><strong>Address:</strong> <?php echo e($student['address']) . ", " . e($student['city']) . ", " . e($student['state']) . " - " . e($student['pincode']); ?></div>
                             </div>
 
                             <!-- Academic Info Grid -->
                             <h6 class="fw-bold text-primary border-bottom pb-2 mb-3">Academic Scorecards</h6>
                             <div class="row g-2 mb-4">
-                                <div class="col-md-6"><strong>10th Percentage:</strong> <?php echo htmlspecialchars($student['tenth_percentage']); ?>%</div>
-                                <div class="col-md-6"><strong>12th Percentage:</strong> <span class="fw-bold <?php echo ($student['twelfth_percentage'] >= 35) ? 'text-success' : 'text-danger'; ?>"><?php echo htmlspecialchars($student['twelfth_percentage']); ?>%</span></div>
-                                <div class="col-md-6"><strong>Previous School:</strong> <?php echo htmlspecialchars($student['school_name']); ?></div>
-                                <div class="col-md-6"><strong>Passing Year:</strong> <?php echo htmlspecialchars($student['passing_year']); ?></div>
+                                <div class="col-md-6"><strong>10th Percentage:</strong> <?php echo e($student['tenth_percentage']); ?>%</div>
+                                <div class="col-md-6"><strong>12th Percentage:</strong> <span class="fw-bold <?php echo ($student['twelfth_percentage'] >= 35) ? 'text-success' : 'text-danger'; ?>"><?php echo e($student['twelfth_percentage']); ?>%</span></div>
+                                <div class="col-md-6"><strong>Previous School:</strong> <?php echo e($student['school_name']); ?></div>
+                                <div class="col-md-6"><strong>Passing Year:</strong> <?php echo e($student['passing_year']); ?></div>
                             </div>
 
                             <!-- Course Selection Info Grid -->
                             <h6 class="fw-bold text-primary border-bottom pb-2 mb-3">Course Preferred</h6>
                             <div class="row g-2 mb-4">
-                                <div class="col-md-12"><strong>Program:</strong> <?php echo htmlspecialchars($student['course_name']); ?></div>
-                                <div class="col-md-6"><strong>Department:</strong> <?php echo htmlspecialchars($student['department']); ?></div>
-                                <div class="col-md-6"><strong>Semester:</strong> <?php echo htmlspecialchars($student['semester']); ?></div>
+                                <div class="col-md-12"><strong>Program:</strong> <?php echo e($student['course_name']); ?></div>
+                                <div class="col-md-6"><strong>Department:</strong> <?php echo e($student['department']); ?></div>
+                                <div class="col-md-6"><strong>Semester:</strong> <?php echo e($student['semester']); ?></div>
                             </div>
 
                             <!-- Processing Fee Payment Details -->
@@ -222,7 +211,7 @@ include '../includes/header.php';
                                 </div>
                                 <div class="col-md-6">
                                     <strong>UPI Transaction Ref:</strong> 
-                                    <span class="font-monospace text-dark fw-bold"><?php echo htmlspecialchars($student['transaction_id'] ? $student['transaction_id'] : 'N/A'); ?></span>
+                                    <span class="font-monospace text-dark fw-bold"><?php echo e($student['transaction_id'] ? $student['transaction_id'] : 'N/A'); ?></span>
                                 </div>
                             </div>
                         </div>
@@ -249,7 +238,7 @@ include '../includes/header.php';
                                             <i class="fa-regular fa-image text-primary me-2"></i><strong>Candidate Photo</strong>
                                         </div>
                                         <?php if (!empty($documents['photo'])): ?>
-                                            <a href="../uploads/photo/<?php echo htmlspecialchars($documents['photo']); ?>" target="_blank" class="btn btn-sm btn-outline-primary">
+                                            <a href="../uploads/photo/<?php echo e($documents['photo']); ?>" target="_blank" class="btn btn-sm btn-outline-primary">
                                                 <i class="fa-solid fa-eye me-1"></i>View Document
                                             </a>
                                         <?php else: ?>
@@ -263,7 +252,7 @@ include '../includes/header.php';
                                             <i class="fa-regular fa-file-pdf text-danger me-2"></i><strong>10th Marksheet</strong>
                                         </div>
                                         <?php if (!empty($documents['marksheet10'])): ?>
-                                            <a href="../uploads/marksheet10/<?php echo htmlspecialchars($documents['marksheet10']); ?>" target="_blank" class="btn btn-sm btn-outline-primary">
+                                            <a href="../uploads/marksheet10/<?php echo e($documents['marksheet10']); ?>" target="_blank" class="btn btn-sm btn-outline-primary">
                                                 <i class="fa-solid fa-eye me-1"></i>View Document
                                             </a>
                                         <?php else: ?>
@@ -277,7 +266,7 @@ include '../includes/header.php';
                                             <i class="fa-regular fa-file-pdf text-danger me-2"></i><strong>12th Marksheet</strong>
                                         </div>
                                         <?php if (!empty($documents['marksheet12'])): ?>
-                                            <a href="../uploads/marksheet12/<?php echo htmlspecialchars($documents['marksheet12']); ?>" target="_blank" class="btn btn-sm btn-outline-primary">
+                                            <a href="../uploads/marksheet12/<?php echo e($documents['marksheet12']); ?>" target="_blank" class="btn btn-sm btn-outline-primary">
                                                 <i class="fa-solid fa-eye me-1"></i>View Document
                                             </a>
                                         <?php else: ?>
@@ -291,7 +280,7 @@ include '../includes/header.php';
                                             <i class="fa-regular fa-file-word text-info me-2"></i><strong>Leaving Certificate</strong>
                                         </div>
                                         <?php if (!empty($documents['leaving_certificate'])): ?>
-                                            <a href="../uploads/leaving_certificate/<?php echo htmlspecialchars($documents['leaving_certificate']); ?>" target="_blank" class="btn btn-sm btn-outline-primary">
+                                            <a href="../uploads/leaving_certificate/<?php echo e($documents['leaving_certificate']); ?>" target="_blank" class="btn btn-sm btn-outline-primary">
                                                 <i class="fa-solid fa-eye me-1"></i>View Document
                                             </a>
                                         <?php else: ?>
@@ -305,7 +294,7 @@ include '../includes/header.php';
                                             <i class="fa-regular fa-address-card text-success me-2"></i><strong>Aadhaar Card</strong>
                                         </div>
                                         <?php if (!empty($documents['aadhaar'])): ?>
-                                            <a href="../uploads/aadhaar/<?php echo htmlspecialchars($documents['aadhaar']); ?>" target="_blank" class="btn btn-sm btn-outline-primary">
+                                            <a href="../uploads/aadhaar/<?php echo e($documents['aadhaar']); ?>" target="_blank" class="btn btn-sm btn-outline-primary">
                                                 <i class="fa-solid fa-eye me-1"></i>View Document
                                             </a>
                                         <?php else: ?>
@@ -323,20 +312,20 @@ include '../includes/header.php';
                                     <form action="verify.php?id=<?php echo $student_id; ?>" method="POST" id="verifyForm">
                                         <!-- Remarks input -->
                                         <div class="mb-3">
-                                            <label for="remarks" class="form-label form-label">Review Remarks / Reason for Rejection</label>
-                                            <textarea class="form-control form-control" id="remarks" name="remarks" rows="3" placeholder="Enter feedback here... Required for rejections."></textarea>
+                                            <label for="remarks" class="form-label">Review Remarks / Reason for Rejection</label>
+                                            <textarea class="form-control" id="remarks" name="remarks" rows="3" placeholder="Enter feedback here... Required for rejections."></textarea>
                                         </div>
 
                                         <div class="row g-2">
                                             <!-- Reject button -->
                                             <div class="col-md-6">
-                                                <button type="submit" name="action" value="reject" class="btn btn-danger w-100 py-2.5 fw-bold" onclick="return confirmReject();">
+                                                <button type="submit" name="action" value="reject" class="btn btn-danger w-100 py-2 fw-bold" onclick="return confirmReject();">
                                                     <i class="fa-solid fa-circle-xmark me-1"></i>Reject Application
                                                 </button>
                                             </div>
                                             <!-- Approve button -->
                                             <div class="col-md-6">
-                                                <button type="submit" name="action" value="approve" class="btn btn-success w-100 py-2.5 fw-bold" onclick="return confirm('Are you sure you want to approve this application?');">
+                                                <button type="submit" name="action" value="approve" class="btn btn-success w-100 py-2 fw-bold" onclick="return confirm('Are you sure you want to approve this application?');">
                                                     <i class="fa-solid fa-circle-check me-1"></i>Approve Admission
                                                 </button>
                                             </div>

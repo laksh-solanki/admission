@@ -11,14 +11,13 @@ require_once 'includes/auth.php';
 // Redirect if already logged in
 redirect_if_logged_in();
 
-$error_msg = "";
-$success_msg = "";
+$error_msg = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $name = trim($_POST['name']);
-    $email = trim($_POST['email']);
-    $password = $_POST['password'];
-    $confirm_password = $_POST['confirm_password'];
+    $name = trim($_POST['name'] ?? '');
+    $email = trim($_POST['email'] ?? '');
+    $password = $_POST['password'] ?? '';
+    $confirm_password = $_POST['confirm_password'] ?? '';
 
     // Input Validation
     if (empty($name) || empty($email) || empty($password) || empty($confirm_password)) {
@@ -52,15 +51,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 // Fetch new user ID
                 $new_user_id = $pdo->lastInsertId();
 
-                // Initialize session variables to auto-login
-                $_SESSION['user_id'] = $new_user_id;
-                $_SESSION['role'] = 'student';
-                $_SESSION['name'] = $name;
-                $_SESSION['email'] = $email;
-
-                // Redirect to student dashboard
-                header("Location: student/dashboard.php");
-                exit;
+                login_user($new_user_id, 'student', $name, $email);
+                app_redirect('student/dashboard.php');
             }
         } catch (PDOException $e) {
             $error_msg = "Database Error: " . $e->getMessage();
@@ -77,45 +69,44 @@ include 'includes/header.php';
         <div class="col-md-6 col-lg-5">
             <div class="card">
                 <div class="card-header text-center bg-white border-0 pt-4">
-                    <h3 class="fw-bold color-primary"><i class="fa-solid fa-user-plus me-2"></i>Student Registration</h3>
-                    <p class="text-muted small">Create an account to start your admission process</p>
+                    <h3 class="fw-bold text-primary mb-1 d-flex align-items-center justify-content-center">
+                        <i class="fa-solid fa-graduation-cap me-2 text-info fs-3"></i>
+                        <span>SCT PORTAL</span>
+                    </h3>
+                    <p class="text-muted small mb-0 fw-semibold text-uppercase tracking-wider" style="font-size: 11px; color: var(--slate-500) !important;">State College of Technology</p>
+                    <p class="text-muted small mt-2"><i class="fa-solid fa-user-plus me-1 text-primary"></i>Student Registration</p>
                 </div>
                 <div class="card-body pt-0">
                     
-                    <?php if (!empty($error_msg)): ?>
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            <i class="fa-solid fa-triangle-exclamation me-2"></i><?php echo htmlspecialchars($error_msg); ?>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                    <?php endif; ?>
+                    <?php render_alert($error_msg, 'danger', false, true); ?>
 
                     <form action="student_register.php" method="POST">
                         <!-- Full Name -->
                         <div class="mb-3">
-                            <label for="name" class="form-label form-label">Full Name</label>
-                            <input type="text" class="form-control form-control" id="name" name="name" value="<?php echo isset($name) ? htmlspecialchars($name) : ''; ?>" required>
+                            <label for="name" class="form-label">Full Name</label>
+                            <input type="text" class="form-control" id="name" name="name" value="<?php echo e($name ?? ''); ?>" required>
                         </div>
 
                         <!-- Email -->
                         <div class="mb-3">
-                            <label for="email" class="form-label form-label">Email Address</label>
-                            <input type="email" class="form-control form-control" id="email" name="email" value="<?php echo isset($email) ? htmlspecialchars($email) : ''; ?>" required>
+                            <label for="email" class="form-label">Email Address</label>
+                            <input type="email" class="form-control" id="email" name="email" value="<?php echo e($email ?? ''); ?>" required>
                         </div>
 
                         <!-- Password -->
                         <div class="mb-3">
-                            <label for="password" class="form-label form-label">Password (Min. 6 chars)</label>
-                            <input type="password" class="form-control form-control" id="password" name="password" required>
+                            <label for="password" class="form-label">Password (Min. 6 chars)</label>
+                            <input type="password" class="form-control" id="password" name="password" required>
                         </div>
 
                         <!-- Confirm Password -->
                         <div class="mb-4">
-                            <label for="confirm_password" class="form-label form-label">Confirm Password</label>
-                            <input type="password" class="form-control form-control" id="confirm_password" name="confirm_password" required>
+                            <label for="confirm_password" class="form-label">Confirm Password</label>
+                            <input type="password" class="form-control" id="confirm_password" name="confirm_password" required>
                         </div>
 
                         <!-- Submit Button -->
-                        <button type="submit" class="btn btn-primary w-100 py-2.5 mb-3">Register Now</button>
+                        <button type="submit" class="btn btn-primary w-100 py-2 mb-3">Register Now</button>
                     </form>
                     
                     <div class="text-center mt-3">

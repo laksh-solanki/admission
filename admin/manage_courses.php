@@ -91,20 +91,7 @@ include '../includes/header.php';
 
     <!-- Page Content -->
     <div id="content">
-        <!-- Top Navbar -->
-        <nav class="navbar navbar-expand-lg navbar">
-            <div class="container-fluid">
-                <button type="button" id="sidebarCollapse" class="btn btn-primary">
-                    <i class="fa-solid fa-bars"></i>
-                </button>
-                <span class="navbar-brand ms-3">Course Management Portal</span>
-                <div class="ms-auto">
-                    <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addCourseModal">
-                        <i class="fa-solid fa-plus me-1"></i>Add New Course
-                    </button>
-                </div>
-            </div>
-        </nav>
+        <?php render_topbar('Course Management Portal', '<button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addCourseModal"><i class="fa-solid fa-plus me-1"></i>Add New Course</button>'); ?>
 
         <div class="container-fluid">
             <!-- Notifications -->
@@ -146,13 +133,13 @@ include '../includes/header.php';
                                     <?php foreach ($courses as $c): ?>
                                         <tr>
                                             <td><?php echo $c['course_id']; ?></td>
-                                            <td class="fw-bold text-primary"><?php echo htmlspecialchars($c['course_name']); ?></td>
-                                            <td><?php echo htmlspecialchars($c['department']); ?></td>
-                                            <td><?php echo htmlspecialchars($c['semester']); ?></td>
-                                            <td><?php echo htmlspecialchars($c['total_seats']); ?></td>
+                                            <td class="fw-bold text-primary"><?php echo e($c['course_name']); ?></td>
+                                            <td><?php echo e($c['department']); ?></td>
+                                            <td><?php echo e($c['semester']); ?></td>
+                                            <td><?php echo e($c['total_seats']); ?></td>
                                             <td class="text-center">
                                                 <!-- Edit Button triggers modal populate JS -->
-                                                <button class="btn btn-sm btn-outline-secondary me-2" onclick="editCourse(<?php echo htmlspecialchars(json_encode($c)); ?>)">
+                                                <button class="btn btn-sm btn-outline-secondary me-2" onclick="editCourse(<?php echo e(json_encode($c)); ?>)">
                                                     <i class="fa-solid fa-pen-to-square"></i> Edit
                                                 </button>
                                                 <!-- Delete Button -->
@@ -188,20 +175,20 @@ include '../includes/header.php';
                 <input type="hidden" name="action" value="add">
                 <div class="modal-body">
                     <div class="mb-3">
-                        <label for="course_name" class="form-label form-label">Course / Degree Name</label>
-                        <input type="text" class="form-control form-control" id="course_name" name="course_name" placeholder="e.g. B.Sc. Computer Science" required>
+                        <label for="course_name" class="form-label">Course / Degree Name</label>
+                        <input type="text" class="form-control" id="course_name" name="course_name" placeholder="e.g. B.Sc. Computer Science" required>
                     </div>
                     <div class="mb-3">
-                        <label for="department" class="form-label form-label">Department Name</label>
-                        <input type="text" class="form-control form-control" id="department" name="department" placeholder="e.g. Science & IT" required>
+                        <label for="department" class="form-label">Department Name</label>
+                        <input type="text" class="form-control" id="department" name="department" placeholder="e.g. Science & IT" required>
                     </div>
                     <div class="mb-3">
-                        <label for="semester" class="form-label form-label">Semester / Duration</label>
-                        <input type="text" class="form-control form-control" id="semester" name="semester" placeholder="e.g. Semester I" required>
+                        <label for="semester" class="form-label">Semester / Duration</label>
+                        <input type="text" class="form-control" id="semester" name="semester" placeholder="e.g. Semester I" required>
                     </div>
                     <div class="mb-3">
-                        <label for="total_seats" class="form-label form-label">Total Available Seats</label>
-                        <input type="number" min="1" class="form-control form-control" id="total_seats" name="total_seats" placeholder="e.g. 60" required>
+                        <label for="total_seats" class="form-label">Total Available Seats</label>
+                        <input type="number" min="1" class="form-control" id="total_seats" name="total_seats" placeholder="e.g. 60" required>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -226,20 +213,20 @@ include '../includes/header.php';
                 <input type="hidden" id="edit_course_id" name="course_id">
                 <div class="modal-body">
                     <div class="mb-3">
-                        <label for="edit_course_name" class="form-label form-label">Course / Degree Name</label>
-                        <input type="text" class="form-control form-control" id="edit_course_name" name="course_name" required>
+                        <label for="edit_course_name" class="form-label">Course / Degree Name</label>
+                        <input type="text" class="form-control" id="edit_course_name" name="course_name" required>
                     </div>
                     <div class="mb-3">
-                        <label for="edit_department" class="form-label form-label">Department Name</label>
-                        <input type="text" class="form-control form-control" id="edit_department" name="department" required>
+                        <label for="edit_department" class="form-label">Department Name</label>
+                        <input type="text" class="form-control" id="edit_department" name="department" required>
                     </div>
                     <div class="mb-3">
-                        <label for="edit_semester" class="form-label form-label">Semester / Duration</label>
-                        <input type="text" class="form-control form-control" id="edit_semester" name="semester" required>
+                        <label for="edit_semester" class="form-label">Semester / Duration</label>
+                        <input type="text" class="form-control" id="edit_semester" name="semester" required>
                     </div>
                     <div class="mb-3">
-                        <label for="edit_total_seats" class="form-label form-label">Total Available Seats</label>
-                        <input type="number" min="1" class="form-control form-control" id="edit_total_seats" name="total_seats" required>
+                        <label for="edit_total_seats" class="form-label">Total Available Seats</label>
+                        <input type="number" min="1" class="form-control" id="edit_total_seats" name="total_seats" required>
                     </div>
                 </div>
                 <div class="modal-footer">

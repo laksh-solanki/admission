@@ -41,15 +41,7 @@ include '../includes/header.php';
 
     <!-- Page Content -->
     <div id="content">
-        <!-- Top Navbar -->
-        <nav class="navbar navbar-expand-lg navbar">
-            <div class="container-fluid">
-                <button type="button" id="sidebarCollapse" class="btn btn-primary">
-                    <i class="fa-solid fa-bars"></i>
-                </button>
-                <span class="navbar-brand ms-3">Application Status Tracker</span>
-            </div>
-        </nav>
+        <?php render_topbar('Application Status Tracker'); ?>
 
         <div class="container-fluid">
             <?php if (!$student): ?>
@@ -61,10 +53,10 @@ include '../includes/header.php';
                     <!-- Current Status Card -->
                     <div class="col-md-4 mb-4">
                         <div class="card bg-white p-4">
-                            <h5 class="fw-bold color-primary mb-3">Application Status</h5>
+                            <h5 class="fw-bold text-primary mb-3">Application Status</h5>
                             <div class="mb-3">
                                 <strong>Admission Number:</strong>
-                                <div class="fs-5 text-dark fw-bold"><?php echo htmlspecialchars($student['admission_no']); ?></div>
+                                <div class="fs-5 text-dark fw-bold"><?php echo e($student['admission_no']); ?></div>
                             </div>
                             <div>
                                 <strong>Current Decision:</strong>
@@ -116,7 +108,7 @@ include '../includes/header.php';
                                                 </div>
                                                 <div class="bg-light p-3 rounded mt-2 border">
                                                     <strong>Remarks:</strong>
-                                                    <p class="text-muted mb-0 small mt-1"><?php echo htmlspecialchars($log['remarks']); ?></p>
+                                                    <p class="text-muted mb-0 small mt-1"><?php echo e($log['remarks']); ?></p>
                                                 </div>
                                             </div>
                                         <?php endforeach; ?>

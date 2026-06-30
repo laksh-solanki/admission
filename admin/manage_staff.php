@@ -130,20 +130,7 @@ include '../includes/header.php';
 
     <!-- Page Content -->
     <div id="content">
-        <!-- Top Navbar -->
-        <nav class="navbar navbar-expand-lg navbar">
-            <div class="container-fluid">
-                <button type="button" id="sidebarCollapse" class="btn btn-primary">
-                    <i class="fa-solid fa-bars"></i>
-                </button>
-                <span class="navbar-brand ms-3">Staff Management Portal</span>
-                <div class="ms-auto">
-                    <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addStaffModal">
-                        <i class="fa-solid fa-plus me-1"></i>Create Staff Account
-                    </button>
-                </div>
-            </div>
-        </nav>
+        <?php render_topbar('Staff Management Portal', '<button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addStaffModal"><i class="fa-solid fa-plus me-1"></i>Create Staff Account</button>'); ?>
 
         <div class="container-fluid">
             <!-- Notifications -->
@@ -183,11 +170,11 @@ include '../includes/header.php';
                                     <?php foreach ($staff_members as $s): ?>
                                         <tr>
                                             <td><?php echo $s['staff_id']; ?></td>
-                                            <td class="fw-bold text-primary"><?php echo htmlspecialchars($s['name']); ?></td>
-                                            <td><?php echo htmlspecialchars($s['email']); ?></td>
+                                            <td class="fw-bold text-primary"><?php echo e($s['name']); ?></td>
+                                            <td><?php echo e($s['email']); ?></td>
                                             <td class="text-center">
                                                 <!-- Edit button triggers Populate JS -->
-                                                <button class="btn btn-sm btn-outline-secondary me-2" onclick="editStaff(<?php echo htmlspecialchars(json_encode($s)); ?>)">
+                                                <button class="btn btn-sm btn-outline-secondary me-2" onclick="editStaff(<?php echo e(json_encode($s)); ?>)">
                                                     <i class="fa-solid fa-user-pen"></i> Edit
                                                 </button>
                                                 <!-- Delete button -->
@@ -223,16 +210,16 @@ include '../includes/header.php';
                 <input type="hidden" name="action" value="add">
                 <div class="modal-body">
                     <div class="mb-3">
-                        <label for="name" class="form-label form-label">Staff Full Name</label>
-                        <input type="text" class="form-control form-control" id="name" name="name" required>
+                        <label for="name" class="form-label">Staff Full Name</label>
+                        <input type="text" class="form-control" id="name" name="name" required>
                     </div>
                     <div class="mb-3">
-                        <label for="email" class="form-label form-label">Secure Email Address</label>
-                        <input type="email" class="form-control form-control" id="email" name="email" required>
+                        <label for="email" class="form-label">Secure Email Address</label>
+                        <input type="email" class="form-control" id="email" name="email" required>
                     </div>
                     <div class="mb-3">
-                        <label for="password" class="form-label form-label">Account Password (Min. 6 chars)</label>
-                        <input type="password" class="form-control form-control" id="password" name="password" required>
+                        <label for="password" class="form-label">Account Password (Min. 6 chars)</label>
+                        <input type="password" class="form-control" id="password" name="password" required>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -257,16 +244,16 @@ include '../includes/header.php';
                 <input type="hidden" id="edit_staff_id" name="staff_id">
                 <div class="modal-body">
                     <div class="mb-3">
-                        <label for="edit_name" class="form-label form-label">Staff Full Name</label>
-                        <input type="text" class="form-control form-control" id="edit_name" name="name" required>
+                        <label for="edit_name" class="form-label">Staff Full Name</label>
+                        <input type="text" class="form-control" id="edit_name" name="name" required>
                     </div>
                     <div class="mb-3">
-                        <label for="edit_email" class="form-label form-label">Secure Email Address</label>
-                        <input type="email" class="form-control form-control" id="edit_email" name="email" required>
+                        <label for="edit_email" class="form-label">Secure Email Address</label>
+                        <input type="email" class="form-control" id="edit_email" name="email" required>
                     </div>
                     <div class="mb-3">
-                        <label for="edit_password" class="form-label form-label">Password (Leave blank to keep current)</label>
-                        <input type="password" class="form-control form-control" id="edit_password" name="password" placeholder="Change password...">
+                        <label for="edit_password" class="form-label">Password (Leave blank to keep current)</label>
+                        <input type="password" class="form-control" id="edit_password" name="password" placeholder="Change password...">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -293,4 +280,3 @@ function editStaff(staff) {
 </script>
 
 <?php include '../includes/footer.php'; ?>
-

@@ -88,18 +88,7 @@ include '../includes/header.php';
 
     <!-- Page Content -->
     <div id="content">
-        <!-- Top Navbar -->
-        <nav class="navbar navbar-expand-lg navbar">
-            <div class="container-fluid">
-                <button type="button" id="sidebarCollapse" class="btn btn-primary">
-                    <i class="fa-solid fa-bars"></i>
-                </button>
-                <span class="navbar-brand ms-3">Staff Control Panel</span>
-                <div class="ms-auto d-flex align-items-center">
-                    <span class="me-3 text-muted small"><i class="fa-solid fa-user-gear me-1"></i><?php echo htmlspecialchars($_SESSION['name']); ?> (Staff)</span>
-                </div>
-            </div>
-        </nav>
+        <?php render_topbar('Staff Control Panel', '<span class="text-muted small"><i class="fa-solid fa-user-gear me-1"></i>' . e($_SESSION['name']) . ' (Staff)</span>'); ?>
 
         <div class="container-fluid">
             <!-- Stat Cards Row -->
@@ -163,7 +152,7 @@ include '../includes/header.php';
                             <div class="input-group">
                                 <span class="input-group-text bg-white border-end-0"><i class="fa-solid fa-magnifying-glass text-muted"></i></span>
                                 <input type="text" class="form-control border-start-0" id="search" name="search" 
-                                    placeholder="ID, Name, Mobile..." value="<?php echo htmlspecialchars($search); ?>">
+                                    placeholder="ID, Name, Mobile..." value="<?php echo e($search); ?>">
                             </div>
                         </div>
                         <div class="col-md-2">
@@ -181,7 +170,7 @@ include '../includes/header.php';
                                 <option value="">All Courses</option>
                                 <?php foreach ($courses_list as $c): ?>
                                     <option value="<?php echo $c['course_id']; ?>" <?php echo ($course_filter == $c['course_id']) ? 'selected' : ''; ?>>
-                                        <?php echo htmlspecialchars($c['course_name']); ?>
+                                        <?php echo e($c['course_name']); ?>
                                     </option>
                                 <?php endforeach; ?>
                             </select>
@@ -217,7 +206,6 @@ include '../includes/header.php';
                                     <th>Student Name</th>
                                     <th>Course Applied</th>
                                     <th>Mobile</th>
-                                    <th>12th Std (%)</th>
                                     <th>Status</th>
                                     <th class="text-center">Action</th>
                                 </tr>
@@ -230,11 +218,10 @@ include '../includes/header.php';
                                 <?php else: ?>
                                     <?php foreach ($applications as $app): ?>
                                         <tr>
-                                            <td class="fw-bold text-primary"><?php echo htmlspecialchars($app['admission_no']); ?></td>
-                                            <td><?php echo htmlspecialchars($app['full_name']); ?></td>
-                                            <td><?php echo htmlspecialchars($app['course_name']); ?></td>
-                                            <td><?php echo htmlspecialchars($app['mobile']); ?></td>
-                                            <td><?php echo htmlspecialchars($app['twelfth_percentage']); ?>%</td>
+                                            <td class="fw-bold text-primary"><?php echo e($app['admission_no']); ?></td>
+                                            <td><?php echo e($app['full_name']); ?></td>
+                                            <td><?php echo e($app['course_name']); ?></td>
+                                            <td><?php echo e($app['mobile']); ?></td>   
                                             <td>
                                                 <?php if ($app['status'] === 'Pending'): ?>
                                                     <span class="badge badge-pending">Pending</span>

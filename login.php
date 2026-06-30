@@ -12,18 +12,14 @@ require_once 'includes/auth.php';
 // Redirect if already logged in
 redirect_if_logged_in();
 
-$error_msg = "";
+$error_msg = '';
 
-// Determine active role tab (default: 'student')
-$role = isset($_GET['role']) ? trim($_GET['role']) : 'student';
-if (!in_array($role, ['student', 'staff', 'admin'])) {
-    $role = 'student';
-}
+$role = normalize_role($_GET['role'] ?? 'student');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $email = trim($_POST['email']);
-    $password = $_POST['password'];
-    $role = isset($_POST['role']) ? trim($_POST['role']) : 'student';
+    $email = trim($_POST['email'] ?? '');
+    $password = $_POST['password'] ?? '';
+    $role = normalize_role($_POST['role'] ?? 'student');
 
     if (empty($email) || empty($password)) {
         $error_msg = "Please fill in all fields.";
@@ -44,23 +40,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
 
             if ($user && password_verify($password, $user['password'])) {
-                // Login successful. Store session details.
-                $_SESSION['user_id'] = $user[$id_col];
-                $_SESSION['role'] = $role;
-                $_SESSION['name'] = $user['name'];
-                $_SESSION['email'] = $user['email'];
-
-                // Redirect to corresponding dashboard
-                if ($role === 'admin') {
-                    header("Location: admin/dashboard.php");
-                } elseif ($role === 'staff') {
-                    header("Location: staff/dashboard.php");
-                } else {
-                    header("Location: student/dashboard.php");
-                }
-                exit;
+                login_user($user[$id_col], $role, $user['name'], $user['email']);
+                app_redirect(role_dashboard_path($role));
             } else {
-                $error_msg = "Invalid " . ($role === 'student' ? 'student' : ($role === 'staff' ? 'staff' : 'admin')) . " email or password.";
+                $error_msg = "Invalid " . strtolower(role_label($role)) . " email or password.";
             }
         } catch (PDOException $e) {
             $error_msg = "Database Error: " . $e->getMessage();
@@ -77,10 +60,12 @@ include 'includes/header.php';
         <div class="col-md-6 col-lg-5">
             <div class="card shadow-sm border-0">
                 <div class="card-header text-center bg-white border-0 pt-4 pb-0">
-                    <h3 class="fw-bold text-primary mb-1">
-                        <i class="fa-solid fa-graduation-cap me-2"></i>College Portal
+                    <h3 class="fw-bold text-primary mb-1 d-flex align-items-center justify-content-center">
+                        <i class="fa-solid fa-graduation-cap me-2 text-info fs-3"></i>
+                        <span>SCT PORTAL</span>
                     </h3>
-                    <p class="text-muted small">Please sign in to access your dashboard</p>
+                    <p class="text-muted small mb-0 fw-semibold text-uppercase tracking-wider" style="font-size: 11px; color: var(--slate-500) !important;">State College of Technology</p>
+                    <p class="text-muted small mt-2">Please sign in to access your dashboard</p>
                 </div>
                 
                 <!-- Role Tabs Navigation -->
@@ -93,7 +78,7 @@ include 'includes/header.php';
                         </li>
                         <li class="nav-item">
                             <a class="nav-link fw-semibold rounded-2 <?php echo $role === 'staff' ? 'active text-info border-bottom border-info border-2' : 'text-muted'; ?>" href="login.php?role=staff">
-                                <i class="fa-solid fa-user-tie me-1"></i>Staff
+                                <i class="fa-solid fa-user-tie me-1"></i>Admission Staff
                             </a>
                         </li>
                         <li class="nav-item">
@@ -105,22 +90,17 @@ include 'includes/header.php';
                 </div>
 
                 <div class="card-body pt-3">
-                    <?php if (!empty($error_msg)): ?>
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            <i class="fa-solid fa-triangle-exclamation me-2"></i><?php echo htmlspecialchars($error_msg); ?>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                    <?php endif; ?>
+                    <?php render_alert($error_msg, 'danger', false, true); ?>
 
                     <form action="login.php?role=<?php echo urlencode($role); ?>" method="POST">
-                        <input type="hidden" name="role" value="<?php echo htmlspecialchars($role); ?>">
+                        <input type="hidden" name="role" value="<?php echo e($role); ?>">
                         
                         <!-- Email -->
                         <div class="mb-3">
                             <label for="email" class="form-label">
                                 <?php echo $role === 'student' ? 'Email Address' : ($role === 'staff' ? 'Staff Email' : 'Admin Email'); ?>
                             </label>
-                            <input type="email" class="form-control" id="email" name="email" value="<?php echo isset($email) ? htmlspecialchars($email) : ''; ?>" required>
+                            <input type="email" class="form-control" id="email" name="email" value="<?php echo e($email ?? ''); ?>" required>
                         </div>
 
                         <!-- Password -->
@@ -134,7 +114,7 @@ include 'includes/header.php';
                         $btn_class = $role === 'student' ? 'btn-primary' : ($role === 'staff' ? 'btn-info text-white' : 'btn-dark');
                         $btn_text = $role === 'student' ? 'Login as Student' : ($role === 'staff' ? 'Login as Staff' : 'Login as Admin');
                         ?>
-                        <button type="submit" class="btn <?php echo $btn_class; ?> w-100 py-2.5 mb-3 fw-bold">
+                        <button type="submit" class="btn <?php echo $btn_class; ?> w-100 py-2 mb-3 fw-bold">
                             <?php echo $btn_text; ?>
                         </button>
                     </form>
