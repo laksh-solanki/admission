@@ -1,11 +1,4 @@
 <?php
-// ====================================================================
-// Student Dashboard Page (student/dashboard.php)
-// This page acts as the main landing page for students. It displays
-// their current application progress, alerts them to pending actions,
-// and shows the final decision (Approved/Rejected) with remarks.
-// ====================================================================
-
 require_once '../includes/db_connect.php';
 require_once '../includes/auth.php';
 

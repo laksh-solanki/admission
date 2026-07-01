@@ -1,11 +1,4 @@
 <?php
-// ====================================================================
-// Unified Login Portal (login.php)
-// This page authenticates students, staff, and administrators
-// using a tabbed navigation system, routing users to their correct database
-// tables and dashboard screens.
-// ====================================================================
-
 require_once 'includes/db_connect.php';
 require_once 'includes/auth.php';
 
@@ -51,6 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
+$is_public_page = true;
 $page_title = ucfirst($role) . " Login";
 include 'includes/header.php';
 ?>

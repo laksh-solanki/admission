@@ -1,10 +1,4 @@
 <?php
-// ====================================================================
-// Staff Management Page (admin/manage_staff.php)
-// This page handles CRUD operations for Admission Staff accounts,
-// including password encryption during insertion/updating.
-// ====================================================================
-
 require_once '../includes/db_connect.php';
 require_once '../includes/auth.php';
 

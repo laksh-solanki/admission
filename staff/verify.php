@@ -1,11 +1,4 @@
 <?php
-// ====================================================================
-// Document Verification Page (staff/verify.php)
-// This page displays a student's personal, academic, and document files.
-// It allows staff to approve or reject (requires remarks) applications
-// and logs the history.
-// ====================================================================
-
 require_once '../includes/db_connect.php';
 require_once '../includes/auth.php';
 

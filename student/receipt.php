@@ -1,10 +1,4 @@
 <?php
-// ====================================================================
-// PDF Receipt Generator Page (student/receipt.php)
-// This page uses the FPDF library to construct a styled, downloadable
-// admission receipt for students whose applications are "Approved".
-// ====================================================================
-
 require_once '../includes/db_connect.php';
 require_once '../includes/auth.php';
 

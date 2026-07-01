@@ -1,11 +1,4 @@
 <?php
-// ====================================================================
-// Student Administration Page (admin/manage_students.php)
-// This page provides view, search, edit, and delete functionality
-// for student records. It utilizes ON DELETE CASCADE constraints
-// to clean up associated data in MySQL.
-// ====================================================================
-
 require_once '../includes/db_connect.php';
 require_once '../includes/auth.php';
 

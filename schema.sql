@@ -1,7 +1,5 @@
--- ====================================================================
 -- Database Schema for Student Admission Management System
--- This script initializes the database and creates all required tables.
--- ====================================================================
+
 
 CREATE DATABASE IF NOT EXISTS `student_admission_db`;
 USE `student_admission_db`;

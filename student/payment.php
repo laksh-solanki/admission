@@ -1,11 +1,4 @@
 <?php
-// ====================================================================
-// Fees Payment Gateway (student/payment.php)
-// This file handles student processing fee payments. It shows payment
-// instructions, references a UPI address, collects transaction UTR,
-// and saves details to the `students` table to unlock final submission.
-// ====================================================================
-
 require_once '../includes/db_connect.php';
 require_once '../includes/auth.php';
 

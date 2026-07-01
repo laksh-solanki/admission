@@ -1,119 +1,200 @@
 <?php
-// ====================================================================
-// Home Page / Portal Landing Page (index.php)
-// This is the front page of the Student Admission Management System.
-// It redirects logged-in users to their respective dashboards and
-// offers portal access cards for Students, Staff, and Admins.
-// ====================================================================
-
 require_once 'includes/auth.php';
 
-// If a user is already logged in, redirect them directly to their dashboard
-redirect_if_logged_in();
-
+$is_public_page = true;
 $body_class = "homepage-body";
-$page_title = "Welcome to State College Portal";
+$page_title = "State College of Technology - Academic Excellence";
 include 'includes/header.php';
 ?>
 
-<!-- Glassmorphic Top Navbar -->
-<nav class="navbar navbar-expand-lg glass-nav navbar-dark py-3">
-    <div class="container">
-        <a class="navbar-brand d-flex align-items-center" href="index.php">
-            <i class="fa-solid fa-graduation-cap me-2 text-info fs-3"></i>
-            <span>SCT PORTAL</span>
-        </a>
-        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#homepageNavbar">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="homepageNavbar">
-            <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center gap-2">
-                <li class="nav-item">
-                    <a class="nav-link" href="#portals"><i class="fa-solid fa-door-open me-1"></i>Portals</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#steps"><i class="fa-solid fa-list-check me-1"></i>Admission Steps</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="courses.php"><i class="fa-solid fa-book-open me-1"></i>Academic Courses</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#features"><i class="fa-solid fa-star me-1"></i>Portal Features</a>
-                </li>
-                <li class="nav-item ms-lg-3">
-                    <a href="login.php?role=student" class="btn btn-premium-sky btn-sm py-2 px-4 fw-bold">Student Login</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
-
 <!-- Hero Banner Section -->
-<div class="hero-section-premium text-center">
-    <div class="container">
-        <div class="hero-badge">
-            <i class="fa-solid fa-bullhorn text-warning"></i> Admissions Open for Academic Year 2026-27
+<div class="hero-section-home py-5 position-relative overflow-hidden text-white mb-5" style="background: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%); min-height: 520px; display: flex; align-items: center;">
+    <!-- Decorative Ambient light circles -->
+    <div class="position-absolute" style="width: 350px; height: 350px; background: rgba(59, 130, 246, 0.15); border-radius: 50%; top: -100px; right: -50px; filter: blur(60px);"></div>
+    <div class="position-absolute" style="width: 250px; height: 250px; background: rgba(13, 148, 136, 0.12); border-radius: 50%; bottom: -50px; left: -50px; filter: blur(50px);"></div>
+    
+    <div class="container position-relative z-1 my-3">
+        <div class="row align-items-center g-5">
+            <!-- Left Text Content -->
+            <div class="col-lg-7 text-center text-lg-start">
+                <div class="d-inline-flex align-items-center gap-2 mb-3 px-3 py-1.5 rounded-pill text-warning fw-bold border border-warning border-opacity-25" style="background: rgba(245, 158, 11, 0.1); font-size: 0.85rem;">
+                    <i class="fa-solid fa-bullhorn text-warning"></i> Admissions Open for Academic Year 2026-27
+                </div>
+                <h1 class="display-4 fw-extrabold mb-3 text-white" style="line-height: 1.15; font-family: 'Poppins', sans-serif;">
+                    Unlock Your Academic Potential & <span class="text-info">Innovate for Tomorrow</span>
+                </h1>
+                <p class="lead mb-4 text-white-50" style="font-size: 1.1rem; max-width: 620px; margin: 0 auto 1.5rem;">
+                    Welcome to the State College of Technology. Experience a fully digital, streamlined admission process. Apply for courses, upload your credentials, and track your application status in real time.
+                </p>
+                <div class="d-flex gap-3 justify-content-center justify-content-lg-start flex-wrap mt-2">
+                    <a href="portal.php" class="btn btn-info btn-lg px-4 py-3 fw-bold text-white shadow-sm d-flex align-items-center gap-2">
+                        <i class="fa-solid fa-right-to-bracket"></i> Admission Portal Access
+                    </a>
+                    <a href="courses.php" class="btn btn-outline-light btn-lg px-4 py-3 fw-bold d-flex align-items-center gap-2">
+                        <i class="fa-solid fa-book-open"></i> Explore Courses
+                    </a>
+                </div>
+            </div>
+            <!-- Right graphic box -->
+            <div class="col-lg-5 d-none d-lg-block">
+                <div class="bg-white bg-opacity-10 border border-white border-opacity-10 rounded-4 p-4 shadow-lg backdrop-blur" style="backdrop-filter: blur(10px);">
+                    <div class="d-flex align-items-center justify-content-between mb-4 border-bottom border-white border-opacity-10 pb-3">
+                        <div class="d-flex align-items-center gap-2 text-start">
+                            <div class="bg-info rounded-circle d-flex align-items-center justify-content-center text-white" style="width: 40px; height: 40px;">
+                                <i class="fa-solid fa-graduation-cap"></i>
+                            </div>
+                            <div>
+                                <h6 class="mb-0 text-white">SCT Admission Desk</h6>
+                                <small class="text-white-50 text-xs">Verification System Status</small>
+                            </div>
+                        </div>
+                        <span class="badge bg-success px-2.5 py-1">Online</span>
+                    </div>
+                    
+                    <div class="text-start text-white-50 small">
+                        <div class="d-flex gap-3 mb-3 align-items-start">
+                            <span class="badge bg-info text-white mt-1">1</span>
+                            <div>
+                                <strong class="text-white d-block">Quick Register</strong>
+                                <span>Create accounts with name, email and password.</span>
+                            </div>
+                        </div>
+                        <div class="d-flex gap-3 mb-3 align-items-start">
+                            <span class="badge bg-info text-white mt-1">2</span>
+                            <div>
+                                <strong class="text-white d-block">Academic Profile</strong>
+                                <span>Enter 10th/12th scores and choose preferences.</span>
+                            </div>
+                        </div>
+                        <div class="d-flex gap-3 mb-3 align-items-start">
+                            <span class="badge bg-info text-white mt-1">3</span>
+                            <div>
+                                <strong class="text-white d-block">Secure Upload</strong>
+                                <span>Add marksheet transcripts, photos, and ID.</span>
+                            </div>
+                        </div>
+                        <div class="d-flex gap-3 align-items-start">
+                            <span class="badge bg-info text-white mt-1">4</span>
+                            <div>
+                                <strong class="text-white d-block">Verification Log</strong>
+                                <span>Review staff approval and download admission letter.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <h1 class="hero-title-premium"><i class="fa-solid fa-circle-nodes me-2 text-info"></i>State College of Technology</h1>
-        <p class="hero-subtitle-premium">Experience a fully digital, streamlined admission process. Apply for courses, upload your credentials, and track your application status in real time.</p>
     </div>
 </div>
 
-<!-- Portal Selection Section -->
-<div class="container portal-grid mb-5" id="portals">
+<!-- Stats Counter Grid Section -->
+<div class="container my-5">
+    <div class="row g-4 text-center">
+        <div class="col-6 col-lg-3">
+            <div class="card border-0 shadow-sm p-4 bg-white h-100 rounded-3">
+                <div class="fs-1 fw-extrabold text-primary mb-1">94%</div>
+                <div class="fw-bold text-dark small text-uppercase tracking-wider">Placement Rate</div>
+                <p class="text-muted small mt-2 mb-0">Consistently placed technical and commerce graduates in top firms.</p>
+            </div>
+        </div>
+        <div class="col-6 col-lg-3">
+            <div class="card border-0 shadow-sm p-4 bg-white h-100 rounded-3">
+                <div class="fs-1 fw-extrabold text-success mb-1">120+</div>
+                <div class="fw-bold text-dark small text-uppercase tracking-wider">Top Recruiters</div>
+                <p class="text-muted small mt-2 mb-0">Direct recruitment ties with MNCs and tech startups.</p>
+            </div>
+        </div>
+        <div class="col-6 col-lg-3">
+            <div class="card border-0 shadow-sm p-4 bg-white h-100 rounded-3">
+                <div class="fs-1 fw-extrabold text-warning mb-1">50K+</div>
+                <div class="fw-bold text-dark small text-uppercase tracking-wider">Library Archive</div>
+                <p class="text-muted small mt-2 mb-0">Vast collection of books, academic journals, and digital logs.</p>
+            </div>
+        </div>
+        <div class="col-6 col-lg-3">
+            <div class="card border-0 shadow-sm p-4 bg-white h-100 rounded-3">
+                <div class="fs-1 fw-extrabold text-danger mb-1">₹15 LPA</div>
+                <div class="fw-bold text-dark small text-uppercase tracking-wider">Highest Package</div>
+                <p class="text-muted small mt-2 mb-0">Impressive packages achieved in national hiring portals.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Academic Offerings Preview -->
+<div class="container my-5 py-3">
+    <div class="text-center mb-5">
+        <span class="badge bg-light text-primary border px-3 py-2 mb-2 fw-bold text-uppercase">Programs</span>
+        <h2 class="fw-bold text-dark">Explore Our Academic Fields</h2>
+        <p class="text-muted mx-auto" style="max-width: 600px;">
+            We offer modern, comprehensive curriculum options designed by industry specialists to prepare you for global technology landscapes.
+        </p>
+    </div>
+    
     <div class="row g-4 justify-content-center">
-        <!-- Student Card -->
+        <!-- CS Program Card -->
         <div class="col-md-4">
-            <div class="premium-card card-student">
+            <div class="card border-0 shadow-sm h-100 p-4 bg-white rounded-3 d-flex flex-column justify-content-between">
                 <div>
-                    <div class="card-icon-wrapper">
-                        <i class="fa-solid fa-user-graduate"></i>
+                    <div class="d-inline-flex align-items-center justify-content-center bg-light text-primary rounded-circle mb-3" style="width: 50px; height: 50px; font-size: 1.5rem;">
+                        <i class="fa-solid fa-code"></i>
                     </div>
-                    <h3 class="text-center">Student Portal</h3>
-                    <p class="text-center text-muted">Register a new profile, submit academic marks, select course preferences, upload mandatory documents, and track approval status.</p>
+                    <h5 class="fw-bold text-dark mb-2">Computer Science & IT</h5>
+                    <p class="text-muted small mb-3">Programming, Algorithms, Data Systems, Cybersecurity networks, Cloud Computing, and App Development frameworks.</p>
                 </div>
-                <div class="mt-4 pt-3 border-top border-secondary border-opacity-25">
-                    <a href="login.php?role=student" class="btn btn-premium-primary w-100 mb-2 fw-bold text-center">Student Login</a>
-                    <a href="student_register.php" class="btn btn-premium-secondary w-100 text-center">Create New Account</a>
+                <div class="border-top pt-3 mt-auto">
+                    <a href="courses.php" class="text-decoration-none small fw-bold text-primary d-inline-flex align-items-center gap-1">
+                        Syllabus details <i class="fa-solid fa-arrow-right-long"></i>
+                    </a>
                 </div>
             </div>
         </div>
-
-        <!-- Staff Card -->
+        
+        <!-- Commerce Card -->
         <div class="col-md-4">
-            <div class="premium-card card-staff">
+            <div class="card border-0 shadow-sm h-100 p-4 bg-white rounded-3 d-flex flex-column justify-content-between">
                 <div>
-                    <div class="card-icon-wrapper">
-                        <i class="fa-solid fa-user-tie"></i>
+                    <div class="d-inline-flex align-items-center justify-content-center bg-light text-warning rounded-circle mb-3" style="width: 50px; height: 50px; font-size: 1.5rem;">
+                        <i class="fa-solid fa-chart-line"></i>
                     </div>
-                    <h3 class="text-center">Admission Staff</h3>
-                    <p class="text-center text-muted">Access the verification workflow. Review student profiles, verify transcripts, submit comments, approve or reject applications, and download reports.</p>
+                    <h5 class="fw-bold text-dark mb-2">Commerce & Accounting</h5>
+                    <p class="text-muted small mb-3">Financial reporting, corporate governance, micro/macroeconomics, taxation systems, auditing, and corporate laws.</p>
                 </div>
-                <div class="mt-4 pt-3 border-top border-secondary border-opacity-25">
-                    <a href="login.php?role=staff" class="btn btn-premium-sky w-100 fw-bold text-center">Admission Staff Login</a>
+                <div class="border-top pt-3 mt-auto">
+                    <a href="courses.php" class="text-decoration-none small fw-bold text-warning d-inline-flex align-items-center gap-1">
+                        Syllabus details <i class="fa-solid fa-arrow-right-long"></i>
+                    </a>
                 </div>
             </div>
         </div>
-
-        <!-- Admin Card -->
+        
+        <!-- Literature Card -->
         <div class="col-md-4">
-            <div class="premium-card card-admin">
-                <div>   
-                    <div class="card-icon-wrapper">
-                        <i class="fa-solid fa-screwdriver-wrench"></i>
+            <div class="card border-0 shadow-sm h-100 p-4 bg-white rounded-3 d-flex flex-column justify-content-between">
+                <div>
+                    <div class="d-inline-flex align-items-center justify-content-center bg-light text-danger rounded-circle mb-3" style="width: 50px; height: 50px; font-size: 1.5rem;">
+                        <i class="fa-solid fa-book-open-reader"></i>
                     </div>
-                    <h3 class="text-center">Admin Console</h3>
-                    <p class="text-center text-muted">Monitor system statistics, manage course offerings, create/update staff accounts, edit student details, and perform database maintenance tasks.</p>
+                    <h5 class="fw-bold text-dark mb-2">Humanities & Languages</h5>
+                    <p class="text-muted small mb-3">Linguistics, creative writing, drama critiques, classical and modern English poetry studies, and critical thinking development.</p>
                 </div>
-                <div class="mt-4 pt-3 border-top border-secondary border-opacity-25">
-                    <a href="login.php?role=admin" class="btn btn-premium-amber w-100 fw-bold text-center">Administrator Login</a>
+                <div class="border-top pt-3 mt-auto">
+                    <a href="courses.php" class="text-decoration-none small fw-bold text-danger d-inline-flex align-items-center gap-1">
+                        Syllabus details <i class="fa-solid fa-arrow-right-long"></i>
+                    </a>
                 </div>
             </div>
         </div>
     </div>
+    
+    <div class="text-center mt-5">
+        <a href="courses.php" class="btn btn-primary fw-bold px-4 py-2">
+            <i class="fa-solid fa-magnifying-glass me-1"></i> View All Available Programs
+        </a>
+    </div>
 </div>
 
-<!-- Admission Steps Section -->
+<!-- Admission Steps Journey Section -->
 <div class="container my-5" id="steps">
     <div class="timeline-section">
         <h2 class="section-title">Application Journey</h2>
@@ -144,37 +225,7 @@ include 'includes/header.php';
     </div>
 </div>
 
-<!-- Feature Highlights Section -->
-<div class="container features-section" id="features">
-    <h2 class="section-title">Why Use Our Digital Portal?</h2>
-    <p class="section-subtitle">Engineered to offer a reliable, modern, and transparent experience for applicants and staff alike.</p>
-    
-    <div class="row g-4 mt-2">
-        <div class="col-md-4">
-            <div class="feature-box">
-                <i class="fa-solid fa-bolt feature-icon"></i>
-                <h5>Real-Time Updates</h5>
-                <p>Receive immediate status updates as staff members review your academic documents and uploaded certificates.</p>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="feature-box">
-                <i class="fa-solid fa-shield-halved feature-icon"></i>
-                <h5>Secure Uploads</h5>
-                <p>All private documents and marksheets are encrypted and stored in secure, designated storage directories.</p>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="feature-box">
-                <i class="fa-solid fa-file-pdf feature-icon"></i>
-                <h5>Instant PDF Receipts</h5>
-                <p>Once approved, generate your digital admission fee receipt and seat allotment letter instantly.</p>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Campus Facilities Section -->
+<!-- Campus Infrastructure -->
 <div class="campus-facilities-section" id="facilities">
     <div class="container">
         <h2 class="section-title">Campus & Infrastructure</h2>
@@ -214,43 +265,6 @@ include 'includes/header.php';
                     </div>
                     <h4>Sports & Hostels</h4>
                     <p class="small text-muted mb-0">Dedicated gyms, courts for indoor/outdoor games, and hygienic, comfortable hostel rooms.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Placement Highlights Section -->
-<div class="placement-highlights-section" id="placements">
-    <div class="container">
-        <h2 class="section-title">Training & Placements</h2>
-        <p class="section-subtitle">Bridging the gap between academic education and successful career paths.</p>
-        <div class="row g-4 mt-2">
-            <div class="col-md-4">
-                <div class="placement-card text-center">
-                    <div class="placement-icon-wrapper bg-light text-primary mx-auto">
-                        <i class="fa-solid fa-percent"></i>
-                    </div>
-                    <h4>94% Placement Rate</h4>
-                    <p class="small text-muted mb-0">Consistently high placement rate across IT, Science, Commerce, and Humanities branches.</p>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="placement-card text-center">
-                    <div class="placement-icon-wrapper bg-light text-success mx-auto">
-                        <i class="fa-solid fa-handshake"></i>
-                    </div>
-                    <h4>120+ Corporate Recruiters</h4>
-                    <p class="small text-muted mb-0">Partnerships with top multinational firms, offering internships and packages up to ₹15 LPA.</p>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="placement-card text-center">
-                    <div class="placement-icon-wrapper bg-light text-warning mx-auto">
-                        <i class="fa-solid fa-briefcase"></i>
-                    </div>
-                    <h4>Placement Training Cell</h4>
-                    <p class="small text-muted mb-0">Dedicated guidance cell conducting mock interviews, resume workshops, and soft skill seminars.</p>
                 </div>
             </div>
         </div>
@@ -305,48 +319,22 @@ include 'includes/header.php';
     </div>
 </div>
 
-<!-- Footer Section -->
-<footer class="premium-footer">
-    <div class="container">
-        <div class="row g-4">
-            <div class="col-lg-5 col-md-12">
-                <h5 class="d-flex align-items-center">
-                    <i class="fa-solid fa-graduation-cap me-2 text-info fs-4"></i>
-                    <span>State College of Technology</span>
-                </h5>
-                <p class="mt-3 text-muted">A premier institution offering state-of-the-art technical education. Empowering students since 2002 to build the systems and innovations of tomorrow.</p>
-                <div class="mt-4 d-flex gap-3">
-                    <a href="#" class="text-muted fs-5"><i class="fa-brands fa-facebook"></i></a>
-                    <a href="#" class="text-muted fs-5"><i class="fa-brands fa-twitter"></i></a>
-                    <a href="#" class="text-muted fs-5"><i class="fa-brands fa-linkedin"></i></a>
-                    <a href="#" class="text-muted fs-5"><i class="fa-brands fa-instagram"></i></a>
-                </div>
-            </div>
-            
-            <div class="col-lg-3 col-md-6">
-                <h5 class="text-dark">Quick Links</h5>
-                <ul>
-                    <li><a href="#portals">Portal Selection</a></li>
-                    <li><a href="#steps">Admission Steps</a></li>
-                    <li><a href="courses.php">Academic Courses</a></li>
-                    <li><a href="#features">Key Features</a></li>
-                    <li><a href="student_register.php">Create Account</a></li>
-                </ul>
-            </div>
-            
-            <div class="col-lg-4 col-md-6">
-                <h5 class="text-dark">Help & Support</h5>
-                <p class="small text-muted mb-2"><i class="fa-solid fa-envelope me-2 text-info"></i>admissions@statecollege.edu</p>
-                <p class="small text-muted mb-2"><i class="fa-solid fa-phone me-2 text-info"></i>+1 (555) 019-2834</p>
-                <p class="small text-muted"><i class="fa-solid fa-location-dot me-2 text-info"></i>100 Tech University Circle, Suite 400</p>
-            </div>
-        </div>
-        
-        <div class="footer-bottom text-center">
-            <p class="mb-0">&copy; <?php echo date("Y"); ?> State College of Technology. All Rights Reserved. Designed for Excellence.</p>
+<!-- Bottom Admissions Call To Action -->
+<div class="bg-light border-top py-5 text-center">
+    <div class="container py-3">
+        <h3 class="fw-bold text-dark mb-2">Build Your Technical Career Path Today</h3>
+        <p class="text-muted mb-4 mx-auto" style="max-width: 600px;">
+            Registration is quick and online. Log in, specify your board marks, upload your PDF and picture credentials, and track your admission status instantly.
+        </p>
+        <div class="d-flex gap-3 justify-content-center flex-wrap">
+            <a href="portal.php" class="btn btn-primary btn-lg px-4 py-2.5 fw-bold shadow-sm">
+                <i class="fa-solid fa-user-plus me-1"></i> Register & Apply Online
+            </a>
+            <a href="login.php?role=student" class="btn btn-outline-secondary btn-lg px-4 py-2.5 fw-bold">
+                Student Portal Login
+            </a>
         </div>
     </div>
-</footer>
+</div>
 
 <?php include 'includes/footer.php'; ?>
-

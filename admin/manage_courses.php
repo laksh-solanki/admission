@@ -1,10 +1,4 @@
 <?php
-// ====================================================================
-// Course Management Page (admin/manage_courses.php)
-// This page handles adding, updating, displaying, and deleting academic
-// courses in the system.
-// ====================================================================
-
 require_once '../includes/db_connect.php';
 require_once '../includes/auth.php';
 

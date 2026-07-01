@@ -1,10 +1,4 @@
 <?php
-// ====================================================================
-// Database Connection Configuration File
-// This file initializes a connection to MySQL using the PDO library,
-// which is secure, robust, and supports prepared statements.
-// ====================================================================
-
 // Define connection constants
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');

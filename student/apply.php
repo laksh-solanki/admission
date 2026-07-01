@@ -1,11 +1,4 @@
 <?php
-// ====================================================================
-// Student Admission Form Page (student/apply.php)
-// This page handles filling and editing student details. It performs
-// server-side eligibility checks (12th % >= 35), duplicate mobile checks,
-// and auto-generates the Admission Number.
-// ====================================================================
-
 require_once '../includes/db_connect.php';
 require_once '../includes/auth.php';
 

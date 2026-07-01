@@ -1,10 +1,4 @@
 <?php
-// ====================================================================
-// Admission Reports Page (staff/reports.php)
-// This page outputs student data tables filtered by Course and Status,
-// and implements a complete CSV export facility.
-// ====================================================================
-
 require_once '../includes/db_connect.php';
 require_once '../includes/auth.php';
 

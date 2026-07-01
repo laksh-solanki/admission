@@ -1,10 +1,4 @@
 <?php
-// ====================================================================
-// Add Student Page (admin/add_student.php)
-// This page allows administrators to register a student user account
-// and fill out their admission profile details in a single form.
-// ====================================================================
-
 require_once '../includes/db_connect.php';
 require_once '../includes/auth.php';
 

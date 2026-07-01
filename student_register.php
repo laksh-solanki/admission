@@ -1,10 +1,4 @@
 <?php
-// ====================================================================
-// Student Registration Page (student_register.php)
-// This file handles student account registration, hashes passwords using
-// BCrypt, verifies email uniqueness, and initializes their session.
-// ====================================================================
-
 require_once 'includes/db_connect.php';
 require_once 'includes/auth.php';
 
@@ -60,6 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
+$is_public_page = true;
 $page_title = "Student Registration";
 include 'includes/header.php';
 ?>

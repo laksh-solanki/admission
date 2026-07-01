@@ -1,10 +1,4 @@
 <?php
-// ====================================================================
-// Edit Student Page (admin/edit_student.php)
-// This page allows administrators to edit a student's personal, academic,
-// and course details and saves changes back to the database.
-// ====================================================================
-
 require_once '../includes/db_connect.php';
 require_once '../includes/auth.php';
 

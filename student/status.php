@@ -1,10 +1,4 @@
 <?php
-// ====================================================================
-// Student Application Status Tracking Page (student/status.php)
-// This page fetches and displays the full timeline history of reviews,
-// approvals, and rejections from the `status_history` table.
-// ====================================================================
-
 require_once '../includes/db_connect.php';
 require_once '../includes/auth.php';
 

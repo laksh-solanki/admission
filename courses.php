@@ -1,11 +1,4 @@
 <?php
-// ====================================================================
-// Academic Programs & Course Details Page (courses.php)
-// This page is publicly accessible. It queries all courses from the
-// database and displays detailed info including syllabus, how students study,
-// and how faculty teach.
-// ====================================================================
-
 require_once 'includes/db_connect.php';
 require_once 'includes/auth.php';
 
@@ -107,39 +100,11 @@ $default_details = [
     'how_faculty_teach' => 'Faculty members use a blend of lectures, interactive labs, and individual mentoring. They help students develop critical thinking and guide their projects to academic and industrial success.'
 ];
 
+$is_public_page = true;
 $body_class = "courses-page-body";
 $page_title = "Academic Programs & Courses";
 include 'includes/header.php';
 ?>
-
-<!-- Glassmorphic Top Navbar -->
-<nav class="navbar navbar-expand-lg glass-nav navbar-dark py-3">
-    <div class="container">
-        <a class="navbar-brand d-flex align-items-center" href="index.php">
-            <i class="fa-solid fa-graduation-cap me-2 text-info fs-3"></i>
-            <span>SCT PORTAL</span>
-        </a>
-        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#homepageNavbar">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="homepageNavbar">
-            <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center gap-2">
-                <li class="nav-item">
-                    <a class="nav-link" href="index.php#portals"><i class="fa-solid fa-door-open me-1"></i>Portals</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="index.php#steps"><i class="fa-solid fa-list-check me-1"></i>Admission Steps</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="index.php#features"><i class="fa-solid fa-star me-1"></i>Portal Features</a>
-                </li>
-                <li class="nav-item ms-lg-3">
-                    <a href="login.php?role=student" class="btn btn-premium-sky btn-sm py-2 px-4 fw-bold">Student Login</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
 
 <!-- Hero Section -->
 <div class="courses-hero-section text-center">
@@ -251,46 +216,5 @@ include 'includes/header.php';
     </div>
 </div>
 
-<!-- Footer Section -->
-<footer class="premium-footer">
-    <div class="container">
-        <div class="row g-4">
-            <div class="col-lg-5 col-md-12">
-                <h5 class="d-flex align-items-center">
-                    <i class="fa-solid fa-graduation-cap me-2 text-info fs-4"></i>
-                    <span>State College of Technology</span>
-                </h5>
-                <p class="mt-3 text-muted">A premier institution offering state-of-the-art technical education. Empowering students since 2002 to build the systems and innovations of tomorrow.</p>
-                <div class="mt-4 d-flex gap-3">
-                    <a href="#" class="text-muted fs-5"><i class="fa-brands fa-facebook"></i></a>
-                    <a href="#" class="text-muted fs-5"><i class="fa-brands fa-twitter"></i></a>
-                    <a href="#" class="text-muted fs-5"><i class="fa-brands fa-linkedin"></i></a>
-                    <a href="#" class="text-muted fs-5"><i class="fa-brands fa-instagram"></i></a>
-                </div>
-            </div>
-            
-            <div class="col-lg-3 col-md-6">
-                <h5 class="text-dark">Quick Links</h5>
-                <ul>
-                    <li><a href="index.php#portals">Portal Selection</a></li>
-                    <li><a href="index.php#steps">Admission Steps</a></li>
-                    <li><a href="index.php#features">Key Features</a></li>
-                    <li><a href="student_register.php">Create Account</a></li>
-                </ul>
-            </div>
-            
-            <div class="col-lg-4 col-md-6">
-                <h5 class="text-dark">Help & Support</h5>
-                <p class="small text-muted mb-2"><i class="fa-solid fa-envelope me-2 text-info"></i>admissions@statecollege.edu</p>
-                <p class="small text-muted mb-2"><i class="fa-solid fa-phone me-2 text-info"></i>+1 (555) 019-2834</p>
-                <p class="small text-muted"><i class="fa-solid fa-location-dot me-2 text-info"></i>100 Tech University Circle, Suite 400</p>
-            </div>
-        </div>
-        
-        <div class="footer-bottom text-center">
-            <p class="mb-0">&copy; <?php echo date("Y"); ?> State College of Technology. All Rights Reserved. Designed for Excellence.</p>
-        </div>
-    </div>
-</footer>
-
 <?php include 'includes/footer.php'; ?>
+

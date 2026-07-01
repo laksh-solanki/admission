@@ -1,11 +1,4 @@
 <?php
-// ====================================================================
-// Admin Dashboard Page (admin/dashboard.php)
-// This page outputs system-wide statistics (counts, courses, etc.) and
-// renders interactive HTML5 graphs (gender and category distribution)
-// using Chart.js.
-// ====================================================================
-
 require_once '../includes/db_connect.php';
 require_once '../includes/auth.php';
 

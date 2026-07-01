@@ -1,11 +1,4 @@
 <?php
-// ====================================================================
-// Document Upload System (student/upload.php)
-// This file handles uploading required certificates. It strictly
-// validates file size (<2MB) and extensions (JPEG/PNG/PDF), sanitizes
-// and renames files to avoid collisions, and handles database mapping.
-// ====================================================================
-
 require_once '../includes/db_connect.php';
 require_once '../includes/auth.php';
 

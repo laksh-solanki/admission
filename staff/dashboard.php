@@ -1,10 +1,4 @@
 <?php
-// ====================================================================
-// Staff Dashboard Page (staff/dashboard.php)
-// This page allows staff to view admission stats, search applications
-// by ID, Name, or Mobile, and access verification profiles.
-// ====================================================================
-
 require_once '../includes/db_connect.php';
 require_once '../includes/auth.php';
 

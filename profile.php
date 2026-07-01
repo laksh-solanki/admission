@@ -1,10 +1,4 @@
 <?php
-// ====================================================================
-// Unified User Profile Page (profile.php)
-// This page is shared by all logged-in roles (Admin, Staff, Student).
-// It allows users to view their account info and change their passwords.
-// ====================================================================
-
 require_once 'includes/db_connect.php';
 require_once 'includes/auth.php';
 

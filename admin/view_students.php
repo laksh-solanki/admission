@@ -1,11 +1,4 @@
 <?php
-// ====================================================================
-// View Student Profile (admin/view_students.php)
-// This page provides administrators with a comprehensive, read-only
-// profile of any student, including their uploaded documents and
-// status update timeline.
-// ====================================================================
-
 require_once '../includes/db_connect.php';
 require_once '../includes/auth.php';
 
